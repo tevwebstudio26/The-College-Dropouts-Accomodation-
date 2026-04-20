@@ -55,7 +55,7 @@
     box-shadow: 0 2px 24px rgba(26,24,20,.08);
     border-bottom: 1px solid rgba(26,24,20,.08);
   }
-  .nav-logo { height: 56px; width: auto; display: block; }
+  .nav-logo { height: 80px; width: auto; display: block; }
   .nav-links { display: flex; align-items: center; gap: 6px; list-style: none; }
   .nav-links a { font-size: .82rem; font-weight: 500; letter-spacing: .04em; color: var(--ink-60); padding: 8px 14px; border-radius: 100px; transition: color .2s, background .2s; }
   .nav-links a:hover { color: var(--ink); background: var(--ink-10); }
@@ -286,7 +286,7 @@
   <nav id="nav" aria-label="Navigazione principale">
     <a href="index.html" aria-label="Teseo Renting — Homepage">
       <img src="assets/images/brand/teseo-passarani-renting-logo.webp"
-           alt="Teseo Passarani Renting" class="nav-logo" width="180" height="56"/>
+           alt="Teseo Passarani Renting" class="nav-logo" width="180" height="80"/>
     </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
@@ -548,8 +548,14 @@
   /* ============================================================
      RENDER CARD
   ============================================================ */
+  /* Percorso base compatibile GitHub Pages */
+  var BASE_PATH = (function(){
+    var p = window.location.pathname;
+    return p.substring(0, p.lastIndexOf('/') + 1);
+  })();
+
   function renderCard(apt) {
-    return '<a href="appartamento.html?id=' + apt.id + '" class="apt-card" role="listitem" aria-label="' + apt.nome + ', ' + apt.prezzo + ' euro al mese">' +
+    return '<a href="' + BASE_PATH + 'appartamento.html?id=' + apt.id + '" class="apt-card" role="listitem"' aria-label="' + apt.nome + ', ' + apt.prezzo + ' euro al mese">' +
       '<div class="card-img">' +
         '<img src="' + apt.fotoPrincipale + '" alt="' + apt.fotoAlt + '" width="800" height="600" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"/>' +
         '<div style="display:none;width:100%;height:100%;background:linear-gradient(135deg,#EDE8DF,#DDD8CE);align-items:center;justify-content:center;flex-direction:column;gap:6px;color:rgba(26,24,20,.3)">' +
