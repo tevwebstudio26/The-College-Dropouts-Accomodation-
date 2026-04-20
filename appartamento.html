@@ -703,24 +703,39 @@
     }
   ];
 
-  /* ============================================================
-     LEGGI ID DALL'URL E CARICA APPARTAMENTO
-  ============================================================ */
-  /* Percorso base compatibile GitHub Pages */
+  /* BASE_PATH — disponibile globalmente per tutte le funzioni */
   var BASE_PATH = (function(){
     var p = window.location.pathname;
     return p.substring(0, p.lastIndexOf('/') + 1);
   })();
-  var params = new URLSearchParams(window.location.search);
-  var aptId  = params.get("id");
-  var apt    = APPARTAMENTI.find(function(a){ return a.id === aptId; });
 
-  if (!apt) {
-    var nfEl = document.getElementById("not-found");
-    nfEl.style.display = "block";
-  } else {
-    renderApartment(apt);
-  }
+  /* ============================================================
+     INIT — wrappato in DOMContentLoaded per garantire che
+     il DOM sia pronto e che l'URL sia leggibile correttamente
+     sia al primo carico che dopo navigazione su GitHub Pages
+  ============================================================ */
+  document.addEventListener("DOMContentLoaded", function() {
+
+    /* Leggi ?id= dall'URL */
+    var params = new URLSearchParams(window.location.search);
+    var aptId  = params.get("id");
+
+    /* Fallback: prova anche con location.href nel caso in cui
+       search sia vuoto per problemi di routing GitHub Pages */
+    if (!aptId) {
+      var href = window.location.href;
+      var match = href.match(/[?&]id=([^&]+)/);
+      if (match) aptId = decodeURIComponent(match[1]);
+    }
+
+    var apt = APPARTAMENTI.find(function(a){ return a.id === aptId; });
+
+    if (!apt) {
+      var nfEl = document.getElementById("not-found");
+      nfEl.style.display = "block";
+    } else {
+      renderApartment(apt);
+    }
 
   function renderApartment(apt) {
     var aptMain  = document.getElementById("apt-main");
@@ -927,11 +942,13 @@
     }).join("");
   }
 
-  /* ── Hamburger ── */
-  var ham = document.getElementById("hamburger");
-  if(ham) ham.addEventListener("click", function(){
-    ham.setAttribute("aria-expanded", ham.getAttribute("aria-expanded")==="true"?"false":"true");
-  });
+    /* ── Hamburger ── */
+    var ham = document.getElementById("hamburger");
+    if(ham) ham.addEventListener("click", function(){
+      ham.setAttribute("aria-expanded", ham.getAttribute("aria-expanded")==="true"?"false":"true");
+    });
+
+  }); /* end DOMContentLoaded */
 
   </script>
 </body>
