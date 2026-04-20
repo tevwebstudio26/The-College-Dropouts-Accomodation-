@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <!-- ── SEO PRIMARY ── -->
-  <title>Teseo Renting — Affitti e Intermediazione Immobiliare a Rieti</title>
-  <meta name="description" content="Teseo Renting: il tuo agente immobiliare freelance a Rieti. Appartamenti in affitto, intermediazione professionale e consulenza personalizzata. Trova casa a Rieti con noi."/>
-  <meta name="keywords" content="affitto appartamenti Rieti, agenzia immobiliare Rieti, intermediazione immobiliare Rieti, case in affitto Rieti, agente immobiliare Rieti, affittasi Rieti, appartamento Rieti centro"/>
+  <title>Affitti per Studenti a Rieti — Teseo Renting | Case vicino Università</title>
+  <meta name="description" content="Cerchi un appartamento in affitto a Rieti per l'università? Teseo Renting offre bilocali e trilocali per studenti italiani e stranieri vicino al polo universitario. Contatta subito."/>
+  <meta name="keywords" content="affitto studenti Rieti, appartamento studenti Rieti, case affitto Rieti università, alloggio studenti Rieti, affittasi Rieti studenti, bilocale Rieti centro, monolocale Rieti, polo universitario Rieti, affitto Rieti"/>
   <meta name="author" content="Teseo Renting — Agenzia Immobiliare Rieti"/>
   <meta name="robots" content="index, follow"/>
   <link rel="canonical" href="https://www.teseorenting.it/"/>
@@ -138,6 +138,21 @@
     #navbar.scrolled .nav-links a { color: var(--ink-60); }
     #navbar.scrolled .nav-links a:hover { color: var(--ink); background: var(--ink-10); }
 
+
+    /* Appartamenti: link evidenziato — perno di conversione */
+    .nav-apt {
+      color: #fff !important;
+      background: rgba(184,160,106,0.25) !important;
+      border: 1px solid rgba(184,160,106,0.55) !important;
+      font-weight: 600 !important;
+    }
+    .nav-apt:hover { background: rgba(184,160,106,0.42) !important; transform: translateY(-1px); }
+    #navbar.scrolled .nav-apt {
+      background: var(--gold) !important;
+      color: var(--ink) !important;
+      border-color: var(--gold) !important;
+    }
+    #navbar.scrolled .nav-apt:hover { background: #a08858 !important; }
     /* ── FIX: CTA sempre leggibile ── */
     .nav-cta {
       font-size: 0.82rem !important; font-weight: 600 !important;
@@ -304,8 +319,78 @@
       text-transform: uppercase; color: rgba(255,255,255,0.50); margin-top: 6px;
     }
 
+
+    .carousel-wrap { position: relative; }
+    .carousel-track-outer { overflow: hidden; }
+    .carousel-btn {
+      position: absolute; top: 40%; transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--card-bg); border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(26,24,20,.12);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 20;
+      transition: background .2s, opacity .2s;
+    }
+    .carousel-btn:hover { background: var(--ink); }
+    .carousel-btn:hover svg { color: #fff; }
+    .carousel-btn svg { color: var(--ink-60); transition: color .2s; }
+    .carousel-btn.prev { left: -22px; }
+    .carousel-btn.next { right: -22px; }
+    @media(max-width:768px) { .carousel-btn.prev{left:-10px;} .carousel-btn.next{right:-10px;} }
+    .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 28px; }
+    .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-30); border: none; cursor: pointer; transition: background .25s, transform .2s; padding: 0; }
+    .carousel-dot.active { background: var(--gold); transform: scale(1.25); }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
+
+    /* ══════════════════════
+       CAROSELLO
+    ══════════════════════ */
+    .carousel-wrap { position: relative; }
+    .carousel-track-outer { overflow: hidden; }
+
+    /* Frecce */
+    .carousel-btn {
+      position: absolute; top: 42%; transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--card-bg); border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(26,24,20,.12);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 20;
+      transition: background .2s, box-shadow .2s;
+    }
+    .carousel-btn:hover { background: var(--ink); }
+    .carousel-btn:hover svg { color: #fff; }
+    .carousel-btn svg { color: var(--ink-60); transition: color .2s; }
+    .carousel-btn.prev { left: -22px; }
+    .carousel-btn.next { right: -22px; }
+    @media(max-width:768px) { .carousel-btn.prev{left:-10px;} .carousel-btn.next{right:-10px;} }
+
+    /* Dots carosello */
+    .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 28px; }
+    .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-30); border: none; cursor: pointer; transition: background .25s, transform .2s; padding: 0; }
+    .carousel-dot.active { background: var(--gold); transform: scale(1.25); }
+
+    /* CTA forte dopo carosello */
+    #apt-cta {
+      margin-top: 48px; padding: 44px 40px;
+      background: var(--ink); border-radius: 20px;
+      display: flex; align-items: center; justify-content: space-between; gap: 32px;
+      flex-wrap: wrap;
+    }
+    .apt-cta-eyebrow { font-size: .68rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 8px; }
+    .apt-cta-title { font-family: var(--font-serif); font-size: clamp(1.5rem,3vw,2.2rem); font-weight: 300; color: #fff; line-height: 1.1; letter-spacing: -.01em; }
+    .apt-cta-title em { font-style: italic; color: var(--gold-light); }
+    .apt-cta-sub { font-size: .85rem; color: rgba(249,247,244,.5); margin-top: 8px; line-height: 1.65; max-width: 380px; }
+    .btn-cta-apt {
+      display: inline-flex; align-items: center; gap: 10px; white-space: nowrap;
+      font-size: .92rem; font-weight: 700; padding: 16px 36px;
+      background: #fff; color: var(--ink); border-radius: 100px; flex-shrink: 0;
+      box-shadow: 0 4px 24px rgba(0,0,0,.28);
+      transition: background .2s, transform .15s, box-shadow .2s;
+    }
+    .btn-cta-apt:hover { background: #F0EDE6; transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,.32); }
+    @media(max-width:680px) { #apt-cta { padding: 28px 20px; flex-direction: column; text-align: center; } .apt-cta-sub { max-width: none; } }
     /* ══════════════════════
        APPARTAMENTI
     ══════════════════════ */
@@ -392,6 +477,27 @@
     .apt-arrow svg { color: var(--ink-60); transition: color 0.2s; }
     .apt-card:hover .apt-arrow svg { color: #fff; }
 
+
+    /* ══════════════════════
+       SEZIONE STUDENTI
+    ══════════════════════ */
+    #studenti-band { background: var(--ink); padding: clamp(48px,6vw,80px) var(--px); }
+    #studenti-band-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+    }
+    @media(max-width:860px) { #studenti-band-inner { grid-template-columns: 1fr; gap: 40px; } }
+    #studenti-band .section-eyebrow { color: var(--gold-light); }
+    #studenti-band .section-title { color: var(--cream); font-family: var(--font-serif); font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 300; line-height: 1.1; letter-spacing: -.02em; }
+    #studenti-band .section-title em { font-style: italic; color: var(--gold-light); }
+    .studenti-desc { font-size: .92rem; line-height: 1.85; color: rgba(249,247,244,.55); margin-top: 18px; max-width: 400px; }
+    .studenti-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media(max-width:480px) { .studenti-cards { grid-template-columns: 1fr; } }
+    .studenti-card { padding: 20px; border-radius: 14px; border: 1px solid rgba(249,247,244,.08); background: rgba(249,247,244,.03); transition: background .2s, border-color .2s; }
+    .studenti-card:hover { background: rgba(249,247,244,.07); border-color: rgba(184,160,106,.3); }
+    .studenti-card-icon { font-size: 1.5rem; margin-bottom: 8px; }
+    .studenti-card-title { font-size: .88rem; font-weight: 600; color: var(--cream); margin-bottom: 5px; }
+    .studenti-card-desc { font-size: .78rem; line-height: 1.6; color: rgba(249,247,244,.45); }
     /* ══════════════════════
        PERCHÉ SCEGLIERCI
     ══════════════════════ */
@@ -513,13 +619,17 @@
 
   <!-- NAVBAR -->
   <nav id="navbar" aria-label="Navigazione principale">
-    <a href="index.html" class="nav-logo" aria-label="Teseo Renting - Homepage">
-      Teseo <span>Renting</span>
+    <a href="index.html" aria-label="Teseo Renting - Homepage">
+      <img src="assets/images/brand/teseo-passarani-renting-logo.webp"
+           alt="Teseo Renting — Agente Immobiliare Rieti"
+           class="nav-logo-img invert-on-dark"
+           width="160" height="40"/>
     </a>
     <ul class="nav-links">
       <li><a href="index.html" aria-current="page">Home</a></li>
-      <li><a href="appartamenti.html">Appartamenti</a></li>
+      <li><a href="appartamenti.html" class="nav-apt">Appartamenti</a></li>
       <li><a href="chi-siamo.html">Chi Siamo</a></li>
+      <li><a href="scopri-rieti.html">Scopri Rieti</a></li>
       <li><a href="contatti.html" class="nav-cta">Contattaci</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false">
@@ -548,9 +658,11 @@
     <!-- Testo hero -->
     <div class="hero-content">
       <p class="hero-eyebrow">Agente Immobiliare — Rieti</p>
-      <h1 class="hero-title" id="hero-heading">
-        Trova il tuo<br><em>appartamento</em><br>a Rieti
-      </h1>
+      <div class="hero-title-wrap">
+        <h1 class="hero-title" id="hero-heading">
+          Trova il tuo<br><em>appartamento</em><br>a <span class="rieti">Rieti</span>
+        </h1>
+      </div>
       <p class="hero-subtitle">
         Intermediazione professionale, massima trasparenza.<br>
         Il giusto spazio per la tua vita.
@@ -599,21 +711,62 @@
 
   </section>
 
+  <!-- SEZIONE STUDENTI -->
+  <section id="studenti-band" aria-labelledby="studenti-heading">
+    <div id="studenti-band-inner">
+      <div class="rv">
+        <p class="section-eyebrow">Per chi studia a Rieti</p>
+        <h2 class="section-title" id="studenti-heading">
+          La tua casa<br>durante <em>l'università</em>
+        </h2>
+        <p class="studenti-desc">
+          Il polo universitario di Rieti è in forte espansione. Che tu venga da un'altra città italiana o dall'estero, trovare un appartamento può sembrare complicato. Teseo Renting è qui per rendere il processo semplice, trasparente e senza stress.
+        </p>
+      </div>
+      <div class="studenti-cards rv rv-delay-2">
+        <div class="studenti-card">
+          <div class="studenti-card-icon">🇮🇹</div>
+          <p class="studenti-card-title">Studenti italiani</p>
+          <p class="studenti-card-desc">Contratti standard, assistenza burocratica, vicinanza ai servizi universitari.</p>
+        </div>
+        <div class="studenti-card">
+          <div class="studenti-card-icon">🌍</div>
+          <p class="studenti-card-title">International students</p>
+          <p class="studenti-card-desc">English-friendly support, flexible contracts, help with registration.</p>
+        </div>
+        <div class="studenti-card">
+          <div class="studenti-card-icon">📄</div>
+          <p class="studenti-card-title">Contratti flessibili</p>
+          <p class="studenti-card-desc">Affitti a canone concordato, contratti per studenti, durate adatte all'anno accademico.</p>
+        </div>
+        <div class="studenti-card">
+          <div class="studenti-card-icon">⚡</div>
+          <p class="studenti-card-title">Risposta rapida</p>
+          <p class="studenti-card-desc">Visita organizzata entro 24-48h. Niente attese quando hai urgenza.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- APPARTAMENTI IN EVIDENZA -->
   <section id="appartamenti-preview" aria-labelledby="apt-heading">
     <div class="section-header rv">
       <div>
-        <p class="section-eyebrow">Disponibili ora</p>
+        <p class="section-eyebrow">Disponibili ora a Rieti</p>
         <h2 class="section-title" id="apt-heading">Appartamenti<br>in <em>evidenza</em></h2>
       </div>
-      <a href="appartamenti.html" class="section-link" aria-label="Vedi il catalogo completo appartamenti Rieti">
-        Vedi tutti
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
+
     </div>
-    <div class="cards-grid">
+
+    <div class="carousel-wrap">
+      <button class="carousel-btn prev" id="carouselPrev" aria-label="Card precedenti" style="opacity:0.35">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L6 8l4 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="carousel-btn next" id="carouselNext" aria-label="Card successive">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l4 5-4 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="carousel-track-outer">
+        <div class="cards-grid" id="cardsGrid">
 
       <!-- Card 1 -->
       <article class="apt-card rv rv-delay-1">
@@ -697,9 +850,94 @@
             </div>
           </div>
         </a>
+
+      <!-- Card 4 -->
+      <article class="apt-card">
+        <a href="appartamenti.html#apt-004" style="display:contents" aria-label="Monolocale zona università Rieti, 380 euro al mese">
+          <div class="apt-img-wrap">
+            <!-- <img src="assets/images/appartamenti/apt-universita-004.webp" alt="Monolocale arredato vicino al polo universitario di Rieti" width="800" height="600" loading="lazy"/> -->
+            <div class="apt-placeholder" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.9"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span class="apt-placeholder-label">Foto da inserire</span></div>
+            <span class="apt-badge disponibile">Disponibile</span>
+          </div>
+          <div class="apt-body">
+            <p class="apt-zone">Zona Università</p>
+            <h3 class="apt-name">Monolocale arredato</h3>
+            <ul class="apt-features" aria-label="Caratteristiche">
+              <li class="apt-feat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>1 locale</li>
+              <li class="apt-feat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/></svg>32 m²</li>
+              <li class="apt-feat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9V4a1 1 0 011-1h10a1 1 0 011 1v5"/><rect x="2" y="9" width="20" height="12" rx="2"/></svg>Piano terra</li>
+            </ul>
+            <div class="apt-footer"><div><div class="apt-price">€ 380</div><div class="apt-price-label">/mese</div></div><div class="apt-arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+          </div>
+        </a>
       </article>
 
+      <!-- Card 5 -->
+      <article class="apt-card">
+        <a href="appartamenti.html#apt-005" style="display:contents" aria-label="Bilocale Santa Barbara Rieti con balcone, 490 euro al mese">
+          <div class="apt-img-wrap">
+            <!-- <img src="assets/images/appartamenti/apt-santa-barbara-005.webp" alt="Bilocale luminoso in zona Santa Barbara Rieti con balcone e cucina separata" width="800" height="600" loading="lazy"/> -->
+            <div class="apt-placeholder" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.9"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span class="apt-placeholder-label">Foto da inserire</span></div>
+            <span class="apt-badge novita">Nuovo</span>
+          </div>
+          <div class="apt-body">
+            <p class="apt-zone">Santa Barbara</p>
+            <h3 class="apt-name">Bilocale con balcone</h3>
+            <ul class="apt-features" aria-label="Caratteristiche">
+              <li class="apt-feat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>2 locali</li>
+              <li class="apt-feat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/></svg>62 m²</li>
+              <li class="apt-feat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9V4a1 1 0 011-1h10a1 1 0 011 1v5"/><rect x="2" y="9" width="20" height="12" rx="2"/></svg>3° piano</li>
+            </ul>
+            <div class="apt-footer"><div><div class="apt-price">€ 490</div><div class="apt-price-label">/mese</div></div><div class="apt-arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+          </div>
+        </a>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="apt-card">
+        <a href="appartamenti.html#apt-006" style="display:contents" aria-label="Trilocale zona stazione Rieti, 680 euro al mese">
+          <div class="apt-img-wrap">
+            <!-- <img src="assets/images/appartamenti/apt-stazione-006.webp" alt="Trilocale comodo vicino alla stazione di Rieti, ideale per studenti pendolari" width="800" height="600" loading="lazy"/> -->
+            <div class="apt-placeholder" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.9"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span class="apt-placeholder-label">Foto da inserire</span></div>
+            <span class="apt-badge disponibile">Disponibile</span>
+          </div>
+          <div class="apt-body">
+            <p class="apt-zone">Zona Stazione</p>
+            <h3 class="apt-name">Trilocale vicino ai servizi</h3>
+            <ul class="apt-features" aria-label="Caratteristiche">
+              <li class="apt-feat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>3 locali</li>
+              <li class="apt-feat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/></svg>78 m²</li>
+              <li class="apt-feat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9V4a1 1 0 011-1h10a1 1 0 011 1v5"/><rect x="2" y="9" width="20" height="12" rx="2"/></svg>1° piano</li>
+            </ul>
+            <div class="apt-footer"><div><div class="apt-price">€ 680</div><div class="apt-price-label">/mese</div></div><div class="apt-arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+          </div>
+        </a>
+      </article>
+
+    </div><!-- /cards-grid -->
+    </div><!-- /carousel-track-outer -->
+
+    <div class="carousel-dots" role="tablist" aria-label="Pagine appartamenti">
+      <button class="carousel-dot active" data-page="0" role="tab" aria-selected="true" aria-label="Prima pagina"></button>
+      <button class="carousel-dot" data-page="1" role="tab" aria-selected="false" aria-label="Seconda pagina"></button>
     </div>
+    </div><!-- /carousel-wrap -->
+
+    <!-- CTA forte: rimanda al catalogo completo -->
+    <div id="apt-cta" class="rv">
+      <div>
+        <p class="apt-cta-eyebrow">Catalogo completo</p>
+        <h3 class="apt-cta-title">Vuoi vedere <em>tutti</em> gli appartamenti<br>disponibili a Rieti?</h3>
+        <p class="apt-cta-sub">Bilocali, trilocali, monolocali vicino all'università e al centro storico. Aggiornati in tempo reale.</p>
+      </div>
+      <a href="appartamenti.html" class="btn-cta-apt" aria-label="Catalogo completo appartamenti in affitto a Rieti">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V10.5z"/><path d="M9 21V13h6v8"/>
+        </svg>
+        Vai al catalogo completo
+      </a>
+    </div>
+
   </section>
 
   <!-- PERCHÉ SCEGLIERCI -->
@@ -778,7 +1016,10 @@
   <footer id="footer" aria-labelledby="footer-brand">
     <div class="footer-inner">
       <div>
-        <div class="footer-brand" id="footer-brand">Teseo <span>Renting</span></div>
+        <img src="assets/images/brand/teseo-passarani-renting-logo.webp"
+             alt="Teseo Renting logo"
+             style="height:34px;width:auto;margin-bottom:12px;opacity:.75;filter:brightness(0) invert(1)"
+             width="140" height="34" loading="lazy"/>
         <p class="footer-desc">Agente immobiliare freelance specializzato in affitti e intermediazione a Rieti e provincia. Professionalità, trasparenza, attenzione alla persona.</p>
       </div>
       <div>
@@ -787,6 +1028,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="appartamenti.html">Appartamenti</a></li>
           <li><a href="chi-siamo.html">Chi Siamo</a></li>
+          <li><a href="scopri-rieti.html">Scopri Rieti</a></li>
           <li><a href="contatti.html">Contatti</a></li>
         </ul>
       </div>
@@ -808,7 +1050,7 @@
   <script>
   (function() {
 
-    /* ── Navbar trasparente su hero → opaca dopo scroll ── */
+    /* ── Navbar ── */
     var navbar = document.getElementById("navbar");
     function updateNav() {
       if (window.scrollY > 60) navbar.classList.add("scrolled");
@@ -817,36 +1059,96 @@
     window.addEventListener("scroll", updateNav, { passive: true });
     updateNav();
 
-    /* ── Slideshow ── */
+    /* ── Hero slideshow ── */
     var slides  = document.querySelectorAll(".hero-slide");
     var dots    = document.querySelectorAll(".hero-dot");
-    var current = 0;
-    var timer;
+    var current = 0, heroTimer;
 
-    function goTo(idx) {
+    function heroGoTo(idx) {
       slides[current].classList.remove("active");
       dots[current].classList.remove("active");
-      dots[current].setAttribute("aria-selected", "false");
+      dots[current].setAttribute("aria-selected","false");
       current = idx;
       slides[current].classList.add("active");
       dots[current].classList.add("active");
-      dots[current].setAttribute("aria-selected", "true");
+      dots[current].setAttribute("aria-selected","true");
+    }
+    function heroNext() { heroGoTo((current + 1) % slides.length); }
+    function heroStart() { heroTimer = setInterval(heroNext, 5500); }
+    function heroStop()  { clearInterval(heroTimer); }
+    dots.forEach(function(d,i){ d.addEventListener("click",function(){ heroStop(); heroGoTo(i); heroStart(); }); });
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) heroStart();
+
+    /* ── Carosello appartamenti ── */
+    var grid    = document.getElementById("cardsGrid");
+    var cards   = grid ? Array.from(grid.querySelectorAll("article.apt-card, article")) : [];
+    var prevBtn = document.getElementById("carouselPrev");
+    var nextBtn = document.getElementById("carouselNext");
+    var page    = 0;
+
+    function getPerPage() {
+      var w = window.innerWidth;
+      if (w <= 560) return 1;
+      if (w <= 900) return 2;
+      return 3;
     }
 
-    function next() { goTo((current + 1) % slides.length); }
+    function totalPages() {
+      return Math.ceil(cards.length / getPerPage());
+    }
 
-    function startAuto() { timer = setInterval(next, 5500); }
-    function stopAuto()  { clearInterval(timer); }
+    function showPage(p) {
+      var pp  = getPerPage();
+      var tp  = totalPages();
+      page    = Math.max(0, Math.min(p, tp - 1));
+      var start = page * pp;
 
-    dots.forEach(function(dot, i) {
-      dot.addEventListener("click", function() {
-        stopAuto(); goTo(i); startAuto();
+      cards.forEach(function(c, i) {
+        c.style.display = (i >= start && i < start + pp) ? "" : "none";
       });
-    });
 
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      startAuto();
+      // Rebuild dots
+      var dotsWrap = document.querySelector(".carousel-dots");
+      if (dotsWrap) {
+        dotsWrap.innerHTML = "";
+        for (var i = 0; i < tp; i++) {
+          var btn = document.createElement("button");
+          btn.className = "carousel-dot" + (i === page ? " active" : "");
+          btn.setAttribute("data-page", i);
+          btn.setAttribute("role","tab");
+          btn.setAttribute("aria-selected", i === page ? "true" : "false");
+          btn.setAttribute("aria-label", "Pagina " + (i+1) + " di appartamenti");
+          (function(idx){ btn.addEventListener("click", function(){ showPage(idx); }); })(i);
+          dotsWrap.appendChild(btn);
+        }
+      }
+
+      // Arrow visibility
+      if (prevBtn) prevBtn.style.opacity = page === 0 ? "0.35" : "1";
+      if (nextBtn) nextBtn.style.opacity = page >= tp-1 ? "0.35" : "1";
     }
+
+    if (prevBtn) prevBtn.addEventListener("click", function() { showPage(page - 1); });
+    if (nextBtn) nextBtn.addEventListener("click", function() { showPage(page + 1); });
+
+    // Swipe support
+    var touchStartX = 0;
+    if (grid) {
+      grid.addEventListener("touchstart", function(e){ touchStartX = e.touches[0].clientX; }, { passive:true });
+      grid.addEventListener("touchend",   function(e){
+        var dx = e.changedTouches[0].clientX - touchStartX;
+        if (dx < -50) showPage(page + 1);
+        if (dx >  50) showPage(page - 1);
+      }, { passive:true });
+    }
+
+    if (grid) showPage(0);
+
+    var resizeTimer;
+    window.addEventListener("resize", function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function(){ showPage(0); }, 200);
+    });
 
     /* ── Scroll reveal ── */
     var ios = new IntersectionObserver(function(entries) {
@@ -861,7 +1163,6 @@
     if (ham) ham.addEventListener("click", function() {
       var exp = ham.getAttribute("aria-expanded") === "true";
       ham.setAttribute("aria-expanded", !exp);
-      // TODO: mobile drawer
     });
 
   })();
