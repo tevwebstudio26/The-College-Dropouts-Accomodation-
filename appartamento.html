@@ -803,7 +803,10 @@
     /* WhatsApp con nome appartamento precompilato */
     document.getElementById("sb-wa").href =
       "https://wa.me/39XXXXXXXXXX?text=" +
-      encodeURIComponent("Ciao Teseo, sono interessato/a all'appartamento "" + apt.nome + "" a " + apt.indirizzo + ". Possiamo organizzare una visita?");
+      (function(){
+      var msg = 'Ciao Teseo, sono interessato/a all' + String.fromCharCode(39) + 'appartamento ' + apt.nome + ' a ' + apt.indirizzo + '. Possiamo organizzare una visita?';
+      return encodeURIComponent(msg);
+    }())
 
     /* ── Galleria ── */
     renderGallery(apt.foto, apt.fotoAlt);
