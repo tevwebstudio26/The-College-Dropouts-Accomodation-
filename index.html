@@ -175,6 +175,14 @@
     #navbar.scrolled .hamburger span { background: var(--ink); }
     @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: flex; } }
 
+    /* ── Logo: bianco su hero, originale dopo scroll ── */
+    .nav-logo-img {
+      height: 36px; width: auto; display: block;
+      filter: brightness(0) invert(1);
+      transition: filter 0.35s ease;
+    }
+    #navbar.scrolled .nav-logo-img { filter: none; }
+
     /* ══════════════════════
        HERO — SLIDESHOW
     ══════════════════════ */
@@ -233,8 +241,7 @@
 
     .hero-eyebrow {
       font-size: 0.72rem; font-weight: 500; letter-spacing: 0.22em;
-      text-transform: uppercase; color: var(--gold-light); margin-bottom: 28px;
-      opacity: 0; animation: fadeUp 0.7s var(--ease-out) 0.2s forwards;
+      text-transform: uppercase; color: var(--gold-light); margin-bottom: 16px;
     }
     .hero-title {
       font-family: var(--font-serif);
@@ -249,10 +256,9 @@
     .hero-subtitle {
       font-family: var(--font-serif);
       font-size: clamp(1rem, 2.5vw, 1.4rem); font-weight: 300; font-style: italic;
-      color: rgba(255,255,255,0.80); max-width: 480px; margin-bottom: 48px;
+      color: rgba(255,255,255,0.80); max-width: 480px; margin-bottom: 0; margin-top: 14px;
       line-height: 1.55; text-shadow: 0 1px 12px rgba(0,0,0,0.35);
-      opacity: 0; animation: fadeUp 0.8s var(--ease-out) 0.5s forwards;
-    }
+      
 
     /* ── Bottoni hero ── */
     .hero-actions {
@@ -591,6 +597,156 @@
     }
     #cta-band .btn-cta:hover { background: #2C2820; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26,24,20,0.25); }
 
+
+
+
+    /* ══════════════════════════════
+       FORM CONTATTO
+    ══════════════════════════════ */
+    #contatto {
+      background: var(--cream);
+      border-top: 1px solid var(--border);
+      padding: var(--section-py) var(--px);
+    }
+    #contatto-inner {
+      max-width: 640px; margin: 0 auto; text-align: center;
+    }
+    #contatto .section-eyebrow { margin-bottom: 10px; }
+    #contatto .section-title { margin-bottom: 16px; }
+    .form-placeholder {
+      margin-top: 40px;
+      border: 2px dashed var(--border);
+      border-radius: 20px;
+      padding: 56px 32px;
+      text-align: center;
+      color: var(--ink-30);
+    }
+    .form-placeholder-icon { font-size: 2.4rem; margin-bottom: 12px; }
+    .form-placeholder-label { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+    .form-placeholder-sub { font-size: 0.78rem; margin-top: 6px; color: var(--ink-30); }
+    /* ══════════════════════════════
+       FAB — TOGGLE AZIONI RAPIDE
+    ══════════════════════════════ */
+    #fab-wrap {
+      position: fixed; bottom: 28px; right: 28px; z-index: 2000;
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+    }
+    .fab-actions {
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      opacity: 0; pointer-events: none;
+      transform: translateY(12px);
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .fab-actions.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+    .fab-item {
+      width: 46px; height: 46px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; border: none; box-shadow: 0 4px 16px rgba(26,24,20,0.18);
+      text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+    .fab-item:hover { transform: scale(1.1); box-shadow: 0 8px 24px rgba(26,24,20,0.25); }
+    .fab-item.whatsapp { background: #25D366; color: #fff; }
+    .fab-item.telefono { background: var(--ink); color: #fff; }
+    .fab-item.mail     { background: var(--gold); color: var(--ink); }
+    .fab-item.apt      { background: #fff; color: var(--ink); border: 1px solid var(--border); }
+
+    /* Tooltip etichetta */
+    .fab-item::before {
+      content: attr(data-label);
+      position: absolute; right: 54px; top: 50%; transform: translateY(-50%);
+      background: var(--ink); color: #fff;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em;
+      white-space: nowrap; padding: 5px 10px; border-radius: 8px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.15s;
+    }
+    .fab-item:hover::before { opacity: 1; }
+
+    /* Bottone principale + */
+    #fab-main {
+      width: 54px; height: 54px; border-radius: 50%;
+      background: var(--ink); color: #fff; border: none;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1.6rem; line-height: 1;
+      box-shadow: 0 6px 24px rgba(26,24,20,0.28);
+      transition: transform 0.3s, background 0.2s, box-shadow 0.2s;
+    }
+    #fab-main:hover { box-shadow: 0 10px 32px rgba(26,24,20,0.35); }
+    #fab-main.open { transform: rotate(45deg); background: #2C2820; }
+    #fab-main svg { pointer-events: none; transition: transform 0.3s; }
+    /* ══════════════════════════════
+       TESTIMONIANZE
+    ══════════════════════════════ */
+    #testimonianze {
+      background: #F0EDE6;
+      border-top: 1px solid var(--border);
+      padding: var(--section-py) var(--px);
+      overflow: hidden;
+    }
+    #testimonianze .section-header { margin-bottom: 40px; }
+
+    .testi-track-outer { overflow: hidden; position: relative; }
+    .testi-track {
+      display: flex; gap: 24px;
+      transition: transform 0.55s var(--ease-out);
+    }
+    .testi-card {
+      flex: 0 0 calc(50% - 12px);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(26,24,20,0.05);
+    }
+    @media(max-width:768px) { .testi-card { flex: 0 0 100%; } }
+
+    .testi-stars {
+      display: flex; gap: 3px; color: var(--gold);
+      font-size: 1rem;
+    }
+    .testi-text {
+      font-family: var(--font-serif);
+      font-size: 1.08rem; font-weight: 300; font-style: italic;
+      line-height: 1.7; color: var(--ink);
+      flex: 1;
+    }
+    .testi-text::before { content: "\201C"; color: var(--gold); font-size: 1.5em; line-height: 0; vertical-align: -0.3em; margin-right: 2px; }
+    .testi-text::after  { content: "\201D"; color: var(--gold); font-size: 1.5em; line-height: 0; vertical-align: -0.3em; margin-left:  2px; }
+    .testi-author {
+      display: flex; align-items: center; gap: 14px;
+      border-top: 1px solid var(--border); padding-top: 16px;
+    }
+    .testi-avatar {
+      width: 48px; height: 48px; border-radius: 50%; overflow: hidden;
+      background: #E8E4DC; flex-shrink: 0; border: 2px solid var(--border);
+    }
+    .testi-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .testi-name { font-size: 0.88rem; font-weight: 600; color: var(--ink); }
+    .testi-role { font-size: 0.75rem; color: var(--ink-60); margin-top: 2px; }
+
+    /* Navigazione testimonianze */
+    .testi-nav {
+      display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 32px;
+    }
+    .testi-btn {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: #fff; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      box-shadow: 0 2px 12px rgba(26,24,20,0.08);
+      transition: background 0.2s, opacity 0.2s;
+    }
+    .testi-btn:hover { background: var(--ink); }
+    .testi-btn:hover svg { color: #fff; }
+    .testi-btn svg { color: var(--ink-60); transition: color 0.2s; }
+    .testi-btn:disabled { opacity: 0.3; pointer-events: none; }
+    .testi-dots-row { display: flex; gap: 7px; }
+    .testi-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-30); border: none; padding: 0; cursor: pointer; transition: background .25s, transform .2s; }
+    .testi-dot.active { background: var(--gold); transform: scale(1.3); }
     /* ══════════════════════
        FOOTER
     ══════════════════════ */
@@ -622,7 +778,7 @@
     <a href="index.html" aria-label="Teseo Renting - Homepage">
       <img src="assets/images/brand/teseo-passarani-renting-logo.webp"
            alt="Teseo Renting — Agente Immobiliare Rieti"
-           class="nav-logo-img invert-on-dark"
+           class="nav-logo-img"
            width="160" height="40"/>
     </a>
     <ul class="nav-links">
@@ -657,16 +813,16 @@
 
     <!-- Testo hero -->
     <div class="hero-content">
-      <p class="hero-eyebrow">Agente Immobiliare — Rieti</p>
       <div class="hero-title-wrap">
+        <p class="hero-eyebrow">Agente Immobiliare — Rieti</p>
         <h1 class="hero-title" id="hero-heading">
-          Trova il tuo<br><em>appartamento</em><br>a <span class="rieti">Rieti</span>
+          Trova il tuo<br><em><strong>appartamento</strong></em><br>a&nbsp;<span class="rieti"><strong>Rieti</strong></span>
         </h1>
+        <p class="hero-subtitle">
+          Intermediazione professionale, massima trasparenza.<br>
+          Il giusto spazio per la tua vita.
+        </p>
       </div>
-      <p class="hero-subtitle">
-        Intermediazione professionale, massima trasparenza.<br>
-        Il giusto spazio per la tua vita.
-      </p>
       <div class="hero-actions">
         <!-- CTA 1: icona casa -->
         <a href="appartamenti.html" class="btn-primary" aria-label="Sfoglia gli appartamenti disponibili a Rieti">
@@ -999,6 +1155,122 @@
     </div>
   </div>
 
+
+
+  <!-- ══════════════════════════════
+       FORM CONTATTO
+  ══════════════════════════════ -->
+  <section id="contatto" aria-labelledby="contatto-heading">
+    <div id="contatto-inner">
+      <p class="section-eyebrow rv">Parliamo</p>
+      <h2 class="section-title rv" id="contatto-heading">Scrivici,<br>ti rispondiamo <em>subito</em></h2>
+      <p class="rv" style="font-size:.92rem;color:var(--ink-60);line-height:1.7;margin-top:12px;">
+        Compila il modulo e ti ricontatteremo entro poche ore per fissare una visita o rispondere a qualsiasi domanda.
+      </p>
+      <!-- FORM PLACEHOLDER — sostituire con form Formfree -->
+      <div class="form-placeholder rv rv-delay-2">
+        <div class="form-placeholder-icon">📋</div>
+        <p class="form-placeholder-label">Form di contatto</p>
+        <p class="form-placeholder-sub">Il modulo Formfree verrà inserito qui</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       TESTIMONIANZE
+  ══════════════════════════════ -->
+  <section id="testimonianze" aria-labelledby="testi-heading">
+    <div class="section-header rv">
+      <div>
+        <p class="section-eyebrow">Chi si è affidato a noi</p>
+        <h2 class="section-title" id="testi-heading">Cosa dicono<br>i nostri <em>clienti</em></h2>
+      </div>
+    </div>
+    <div class="testi-track-outer">
+      <div class="testi-track" id="testiTrack">
+
+        <!-- Testimonianza 1 -->
+        <div class="testi-card">
+          <div class="testi-stars" aria-label="5 stelle">★★★★★</div>
+          <p class="testi-text">Ho trovato il mio bilocale in meno di una settimana. Teseo è stato disponibile fin dal primo messaggio, ha risposto in giornata e ha organizzato la visita il giorno dopo. Consigliatissimo per chi arriva da fuori città.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">
+              <img src="assets/images/miscellaneous/persona-opinione-1.webp"
+                   alt="Giulia R., studentessa universitaria a Rieti"
+                   width="48" height="48" loading="lazy"/>
+            </div>
+            <div>
+              <p class="testi-name">Giulia R.</p>
+              <p class="testi-role">Studentessa — Facoltà di Scienze</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonianza 2 -->
+        <div class="testi-card">
+          <div class="testi-stars" aria-label="5 stelle">★★★★★</div>
+          <p class="testi-text">As an Erasmus student from Germany, I was worried about finding an apartment in Italy. Teseo made everything easy — he explained the contract clearly, helped with the registration and was always reachable. Highly recommend.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">
+              <img src="assets/images/miscellaneous/persona-opinione-2.webp"
+                   alt="Lukas M., studente Erasmus a Rieti"
+                   width="48" height="48" loading="lazy"/>
+            </div>
+            <div>
+              <p class="testi-name">Lukas M.</p>
+              <p class="testi-role">Erasmus student — Germany</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonianza 3 -->
+        <div class="testi-card">
+          <div class="testi-stars" aria-label="5 stelle">★★★★★</div>
+          <p class="testi-text">Zero sorprese, zero costi nascosti. Il contratto era esattamente come descritto. Ho apprezzato molto la disponibilità a rispondere anche la sera per dubbi urgenti. Una persona seria e di parola.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">
+              <img src="assets/images/miscellaneous/persona-opinione-3.webp"
+                   alt="Marco T., studente universitario a Rieti"
+                   width="48" height="48" loading="lazy"/>
+            </div>
+            <div>
+              <p class="testi-name">Marco T.</p>
+              <p class="testi-role">Studente — Corso di Economia</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonianza 4 -->
+        <div class="testi-card">
+          <div class="testi-stars" aria-label="5 stelle">★★★★★</div>
+          <p class="testi-text">Mi sono trasferita a Rieti per lavoro e non conoscevo nessuno. Teseo mi ha accompagnata a vedere tre appartamenti in una mattina, spiegandomi pro e contro di ogni zona. Alla fine ho scelto quello perfetto per me.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">
+              <img src="assets/images/miscellaneous/persona-opinione-4.webp"
+                   alt="Sara B., professionista trasferita a Rieti"
+                   width="48" height="48" loading="lazy"/>
+            </div>
+            <div>
+              <p class="testi-name">Sara B.</p>
+              <p class="testi-role">Professionista — trasferita a Rieti</p>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /testi-track -->
+    </div><!-- /testi-track-outer -->
+
+    <div class="testi-nav">
+      <button class="testi-btn" id="testiPrev" aria-label="Testimonianza precedente">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L6 8l4 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="testi-dots-row" id="testiDots" role="tablist" aria-label="Naviga tra le testimonianze"></div>
+      <button class="testi-btn" id="testiNext" aria-label="Testimonianza successiva">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l4 5-4 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </section>
+
   <!-- CTA BAND -->
   <section id="cta-band" aria-labelledby="cta-heading">
     <p class="cta-band-eyebrow rv">Inizia ora</p>
@@ -1047,6 +1319,46 @@
     </div>
   </footer>
 
+
+  <!-- ══════════════════════════════
+       FAB — AZIONI RAPIDE
+  ══════════════════════════════ -->
+  <div id="fab-wrap" aria-label="Azioni rapide">
+    <div class="fab-actions" id="fabActions" aria-hidden="true">
+      <!-- Appartamenti -->
+      <a href="appartamenti.html" class="fab-item apt" data-label="Appartamenti" aria-label="Vai agli appartamenti">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V10.5z"/><path d="M9 21V13h6v8"/>
+        </svg>
+      </a>
+      <!-- Mail → form contatto -->
+      <a href="#contatto" class="fab-item mail" data-label="Scrivici" aria-label="Vai al form di contatto">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+        </svg>
+      </a>
+      <!-- Telefono -->
+      <a href="tel:+39XXXXXXXXX" class="fab-item telefono" data-label="Chiama" aria-label="Chiama Teseo Renting">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.04 1.17 2 2 0 012 .02h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+      </a>
+      <!-- WhatsApp -->
+      <a href="https://wa.me/39XXXXXXXXXX" target="_blank" rel="noopener noreferrer" class="fab-item whatsapp" data-label="WhatsApp" aria-label="Contatta su WhatsApp">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Pulsante principale + -->
+    <button id="fab-main" aria-label="Apri azioni rapide" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+      </svg>
+    </button>
+  </div>
+
   <script>
   (function() {
 
@@ -1062,18 +1374,17 @@
     /* ── Hero slideshow ── */
     var slides  = document.querySelectorAll(".hero-slide");
     var dots    = document.querySelectorAll(".hero-dot");
-    var current = 0, heroTimer;
-
+    var heroCur = 0, heroTimer;
     function heroGoTo(idx) {
-      slides[current].classList.remove("active");
-      dots[current].classList.remove("active");
-      dots[current].setAttribute("aria-selected","false");
-      current = idx;
-      slides[current].classList.add("active");
-      dots[current].classList.add("active");
-      dots[current].setAttribute("aria-selected","true");
+      slides[heroCur].classList.remove("active");
+      dots[heroCur].classList.remove("active");
+      dots[heroCur].setAttribute("aria-selected","false");
+      heroCur = idx;
+      slides[heroCur].classList.add("active");
+      dots[heroCur].classList.add("active");
+      dots[heroCur].setAttribute("aria-selected","true");
     }
-    function heroNext() { heroGoTo((current + 1) % slides.length); }
+    function heroNext() { heroGoTo((heroCur+1) % slides.length); }
     function heroStart() { heroTimer = setInterval(heroNext, 5500); }
     function heroStop()  { clearInterval(heroTimer); }
     dots.forEach(function(d,i){ d.addEventListener("click",function(){ heroStop(); heroGoTo(i); heroStart(); }); });
@@ -1081,10 +1392,10 @@
 
     /* ── Carosello appartamenti ── */
     var grid    = document.getElementById("cardsGrid");
-    var cards   = grid ? Array.from(grid.querySelectorAll("article.apt-card, article")) : [];
+    var cards   = grid ? Array.from(grid.querySelectorAll("article")) : [];
     var prevBtn = document.getElementById("carouselPrev");
     var nextBtn = document.getElementById("carouselNext");
-    var page    = 0;
+    var aptPage = 0;
 
     function getPerPage() {
       var w = window.innerWidth;
@@ -1092,63 +1403,120 @@
       if (w <= 900) return 2;
       return 3;
     }
+    function aptTotal() { return Math.ceil(cards.length / getPerPage()); }
 
-    function totalPages() {
-      return Math.ceil(cards.length / getPerPage());
-    }
-
-    function showPage(p) {
-      var pp  = getPerPage();
-      var tp  = totalPages();
-      page    = Math.max(0, Math.min(p, tp - 1));
-      var start = page * pp;
-
-      cards.forEach(function(c, i) {
-        c.style.display = (i >= start && i < start + pp) ? "" : "none";
+    function aptShow(p) {
+      var pp = getPerPage();
+      aptPage = Math.max(0, Math.min(p, aptTotal()-1));
+      cards.forEach(function(c,i){
+        c.style.display = (i >= aptPage*pp && i < aptPage*pp+pp) ? "" : "none";
       });
-
-      // Rebuild dots
-      var dotsWrap = document.querySelector(".carousel-dots");
-      if (dotsWrap) {
-        dotsWrap.innerHTML = "";
-        for (var i = 0; i < tp; i++) {
-          var btn = document.createElement("button");
-          btn.className = "carousel-dot" + (i === page ? " active" : "");
-          btn.setAttribute("data-page", i);
-          btn.setAttribute("role","tab");
-          btn.setAttribute("aria-selected", i === page ? "true" : "false");
-          btn.setAttribute("aria-label", "Pagina " + (i+1) + " di appartamenti");
-          (function(idx){ btn.addEventListener("click", function(){ showPage(idx); }); })(i);
-          dotsWrap.appendChild(btn);
+      var dw = document.querySelector(".carousel-dots");
+      if (dw) {
+        dw.innerHTML = "";
+        for (var i=0;i<aptTotal();i++){
+          var b=document.createElement("button");
+          b.className="carousel-dot"+(i===aptPage?" active":"");
+          b.setAttribute("data-page",i);
+          b.setAttribute("role","tab");
+          b.setAttribute("aria-selected",i===aptPage?"true":"false");
+          b.setAttribute("aria-label","Pagina "+(i+1));
+          (function(idx){b.addEventListener("click",function(){aptShow(idx);});})(i);
+          dw.appendChild(b);
         }
       }
-
-      // Arrow visibility
-      if (prevBtn) prevBtn.style.opacity = page === 0 ? "0.35" : "1";
-      if (nextBtn) nextBtn.style.opacity = page >= tp-1 ? "0.35" : "1";
+      if (prevBtn) prevBtn.style.opacity = aptPage===0 ? "0.35" : "1";
+      if (nextBtn) nextBtn.style.opacity = aptPage>=aptTotal()-1 ? "0.35" : "1";
     }
-
-    if (prevBtn) prevBtn.addEventListener("click", function() { showPage(page - 1); });
-    if (nextBtn) nextBtn.addEventListener("click", function() { showPage(page + 1); });
-
-    // Swipe support
-    var touchStartX = 0;
+    if (prevBtn) prevBtn.addEventListener("click",function(){aptShow(aptPage-1);});
+    if (nextBtn) nextBtn.addEventListener("click",function(){aptShow(aptPage+1);});
     if (grid) {
-      grid.addEventListener("touchstart", function(e){ touchStartX = e.touches[0].clientX; }, { passive:true });
-      grid.addEventListener("touchend",   function(e){
-        var dx = e.changedTouches[0].clientX - touchStartX;
-        if (dx < -50) showPage(page + 1);
-        if (dx >  50) showPage(page - 1);
-      }, { passive:true });
+      var tx=0;
+      grid.addEventListener("touchstart",function(e){tx=e.touches[0].clientX;},{passive:true});
+      grid.addEventListener("touchend",function(e){
+        var dx=e.changedTouches[0].clientX-tx;
+        if(dx<-50)aptShow(aptPage+1);
+        if(dx>50)aptShow(aptPage-1);
+      },{passive:true});
     }
+    if (grid) aptShow(0);
+    var resT;
+    window.addEventListener("resize",function(){clearTimeout(resT);resT=setTimeout(function(){aptShow(0);},200);});
 
-    if (grid) showPage(0);
+    /* ── Testimonianze ── */
+    var track   = document.getElementById("testiTrack");
+    var testiCards = track ? Array.from(track.querySelectorAll(".testi-card")) : [];
+    var dotsRow = document.getElementById("testiDots");
+    var tPrev   = document.getElementById("testiPrev");
+    var tNext   = document.getElementById("testiNext");
+    var tPage   = 0, tTimer;
 
-    var resizeTimer;
-    window.addEventListener("resize", function() {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(function(){ showPage(0); }, 200);
+    function tPerPage() { return window.innerWidth <= 768 ? 1 : 2; }
+    function tTotal()   { return Math.ceil(testiCards.length / tPerPage()); }
+
+    function tShow(p) {
+      tPage = Math.max(0, Math.min(p, tTotal()-1));
+      var pp = tPerPage();
+      // Translate track
+      var cardW = testiCards[0] ? testiCards[0].offsetWidth + 24 : 0;
+      track.style.transform = "translateX(-" + (tPage * pp * cardW) + "px)";
+      // Dots
+      if (dotsRow) {
+        dotsRow.innerHTML = "";
+        for (var i=0;i<tTotal();i++){
+          var d=document.createElement("button");
+          d.className="testi-dot"+(i===tPage?" active":"");
+          d.setAttribute("role","tab");
+          d.setAttribute("aria-selected",i===tPage?"true":"false");
+          d.setAttribute("aria-label","Testimonianza "+(i+1));
+          (function(idx){d.addEventListener("click",function(){tStop();tShow(idx);tStart();});})(i);
+          dotsRow.appendChild(d);
+        }
+      }
+      if (tPrev) tPrev.disabled = tPage===0;
+      if (tNext) tNext.disabled = tPage>=tTotal()-1;
+    }
+    function tStart() { tTimer = setInterval(function(){ tShow((tPage+1)%tTotal()); }, 5000); }
+    function tStop()  { clearInterval(tTimer); }
+    if (tPrev) tPrev.addEventListener("click",function(){tStop();tShow(tPage-1);tStart();});
+    if (tNext) tNext.addEventListener("click",function(){tStop();tShow(tPage+1);tStart();});
+    if (track) {
+      var ttx=0;
+      track.addEventListener("touchstart",function(e){ttx=e.touches[0].clientX;},{passive:true});
+      track.addEventListener("touchend",function(e){
+        var dx=e.changedTouches[0].clientX-ttx;
+        if(dx<-50){tStop();tShow(tPage+1);tStart();}
+        if(dx>50) {tStop();tShow(tPage-1);tStart();}
+      },{passive:true});
+    }
+    if (track && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setTimeout(function(){ tShow(0); tStart(); }, 800);
+    } else if (track) {
+      tShow(0);
+    }
+    var resT2;
+    window.addEventListener("resize",function(){clearTimeout(resT2);resT2=setTimeout(function(){tShow(0);},200);});
+
+    /* ── FAB toggle ── */
+    var fabMain    = document.getElementById("fab-main");
+    var fabActions = document.getElementById("fabActions");
+    var fabOpen    = false;
+    function fabToggle() {
+      fabOpen = !fabOpen;
+      fabMain.classList.toggle("open", fabOpen);
+      fabActions.classList.toggle("open", fabOpen);
+      fabMain.setAttribute("aria-expanded", fabOpen);
+      fabActions.setAttribute("aria-hidden", !fabOpen);
+    }
+    if (fabMain) fabMain.addEventListener("click", fabToggle);
+    // Close on outside click
+    document.addEventListener("click", function(e){
+      if (fabOpen && !document.getElementById("fab-wrap").contains(e.target)) fabToggle();
     });
+    // Close on scroll
+    window.addEventListener("scroll", function(){
+      if (fabOpen) fabToggle();
+    }, { passive: true });
 
     /* ── Scroll reveal ── */
     var ios = new IntersectionObserver(function(entries) {
