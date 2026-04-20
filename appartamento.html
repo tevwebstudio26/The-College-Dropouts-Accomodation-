@@ -50,7 +50,7 @@
     box-shadow: 0 2px 24px rgba(26,24,20,.08);
     border-bottom: 1px solid rgba(26,24,20,.08);
   }
-  .nav-logo { height: 56px; width: auto; display: block; }
+  .nav-logo { height: 80px; width: auto; display: block; }
   .nav-links { display: flex; align-items: center; gap: 6px; list-style: none; }
   .nav-links a { font-size: .82rem; font-weight: 500; letter-spacing: .04em; color: var(--ink-60); padding: 8px 14px; border-radius: 100px; transition: color .2s, background .2s; }
   .nav-links a:hover { color: var(--ink); background: var(--ink-10); }
@@ -404,7 +404,7 @@
   <nav id="nav" aria-label="Navigazione principale">
     <a href="index.html" aria-label="Teseo Renting — Homepage">
       <img src="assets/images/brand/teseo-passarani-renting-logo.webp"
-           alt="Teseo Passarani Renting" class="nav-logo" width="180" height="56"/>
+           alt="Teseo Passarani Renting" class="nav-logo" width="180" height="80"/>
     </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
@@ -706,12 +706,18 @@
   /* ============================================================
      LEGGI ID DALL'URL E CARICA APPARTAMENTO
   ============================================================ */
+  /* Percorso base compatibile GitHub Pages */
+  var BASE_PATH = (function(){
+    var p = window.location.pathname;
+    return p.substring(0, p.lastIndexOf('/') + 1);
+  })();
   var params = new URLSearchParams(window.location.search);
   var aptId  = params.get("id");
   var apt    = APPARTAMENTI.find(function(a){ return a.id === aptId; });
 
   if (!apt) {
-    document.getElementById("not-found").style.display = "block";
+    var nfEl = document.getElementById("not-found");
+    nfEl.style.display = "block";
   } else {
     renderApartment(apt);
   }
@@ -907,7 +913,7 @@
     var others = APPARTAMENTI.filter(function(a){ return a.id !== currentId; });
     var grid = document.getElementById("corr-grid");
     grid.innerHTML = others.map(function(a){
-      return '<a href="appartamento.html?id=' + a.id + '" class="corr-card rv">' +
+      return '<a href="' + BASE_PATH + 'appartamento.html?id=' + a.id + '" class="corr-card rv">' +
         '<div class="corr-img"><img src="' + a.fotoPrincipale + '" alt="' + a.fotoAlt + '" width="400" height="300" loading="lazy"/></div>' +
         '<div class="corr-body">' +
           '<p class="corr-zone">' + a.zona.charAt(0).toUpperCase() + a.zona.slice(1) + '</p>' +
