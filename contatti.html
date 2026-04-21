@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contatti — Teseo Renting | Agente Immobiliare Rieti</title>
   <meta name="description" content="Contatta Teseo Renting per informazioni su appartamenti in affitto a Rieti. Risposta diretta e personalizzata entro poche ore. Telefono, WhatsApp o modulo online."/>
-  <meta name="keywords" content="contatti Teseo Renting, agente immobiliare Rieti contatto, affitto appartamenti Rieti informazioni, WhatsApp affitti Rieti"/>
+  <meta name="keywords" content="contatti Teseo Renting, agente immobiliare Rieti contatto, affitto appartamenti Rieti informazioni"/>
   <meta name="robots" content="index, follow"/>
   <link rel="canonical" href="https://tevwebstudio26.github.io/Teseo-Passarani-Renting/contatti.html"/>
   <meta property="og:title" content="Contatti — Teseo Renting Rieti"/>
-  <meta property="og:description" content="Contatta direttamente Teseo Renting per appartamenti in affitto a Rieti. Risposta entro poche ore."/>
+  <meta property="og:description" content="Contatta direttamente Teseo Renting per appartamenti in affitto a Rieti."/>
   <meta property="og:type" content="website"/>
   <meta property="og:locale" content="it_IT"/>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"/>
@@ -18,40 +18,32 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
 
   <style>
-  /* ============================================================
-     RESET & BASE
-  ============================================================ */
+  /* ── Reset ── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body {
-    font-family: "DM Sans", sans-serif;
-    background: #F9F7F4; color: #1A1814;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
+  body { font-family: "DM Sans", sans-serif; background: #F9F7F4; color: #1A1814; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   img { display: block; max-width: 100%; height: auto; }
   a { color: inherit; text-decoration: none; }
   button { font-family: inherit; }
 
   :root {
-    --cream:      #F9F7F4;
-    --ink:        #1A1814;
-    --ink-60:     rgba(26,24,20,.60);
-    --ink-30:     rgba(26,24,20,.30);
-    --ink-10:     rgba(26,24,20,.10);
-    --gold:       #B8A06A;
-    --gold-light: #D4C08E;
-    --card-bg:    #ffffff;
-    --border:     rgba(26,24,20,.10);
-    --serif:      "Cormorant Garamond", Georgia, serif;
-    --max-w:      1200px;
-    --px:         clamp(20px,5vw,80px);
-    --ease:       cubic-bezier(.16,1,.3,1);
+    --cream: #F9F7F4; --ink: #1A1814;
+    --ink-60: rgba(26,24,20,.60); --ink-30: rgba(26,24,20,.30); --ink-10: rgba(26,24,20,.10);
+    --gold: #B8A06A; --gold-light: #D4C08E;
+    --border: rgba(26,24,20,.10);
+    --serif: "Cormorant Garamond", Georgia, serif;
+    --max-w: 1200px; --px: clamp(20px,5vw,80px);
+    --ease: cubic-bezier(.16,1,.3,1);
   }
 
-  /* ============================================================
+  /* ── Scroll reveal ── */
+  .rv { opacity:0; transform:translateY(22px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
+  .rv.in { opacity:1; transform:none; }
+  .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s}
+
+  /* ════════════════════════════════════
      NAVBAR
-  ============================================================ */
+  ════════════════════════════════════ */
   #nav {
     position: fixed; inset: 0 0 auto 0; z-index: 1000;
     height: 68px; padding: 0 var(--px);
@@ -63,213 +55,208 @@
   }
   .nav-logo { height: 80px; width: auto; display: block; }
   .nav-links { display: flex; align-items: center; gap: 6px; list-style: none; }
-  .nav-links a {
-    font-size: .82rem; font-weight: 500; letter-spacing: .04em;
-    color: var(--ink-60); padding: 8px 14px; border-radius: 100px;
-    transition: color .2s, background .2s;
-  }
-  .nav-links a:hover { color: var(--ink); background: var(--ink-10); }
-  .nav-apt { background: var(--gold) !important; color: var(--ink) !important; font-weight: 600 !important; }
-  .nav-cta {
-    background: var(--ink) !important; color: #F9F7F4 !important;
-    font-weight: 600 !important; border-radius: 100px !important;
-  }
-  .nav-cta:hover { background: #2C2820 !important; }
-  .nav-links a[aria-current="page"] { color: var(--ink); font-weight: 600; }
+  .nav-links a { font-size:.82rem; font-weight:500; letter-spacing:.04em; color:var(--ink-60); padding:8px 14px; border-radius:100px; transition:color .2s, background .2s; }
+  .nav-links a:hover { color:var(--ink); background:var(--ink-10); }
+  .nav-links a[aria-current="page"] { color:var(--ink); font-weight:600; }
+  .nav-apt { background:var(--gold) !important; color:var(--ink) !important; font-weight:600 !important; }
+  .nav-cta { background:var(--ink) !important; color:#F9F7F4 !important; font-weight:600 !important; border-radius:100px !important; }
+  .nav-cta:hover { background:#2C2820 !important; }
   .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:8px; background:none; border:none; }
-  .hamburger span { display:block; width:22px; height:1.5px; background:var(--ink); transition:background .3s; }
+  .hamburger span { display:block; width:22px; height:1.5px; background:var(--ink); }
   @media(max-width:768px){ .nav-links{display:none;} .hamburger{display:flex;} }
 
-  /* ============================================================
-     PAGE HERO — header compatto scuro
-  ============================================================ */
+  /* ════════════════════════════════════
+     PAGE HERO — sfondo scuro con immagine mura
+  ════════════════════════════════════ */
   #page-hero {
     margin-top: 68px;
-    padding: 72px var(--px) 64px;
+    padding: 80px var(--px) 72px;
     background: var(--ink);
     position: relative; overflow: hidden;
+    min-height: 280px; display: flex; align-items: center;
   }
-  #page-hero::before {
-    content: ""; position: absolute; inset: 0; z-index: 0;
-    background: radial-gradient(ellipse at 30% 60%, rgba(184,160,106,.10) 0%, transparent 65%);
+  /* Immagine mura di Rieti — sfondo hero */
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 55%;
+    opacity: .18; filter: grayscale(25%);
+  }
+  /* Gradiente overlay sul lato destro per sfumare l'immagine */
+  #page-hero::after {
+    content: ""; position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(90deg, rgba(26,24,20,.7) 0%, rgba(26,24,20,.3) 60%, rgba(26,24,20,.1) 100%);
     pointer-events: none;
   }
-  .ph-in { max-width: var(--max-w); margin: 0 auto; position: relative; z-index: 1; }
-  .ph-eyebrow {
-    font-size: .72rem; font-weight: 500; letter-spacing: .2em;
-    text-transform: uppercase; color: var(--gold-light); margin-bottom: 14px;
+  /* Radial gold glow */
+  #page-hero::before {
+    content: ""; position: absolute; inset: 0; z-index: 1;
+    background: radial-gradient(ellipse at 20% 60%, rgba(184,160,106,.12) 0%, transparent 60%);
+    pointer-events: none;
   }
-  .ph-title {
-    font-family: var(--serif);
-    font-size: clamp(2.4rem,6vw,4rem); font-weight: 300;
-    line-height: .95; letter-spacing: -.02em; color: #fff;
-  }
-  .ph-title em { font-style: italic; color: var(--gold-light); }
-  .ph-sub {
-    font-size: .95rem; color: rgba(255,255,255,.45);
-    margin-top: 16px; max-width: 460px; line-height: 1.7;
-  }
+  .ph-in { max-width: var(--max-w); margin: 0 auto; position: relative; z-index: 2; width: 100%; }
+  .ph-eyebrow { font-size:.72rem; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-light); margin-bottom:14px; }
+  .ph-title { font-family:var(--serif); font-size:clamp(2.4rem,6vw,4rem); font-weight:300; line-height:.95; letter-spacing:-.02em; color:#fff; }
+  .ph-title em { font-style:italic; color:var(--gold-light); }
+  .ph-sub { font-size:.95rem; color:rgba(255,255,255,.45); margin-top:16px; max-width:440px; line-height:1.7; }
 
-  /* ============================================================
-     SEZIONE ANIMAZIONE — CASA + METODI DI CONTATTO
-  ============================================================ */
+  /* ════════════════════════════════════
+     SEZIONE ACCORDION CONTATTI
+  ════════════════════════════════════ */
   #contact-visual {
     background: var(--cream);
     padding: clamp(64px,8vw,100px) var(--px);
-    position: relative; overflow: hidden;
+  }
+  .cv-in {
+    max-width: var(--max-w); margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: 48px;
   }
 
-  /* Immagine sfondo mura di Rieti */
-  #contact-visual .bg-mura {
-    position: absolute; inset: 0; z-index: 0;
-    width: 100%; height: 100%; object-fit: cover;
-    object-position: center 40%;
-    opacity: .07;
-    filter: grayscale(40%);
+  /* Copy intro */
+  .cv-copy { max-width: 580px; text-align: center; }
+  .cv-eyebrow { font-size:.72rem; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+  .cv-title { font-family:var(--serif); font-size:clamp(1.8rem,4vw,2.8rem); font-weight:300; line-height:1.1; letter-spacing:-.02em; color:var(--ink); margin-bottom:16px; }
+  .cv-title em { font-style:italic; }
+  .cv-body { font-size:.95rem; line-height:1.85; color:var(--ink-60); }
+
+  /* ── Accordion orizzontale ── */
+  .accordion {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+    min-height: 220px;
+  }
+  @media(max-width:600px){
+    .accordion { flex-direction: column; min-height: auto; gap: 10px; }
   }
 
-  .visual-in {
-    max-width: 900px; margin: 0 auto;
-    position: relative; z-index: 1;
-    display: flex; flex-direction: column; align-items: center;
-    text-align: center;
-  }
-
-  /* Copy sopra l'animazione */
-  .visual-copy { max-width: 580px; margin-bottom: 56px; }
-  .visual-eyebrow {
-    font-size: .72rem; font-weight: 500; letter-spacing: .2em;
-    text-transform: uppercase; color: var(--gold); margin-bottom: 14px;
-  }
-  .visual-title {
-    font-family: var(--serif);
-    font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 300;
-    line-height: 1.1; letter-spacing: -.02em; color: var(--ink);
-    margin-bottom: 18px;
-  }
-  .visual-title em { font-style: italic; }
-  .visual-body {
-    font-size: .95rem; line-height: 1.85; color: var(--ink-60);
-  }
-
-  /* ── SVG animazione ── */
-  #house-svg-wrap {
-    width: 100%; max-width: 680px;
-    position: relative;
-  }
-
-  /* Linee / rami SVG */
-  .branch {
-    stroke-dasharray: 200;
-    stroke-dashoffset: 200;
-    animation: drawBranch .7s var(--ease) forwards;
-  }
-  .branch-1 { animation-delay: .4s; }
-  .branch-2 { animation-delay: .65s; }
-  .branch-3 { animation-delay: .9s; }
-
-  @keyframes drawBranch {
-    to { stroke-dashoffset: 0; }
-  }
-
-  /* Casa SVG */
-  .house-svg {
-    animation: houseIn .6s var(--ease) .1s both;
-  }
-  @keyframes houseIn {
-    from { opacity: 0; transform: scale(.7); }
-    to   { opacity: 1; transform: scale(1); }
-  }
-
-  /* Card metodo di contatto */
-  .contact-card {
-    position: absolute;
-    background: #fff;
+  /* Ogni pannello */
+  .acc-panel {
+    border-radius: 18px;
+    overflow: hidden;
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 18px 20px;
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
-    box-shadow: 0 8px 32px rgba(26,24,20,.10);
-    min-width: 130px;
-    opacity: 0;
-    animation: cardPop .5s var(--ease) forwards;
-    text-decoration: none; color: inherit;
-    transition: transform .25s var(--ease), box-shadow .25s;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    position: relative;
     cursor: pointer;
+    /* Stato chiuso: occupa poco spazio */
+    flex: 0 0 72px;
+    transition: flex .55s var(--ease), box-shadow .3s, border-color .3s;
   }
-  .contact-card:hover {
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 16px 48px rgba(26,24,20,.15);
+  .acc-panel.open {
+    flex: 1 1 auto;
+    box-shadow: 0 16px 48px rgba(26,24,20,.12);
+    border-color: var(--gold);
+    cursor: default;
   }
-  .contact-card-1 { animation-delay: 1.0s; }
-  .contact-card-2 { animation-delay: 1.25s; }
-  .contact-card-3 { animation-delay: 1.5s; }
+  @media(max-width:600px){
+    .acc-panel { flex: none; height: 64px; }
+    .acc-panel.open { height: auto; }
+    .accordion { flex-direction: column; }
+  }
 
-  @keyframes cardPop {
-    from { opacity: 0; transform: scale(.6) translateY(10px); }
-    to   { opacity: 1; transform: scale(1) translateY(0); }
-  }
-
-  .cc-icon {
-    width: 44px; height: 44px; border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
+  /* Header del pannello (sempre visibile) */
+  .acc-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 20px;
     flex-shrink: 0;
-  }
-  .cc-icon.tel { background: var(--ink); color: #fff; }
-  .cc-icon.wa  { background: #25D366; color: #fff; }
-  .cc-icon.form{ background: rgba(184,160,106,.15); color: var(--gold); }
-
-  .cc-label {
-    font-size: .72rem; font-weight: 700; letter-spacing: .08em;
-    text-transform: uppercase; color: var(--ink-60);
-  }
-  .cc-value {
-    font-size: .82rem; font-weight: 600; color: var(--ink);
     white-space: nowrap;
   }
 
-  /* Layout SVG + card: contenitore relativo con aspect ratio fisso */
-  .svg-stage {
-    position: relative;
-    width: 100%;
-    max-width: 680px;
-    /* Le card sono posizionate in absolute rispetto a questo */
-    /* Altezza dinamica per contenere le card */
-    min-height: 320px;
+  .acc-icon {
+    width: 42px; height: 42px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: transform .3s var(--ease);
+  }
+  .acc-panel.open .acc-icon { transform: scale(1.08); }
+  .acc-icon.tel  { background: var(--ink); color: #fff; }
+  .acc-icon.wa   { background: #25D366; color: #fff; }
+  .acc-icon.form { background: rgba(184,160,106,.15); color: var(--gold); }
+
+  .acc-label-wrap { overflow: hidden; }
+  .acc-label {
+    font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--ink-30);
+    display: block; margin-bottom: 2px;
+    transition: color .3s;
+  }
+  .acc-panel.open .acc-label { color: var(--gold); }
+  .acc-title {
+    font-size: .95rem; font-weight: 600; color: var(--ink);
+    white-space: nowrap;
   }
 
-  /* Posizioni card su desktop */
-  .contact-card-1 { left: 0;    top: 50%; transform: translateY(-50%); }
-  .contact-card-2 { left: 50%; top: 0;   transform: translateX(-50%); }
-  .contact-card-3 { right: 0;  top: 50%; transform: translateY(-50%); }
-
-  .contact-card-1:hover { transform: translateY(calc(-50% - 4px)); }
-  .contact-card-2:hover { transform: translate(-50%, -4px); }
-  .contact-card-3:hover { transform: translateY(calc(-50% - 4px)); }
-
-  /* Mobile: stack verticale */
-  @media(max-width:600px){
-    .svg-stage { min-height: auto; }
-    .contact-card {
-      position: static !important;
-      transform: none !important;
-      width: 100%;
-    }
-    .contact-card:hover { transform: translateY(-3px) !important; }
-    .cards-mobile-stack {
-      display: flex; flex-direction: column; gap: 14px;
-      width: 100%; margin-top: 32px;
-    }
-    /* Nasconde lo stage SVG su mobile, mostra solo le card in stack */
-    .svg-stage-wrap { display: none; }
+  /* Freccia indicatore */
+  .acc-arrow {
+    margin-left: auto; flex-shrink: 0;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--ink-10); display: flex; align-items: center; justify-content: center;
+    transition: background .3s, transform .4s var(--ease);
   }
-  @media(min-width:601px){
-    .cards-mobile-stack { display: none; }
+  .acc-arrow svg { color: var(--ink-60); transition: color .3s; }
+  .acc-panel.open .acc-arrow {
+    background: var(--gold);
+    transform: rotate(180deg);
+  }
+  .acc-panel.open .acc-arrow svg { color: #fff; }
+
+  /* Corpo del pannello (si rivela all'apertura) */
+  .acc-body {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .55s var(--ease), padding .4s;
+    opacity: 0;
+    transition: max-height .55s var(--ease), opacity .4s, padding .4s;
+  }
+  .acc-panel.open .acc-body {
+    max-height: 400px;
+    opacity: 1;
+    padding: 0 20px 24px;
   }
 
-  /* ============================================================
+  /* Linea separatrice nel corpo */
+  .acc-sep { height:1px; background:var(--border); margin-bottom:20px; }
+
+  .acc-desc { font-size:.88rem; line-height:1.75; color:var(--ink-60); margin-bottom:20px; }
+
+  /* CTA dentro il pannello */
+  .acc-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: .88rem; font-weight: 700;
+    padding: 12px 24px; border-radius: 100px;
+    transition: transform .2s, box-shadow .2s;
+    text-decoration: none;
+  }
+  .acc-cta:hover { transform: translateY(-2px); }
+  .acc-cta.tel-cta  { background: var(--ink); color: #fff; box-shadow: 0 4px 16px rgba(26,24,20,.2); }
+  .acc-cta.tel-cta:hover { box-shadow: 0 8px 24px rgba(26,24,20,.3); }
+  .acc-cta.wa-cta   { background: #25D366; color: #fff; box-shadow: 0 4px 16px rgba(37,211,102,.25); }
+  .acc-cta.wa-cta:hover { box-shadow: 0 8px 24px rgba(37,211,102,.4); }
+  .acc-cta.form-cta { background: var(--gold); color: var(--ink); box-shadow: 0 4px 16px rgba(184,160,106,.3); }
+  .acc-cta.form-cta:hover { box-shadow: 0 8px 24px rgba(184,160,106,.5); }
+
+  /* Testo nel pannello chiuso (ruota verticalmente) */
+  .acc-vertical-label {
+    position: absolute;
+    bottom: 20px; left: 50%;
+    transform: translateX(-50%) rotate(-90deg);
+    font-size: .65rem; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--ink-30);
+    white-space: nowrap;
+    opacity: 1;
+    transition: opacity .2s;
+    pointer-events: none;
+  }
+  .acc-panel.open .acc-vertical-label { opacity: 0; }
+  @media(max-width:600px){ .acc-vertical-label { display: none; } }
+
+  /* ════════════════════════════════════
      SEZIONE FORM
-  ============================================================ */
+  ════════════════════════════════════ */
   #contact-form-section {
     background: #F0EDE6;
     border-top: 1px solid var(--border);
@@ -277,180 +264,101 @@
   }
   .form-section-in {
     max-width: var(--max-w); margin: 0 auto;
-    display: grid; grid-template-columns: 1fr 1.1fr; gap: 72px; align-items: start;
+    display: grid; grid-template-columns: 1fr 1.15fr; gap: 72px; align-items: start;
   }
   @media(max-width:860px){ .form-section-in{ grid-template-columns:1fr; gap:48px; } }
 
-  /* Colonna sinistra — info */
-  .form-info-eyebrow {
-    font-size: .72rem; font-weight: 500; letter-spacing: .18em;
-    text-transform: uppercase; color: var(--gold); margin-bottom: 12px;
-  }
-  .form-info-title {
-    font-family: var(--serif);
-    font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 300;
-    line-height: 1.1; letter-spacing: -.02em; color: var(--ink);
-    margin-bottom: 20px;
-  }
-  .form-info-title em { font-style: italic; }
-  .form-info-body {
-    font-size: .92rem; line-height: 1.85; color: var(--ink-60);
-    margin-bottom: 32px;
-  }
+  .form-info-eyebrow { font-size:.72rem; font-weight:500; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+  .form-info-title { font-family:var(--serif); font-size:clamp(1.8rem,4vw,2.8rem); font-weight:300; line-height:1.1; letter-spacing:-.02em; color:var(--ink); margin-bottom:20px; }
+  .form-info-title em { font-style:italic; }
+  .form-info-body { font-size:.92rem; line-height:1.85; color:var(--ink-60); margin-bottom:32px; }
 
-  /* Info diretti */
-  .direct-contacts { display: flex; flex-direction: column; gap: 14px; }
+  .direct-contacts { display:flex; flex-direction:column; gap:12px; }
   .direct-item {
-    display: flex; align-items: center; gap: 14px;
-    padding: 14px 18px; background: #fff;
-    border: 1px solid var(--border); border-radius: 12px;
-    text-decoration: none; color: inherit;
-    transition: border-color .2s, box-shadow .2s, transform .2s;
+    display:flex; align-items:center; gap:14px;
+    padding:14px 18px; background:#fff;
+    border:1px solid var(--border); border-radius:12px;
+    text-decoration:none; color:inherit;
+    transition:border-color .2s, box-shadow .2s, transform .2s;
   }
-  .direct-item:hover {
-    border-color: var(--gold);
-    box-shadow: 0 4px 20px rgba(26,24,20,.08);
-    transform: translateX(3px);
-  }
-  .direct-icon {
-    width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .direct-icon.tel  { background: var(--ink); color: #fff; }
-  .direct-icon.wa   { background: #25D366; color: #fff; }
-  .direct-icon.mail { background: rgba(184,160,106,.15); color: var(--gold); }
-  .direct-label { font-size: .7rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-30); }
-  .direct-value { font-size: .9rem; font-weight: 600; color: var(--ink); margin-top: 1px; }
+  .direct-item:hover { border-color:var(--gold); box-shadow:0 4px 20px rgba(26,24,20,.08); transform:translateX(3px); }
+  .direct-icon { width:38px; height:38px; border-radius:10px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .direct-icon.tel  { background:var(--ink); color:#fff; }
+  .direct-icon.wa   { background:#25D366; color:#fff; }
+  .direct-icon.mail { background:rgba(184,160,106,.15); color:var(--gold); }
+  .direct-label { font-size:.7rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-30); }
+  .direct-value { font-size:.9rem; font-weight:600; color:var(--ink); margin-top:1px; }
 
-  /* Colonna destra — form */
-  .form-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 36px 32px;
-    box-shadow: 0 8px 40px rgba(26,24,20,.07);
-  }
-  .form-card-title {
-    font-family: var(--serif);
-    font-size: 1.5rem; font-weight: 300; color: var(--ink);
-    margin-bottom: 6px; letter-spacing: -.01em;
-  }
-  .form-card-sub {
-    font-size: .82rem; color: var(--ink-60); margin-bottom: 28px; line-height: 1.6;
-  }
+  /* Form card */
+  .form-card { background:#fff; border:1px solid var(--border); border-radius:20px; padding:36px 32px; box-shadow:0 8px 40px rgba(26,24,20,.07); }
+  @media(max-width:480px){ .form-card{ padding:24px 20px; } }
+  .form-card-title { font-family:var(--serif); font-size:1.5rem; font-weight:300; color:var(--ink); margin-bottom:6px; letter-spacing:-.01em; }
+  .form-card-sub { font-size:.82rem; color:var(--ink-60); margin-bottom:28px; line-height:1.6; }
 
-  /* Campi form */
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
   @media(max-width:500px){ .form-row{ grid-template-columns:1fr; } }
 
-  .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
-  .field label {
-    font-size: .74rem; font-weight: 600; letter-spacing: .06em;
-    text-transform: uppercase; color: var(--ink-60);
+  .field { display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+  .field label { font-size:.74rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-60); }
+  .field input, .field select, .field textarea {
+    width:100%; padding:12px 14px;
+    border:1px solid var(--border); border-radius:10px;
+    background:var(--cream); font-family:inherit; font-size:.88rem; color:var(--ink);
+    transition:border-color .2s, box-shadow .2s, background .2s; outline:none;
+    appearance:none; -webkit-appearance:none;
   }
-  .field input,
-  .field select,
-  .field textarea {
-    width: 100%; padding: 12px 14px;
-    border: 1px solid var(--border); border-radius: 10px;
-    background: var(--cream); font-family: inherit; font-size: .88rem; color: var(--ink);
-    transition: border-color .2s, box-shadow .2s, background .2s;
-    outline: none;
-    appearance: none; -webkit-appearance: none;
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color:var(--gold); background:#fff; box-shadow:0 0 0 3px rgba(184,160,106,.14);
   }
-  .field input:focus,
-  .field select:focus,
-  .field textarea:focus {
-    border-color: var(--gold);
-    background: #fff;
-    box-shadow: 0 0 0 3px rgba(184,160,106,.14);
-  }
-  .field input::placeholder,
-  .field textarea::placeholder { color: var(--ink-30); }
-  .field textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+  .field input::placeholder, .field textarea::placeholder { color:var(--ink-30); }
+  .field textarea { resize:vertical; min-height:120px; line-height:1.6; }
   .field select {
     background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%231A1814' stroke-opacity='.35' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 14px center;
-    padding-right: 36px; cursor: pointer;
+    background-repeat:no-repeat; background-position:right 14px center; padding-right:36px; cursor:pointer;
   }
-  .field-optional { font-size: .68rem; color: var(--ink-30); font-weight: 400; text-transform: none; letter-spacing: 0; margin-left: 4px; }
+  .field-opt { font-size:.68rem; color:var(--ink-30); font-weight:400; text-transform:none; letter-spacing:0; margin-left:4px; }
 
-  /* Privacy checkbox */
-  .privacy-row {
-    display: flex; gap: 12px; align-items: flex-start;
-    margin-bottom: 22px; margin-top: 4px;
-  }
-  .privacy-row input[type="checkbox"] {
-    width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px;
-    accent-color: var(--gold); cursor: pointer;
-  }
-  .privacy-text {
-    font-size: .78rem; color: var(--ink-60); line-height: 1.55;
-  }
-  .privacy-text a { color: var(--gold); text-decoration: underline; }
+  .privacy-row { display:flex; gap:12px; align-items:flex-start; margin-bottom:22px; margin-top:4px; }
+  .privacy-row input[type="checkbox"] { width:18px; height:18px; flex-shrink:0; margin-top:1px; accent-color:var(--gold); cursor:pointer; }
+  .privacy-text { font-size:.78rem; color:var(--ink-60); line-height:1.55; }
+  .privacy-text a { color:var(--gold); text-decoration:underline; }
 
-  /* Submit button */
   .btn-submit {
-    width: 100%; padding: 15px;
-    background: var(--ink); color: #fff;
-    font-family: inherit; font-size: .9rem; font-weight: 700;
-    letter-spacing: .03em; border: none; border-radius: 12px;
-    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
-    transition: background .2s, transform .15s, box-shadow .2s;
-    box-shadow: 0 4px 20px rgba(26,24,20,.18);
+    width:100%; padding:15px;
+    background:var(--ink); color:#fff;
+    font-family:inherit; font-size:.9rem; font-weight:700; letter-spacing:.03em;
+    border:none; border-radius:12px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    transition:background .2s, transform .15s, box-shadow .2s;
+    box-shadow:0 4px 20px rgba(26,24,20,.18);
   }
-  .btn-submit:hover { background: #2C2820; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26,24,20,.25); }
-  .btn-submit:active { transform: translateY(0); }
-  .btn-submit:disabled { opacity: .55; pointer-events: none; }
+  .btn-submit:hover { background:#2C2820; transform:translateY(-2px); box-shadow:0 8px 28px rgba(26,24,20,.25); }
+  .btn-submit:disabled { opacity:.55; pointer-events:none; }
 
-  /* Stato di successo */
-  #form-success {
-    display: none;
-    text-align: center; padding: 40px 20px;
-  }
-  .success-icon {
-    width: 60px; height: 60px; border-radius: 50%;
-    background: rgba(26,92,52,.10); color: #1a5c34;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 16px; font-size: 1.6rem;
-  }
-  .success-title {
-    font-family: var(--serif); font-size: 1.5rem; font-weight: 300; color: var(--ink); margin-bottom: 8px;
-  }
-  .success-body { font-size: .88rem; color: var(--ink-60); line-height: 1.7; }
+  #form-success { display:none; text-align:center; padding:40px 20px; }
+  .success-icon { width:60px; height:60px; border-radius:50%; background:rgba(26,92,52,.10); color:#1a5c34; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; font-size:1.6rem; }
+  .success-title { font-family:var(--serif); font-size:1.5rem; font-weight:300; color:var(--ink); margin-bottom:8px; }
+  .success-body { font-size:.88rem; color:var(--ink-60); line-height:1.7; }
 
-  /* Nota placeholder */
-  .form-placeholder-note {
-    margin-top: 16px; padding: 12px 16px;
-    background: rgba(184,160,106,.08); border-radius: 8px;
-    border-left: 3px solid var(--gold);
-    font-size: .75rem; color: var(--ink-60); line-height: 1.5;
-  }
+  .form-note { margin-top:16px; padding:12px 16px; background:rgba(184,160,106,.08); border-radius:8px; border-left:3px solid var(--gold); font-size:.75rem; color:var(--ink-60); line-height:1.5; }
 
-  /* ============================================================
+  /* ════════════════════════════════════
      FOOTER
-  ============================================================ */
-  #footer { background: #100e0b; color: rgba(249,247,244,.50); padding: 48px var(--px) 32px; }
-  .foot-in { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 48px; padding-bottom: 40px; border-bottom: 1px solid rgba(249,247,244,.08); }
-  @media(max-width:680px){ .foot-in{ grid-template-columns:1fr; gap:32px; } }
-  .foot-logo { height: 36px; width: auto; margin-bottom: 14px; opacity: .8; filter: brightness(0) invert(1); }
-  .foot-desc { font-size: .82rem; line-height: 1.8; max-width: 280px; }
-  .foot-col-t { font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(249,247,244,.35); margin-bottom: 18px; }
-  .foot-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .foot-links a { font-size: .85rem; color: rgba(249,247,244,.55); transition: color .2s; }
-  .foot-links a:hover { color: var(--cream); }
-  .foot-bot { max-width: var(--max-w); margin: 28px auto 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-  .foot-copy { font-size: .75rem; }
-  .foot-credit { font-size: .75rem; }
-  .foot-credit a { color: var(--gold-light); transition: opacity .2s; }
-  .foot-credit a:hover { opacity: .8; }
-
-  /* ============================================================
-     ANIMAZIONI SCROLL REVEAL
-  ============================================================ */
-  .rv { opacity: 0; transform: translateY(20px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
-  .rv.in { opacity: 1; transform: none; }
-  .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s}
+  ════════════════════════════════════ */
+  #footer { background:#100e0b; color:rgba(249,247,244,.50); padding:48px var(--px) 32px; }
+  .foot-in { max-width:var(--max-w); margin:0 auto; display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:48px; padding-bottom:40px; border-bottom:1px solid rgba(249,247,244,.08); }
+  @media(max-width:680px){ .foot-in{grid-template-columns:1fr;gap:32px;} }
+  .foot-logo { height:36px; width:auto; margin-bottom:14px; opacity:.8; filter:brightness(0) invert(1); }
+  .foot-desc { font-size:.82rem; line-height:1.8; max-width:280px; }
+  .foot-col-t { font-size:.7rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:rgba(249,247,244,.35); margin-bottom:18px; }
+  .foot-links { list-style:none; display:flex; flex-direction:column; gap:10px; }
+  .foot-links a { font-size:.85rem; color:rgba(249,247,244,.55); transition:color .2s; }
+  .foot-links a:hover { color:var(--cream); }
+  .foot-bot { max-width:var(--max-w); margin:28px auto 0; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .foot-copy { font-size:.75rem; }
+  .foot-credit { font-size:.75rem; }
+  .foot-credit a { color:var(--gold-light); transition:opacity .2s; }
+  .foot-credit a:hover { opacity:.8; }
   </style>
 </head>
 <body>
@@ -473,8 +381,17 @@
     </button>
   </nav>
 
-  <!-- PAGE HERO -->
+  <!-- ════════════════════════════════
+       PAGE HERO — sfondo mura Rieti
+  ════════════════════════════════ -->
   <header id="page-hero">
+    <!-- Immagine mura di Rieti come sfondo -->
+    <img src="assets/images/miscellaneous/mura-rieti.webp"
+         alt="Mura storiche medievali di Rieti, centro storico"
+         class="hero-bg"
+         width="1920" height="700"
+         loading="eager"
+         aria-hidden="true"/>
     <div class="ph-in">
       <p class="ph-eyebrow">Contatti · Rieti</p>
       <h1 class="ph-title">Scrivici,<br><em>rispondiamo noi</em></h1>
@@ -482,203 +399,129 @@
     </div>
   </header>
 
-  <!-- SEZIONE ANIMAZIONE CASA -->
+  <!-- ════════════════════════════════
+       SEZIONE ACCORDION CONTATTI
+  ════════════════════════════════ -->
   <section id="contact-visual" aria-label="Metodi di contatto">
-
-    <!-- Sfondo mura di Rieti -->
-    <img src="assets/images/miscellaneous/mura-rieti.webp"
-         alt="Mura storiche di Rieti, centro storico medievale"
-         class="bg-mura"
-         width="1920" height="800"
-         loading="lazy"
-         aria-hidden="true"/>
-
-    <div class="visual-in">
+    <div class="cv-in">
 
       <!-- Copy -->
-      <div class="visual-copy rv">
-        <p class="visual-eyebrow">Come raggiungerci</p>
-        <h2 class="visual-title">Un punto di riferimento,<br><em>tre modi per arrivarci</em></h2>
-        <p class="visual-body">
-          Scegli il canale che preferisci. Che tu scriva su WhatsApp, chiami direttamente o compili il modulo qui sotto, la risposta arriva sempre dalla stessa persona — Teseo Passarani, che conosce ogni appartamento del catalogo.
-        </p>
+      <div class="cv-copy rv">
+        <p class="cv-eyebrow">Come raggiungerci</p>
+        <h2 class="cv-title">Un punto di riferimento,<br><em>tre modi per arrivarci</em></h2>
+        <p class="cv-body">Scegli il canale che preferisci. La risposta arriva sempre dalla stessa persona — Teseo Passarani, che conosce ogni appartamento del catalogo.</p>
       </div>
 
-      <!-- STAGE SVG — visibile solo su desktop/tablet -->
-      <div class="svg-stage-wrap" style="width:100%;max-width:680px;" aria-hidden="true">
-        <div class="svg-stage">
+      <!-- Accordion orizzontale — auto-apre al primo pannello on-scroll -->
+      <div class="accordion rv d2" id="accordion" role="tablist" aria-label="Metodi di contatto disponibili">
 
-          <!-- SVG con casa + rami animati -->
-          <svg viewBox="0 0 680 280" fill="none" xmlns="http://www.w3.org/2000/svg"
-               style="width:100%;display:block;">
-
-            <!-- Ramo sinistro: centro → sinistra (verso card Telefono) -->
-            <path class="branch branch-1"
-                  d="M340 140 C280 140 220 140 175 140"
-                  stroke="#B8A06A" stroke-width="1.5" stroke-linecap="round"
-                  stroke-dasharray="200" stroke-dashoffset="200"/>
-
-            <!-- Ramo centrale-alto: centro → su (verso card WhatsApp) -->
-            <path class="branch branch-2"
-                  d="M340 140 C340 110 340 80 340 55"
-                  stroke="#B8A06A" stroke-width="1.5" stroke-linecap="round"
-                  stroke-dasharray="200" stroke-dashoffset="200"/>
-
-            <!-- Ramo destro: centro → destra (verso card Form) -->
-            <path class="branch branch-3"
-                  d="M340 140 C400 140 460 140 505 140"
-                  stroke="#B8A06A" stroke-width="1.5" stroke-linecap="round"
-                  stroke-dasharray="200" stroke-dashoffset="200"/>
-
-            <!-- Dot di connessione ai rami -->
-            <circle cx="175" cy="140" r="4" fill="#B8A06A" opacity="0"
-                    style="animation: dotIn .3s ease 1.05s forwards">
-              <animate attributeName="opacity" from="0" to="1" begin="1.0s" dur="0.3s" fill="freeze"/>
-            </circle>
-            <circle cx="340" cy="55" r="4" fill="#B8A06A" opacity="0">
-              <animate attributeName="opacity" from="0" to="1" begin="1.25s" dur="0.3s" fill="freeze"/>
-            </circle>
-            <circle cx="505" cy="140" r="4" fill="#B8A06A" opacity="0">
-              <animate attributeName="opacity" from="0" to="1" begin="1.5s" dur="0.3s" fill="freeze"/>
-            </circle>
-
-            <!-- CASA SVG — centro -->
-            <g class="house-svg" transform="translate(300,95)">
-
-              <!-- Ombra casa -->
-              <ellipse cx="40" cy="92" rx="36" ry="5" fill="rgba(26,24,20,.08)"/>
-
-              <!-- Corpo casa -->
-              <rect x="10" y="50" width="60" height="42" rx="2"
-                    fill="#fff" stroke="#1A1814" stroke-width="1.5"/>
-
-              <!-- Tetto -->
-              <path d="M4 52L40 18L76 52"
-                    fill="#1A1814" stroke="#1A1814" stroke-width="1.5"
-                    stroke-linejoin="round"/>
-
-              <!-- Finestra sinistra -->
-              <rect x="16" y="60" width="14" height="12" rx="2"
-                    fill="#F9F7F4" stroke="#1A1814" stroke-width="1"/>
-
-              <!-- Finestra destra -->
-              <rect x="50" y="60" width="14" height="12" rx="2"
-                    fill="#F9F7F4" stroke="#1A1814" stroke-width="1"/>
-
-              <!-- Porta -->
-              <rect x="31" y="70" width="18" height="22" rx="2"
-                    fill="#B8A06A" stroke="#1A1814" stroke-width="1"/>
-
-              <!-- Pomolo porta -->
-              <circle cx="44" cy="82" r="2" fill="#1A1814"/>
-
-              <!-- Camino -->
-              <rect x="52" y="20" width="8" height="14" rx="1"
-                    fill="#1A1814"/>
-
-              <!-- Fumetto camino -->
-              <path d="M54 18 C52 12 58 8 56 2"
-                    stroke="#B8A06A" stroke-width="1.5" stroke-linecap="round"
-                    opacity="0.6"/>
-
-            </g>
-
-          </svg>
-
-          <!-- Card Telefono — sinistra -->
-          <a href="tel:+39XXXXXXXXX" class="contact-card contact-card-1"
-             aria-label="Chiama Teseo Renting">
-            <div class="cc-icon tel">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.04 1.17 2 2 0 012 .02h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <!-- PANNELLO 1 — Telefono -->
+        <div class="acc-panel" id="panel-tel" role="tab" tabindex="0"
+             aria-expanded="false" aria-label="Contatto telefonico">
+          <div class="acc-head">
+            <div class="acc-icon tel" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.04 1.17 2 2 0 012 .02h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
             </div>
-            <span class="cc-label">Telefono</span>
-            <span class="cc-value">Chiama ora</span>
-          </a>
+            <div class="acc-label-wrap">
+              <span class="acc-label">Telefono</span>
+              <span class="acc-title">Chiama ora</span>
+            </div>
+            <div class="acc-arrow" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+          <div class="acc-body">
+            <div class="acc-sep"></div>
+            <p class="acc-desc">La via più diretta. Chiama Teseo direttamente — nessun centralino, nessuna attesa in coda. Disponibile dal lunedì al venerdì, 9:00–18:00.</p>
+            <a href="tel:+39XXXXXXXXX" class="acc-cta tel-cta" aria-label="Chiama Teseo Renting">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.04 1.17 2 2 0 012 .02h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              +39 XXX XXX XXXX
+            </a>
+          </div>
+          <span class="acc-vertical-label">Telefono</span>
+        </div>
 
-          <!-- Card WhatsApp — centro alto -->
-          <a href="https://wa.me/39XXXXXXXXXX?text=Ciao%20Teseo%2C%20vorrei%20informazioni%20sugli%20appartamenti%20in%20affitto%20a%20Rieti."
-             target="_blank" rel="noopener noreferrer"
-             class="contact-card contact-card-2"
-             aria-label="Scrivi su WhatsApp">
-            <div class="cc-icon wa">
+        <!-- PANNELLO 2 — WhatsApp -->
+        <div class="acc-panel" id="panel-wa" role="tab" tabindex="0"
+             aria-expanded="false" aria-label="Contatto WhatsApp">
+          <div class="acc-head">
+            <div class="acc-icon wa" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             </div>
-            <span class="cc-label">WhatsApp</span>
-            <span class="cc-value">Scrivi ora</span>
-          </a>
-
-          <!-- Card Form — destra -->
-          <a href="#contact-form-section" class="contact-card contact-card-3"
-             aria-label="Vai al modulo di contatto">
-            <div class="cc-icon form">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <div class="acc-label-wrap">
+              <span class="acc-label">WhatsApp</span>
+              <span class="acc-title">Scrivi ora</span>
             </div>
-            <span class="cc-label">Modulo</span>
-            <span class="cc-value">Scrivi qui sotto</span>
-          </a>
+            <div class="acc-arrow" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+          <div class="acc-body">
+            <div class="acc-sep"></div>
+            <p class="acc-desc">Il canale più usato dai nostri clienti. Scrivi un messaggio con le tue esigenze — tipo di appartamento, zona, budget — e ricevi una risposta personalizzata in tempi brevi.</p>
+            <a href="https://wa.me/39XXXXXXXXXX?text=Ciao%20Teseo%2C%20vorrei%20informazioni%20sugli%20appartamenti%20in%20affitto%20a%20Rieti."
+               target="_blank" rel="noopener noreferrer"
+               class="acc-cta wa-cta" aria-label="Scrivi su WhatsApp">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Apri WhatsApp
+            </a>
+          </div>
+          <span class="acc-vertical-label">WhatsApp</span>
+        </div>
 
-        </div><!-- /svg-stage -->
-      </div><!-- /svg-stage-wrap -->
+        <!-- PANNELLO 3 — Modulo -->
+        <div class="acc-panel" id="panel-form" role="tab" tabindex="0"
+             aria-expanded="false" aria-label="Modulo di contatto">
+          <div class="acc-head">
+            <div class="acc-icon form" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="acc-label-wrap">
+              <span class="acc-label">Modulo</span>
+              <span class="acc-title">Scrivi qui sotto</span>
+            </div>
+            <div class="acc-arrow" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+          <div class="acc-body">
+            <div class="acc-sep"></div>
+            <p class="acc-desc">Preferisci scrivere con calma? Compila il modulo nella sezione qui sotto — hai spazio per spiegare nel dettaglio la tua situazione.</p>
+            <a href="#contact-form-section" class="acc-cta form-cta" aria-label="Vai al modulo di contatto">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Vai al modulo
+            </a>
+          </div>
+          <span class="acc-vertical-label">Modulo</span>
+        </div>
 
-      <!-- Stack mobile (solo <600px) -->
-      <div class="cards-mobile-stack" aria-label="Metodi di contatto">
-        <a href="tel:+39XXXXXXXXX" class="contact-card" style="position:static;transform:none;" aria-label="Chiama Teseo Renting">
-          <div class="cc-icon tel"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.04 1.17 2 2 0 012 .02h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
-          <span class="cc-label">Telefono</span><span class="cc-value">Chiama ora</span>
-        </a>
-        <a href="https://wa.me/39XXXXXXXXXX" target="_blank" rel="noopener noreferrer" class="contact-card" style="position:static;transform:none;" aria-label="WhatsApp">
-          <div class="cc-icon wa"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
-          <span class="cc-label">WhatsApp</span><span class="cc-value">Scrivi ora</span>
-        </a>
-        <a href="#contact-form-section" class="contact-card" style="position:static;transform:none;" aria-label="Modulo di contatto">
-          <div class="cc-icon form"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-          <span class="cc-label">Modulo</span><span class="cc-value">Scrivi qui sotto</span>
-        </a>
-      </div>
-
-    </div><!-- /visual-in -->
+      </div><!-- /accordion -->
+    </div><!-- /cv-in -->
   </section>
 
-  <!-- SEZIONE FORM -->
+  <!-- ════════════════════════════════
+       SEZIONE FORM
+  ════════════════════════════════ -->
   <section id="contact-form-section" aria-labelledby="form-heading">
     <div class="form-section-in">
 
-      <!-- Colonna sinistra: info -->
+      <!-- Colonna sinistra -->
       <div>
         <p class="form-info-eyebrow rv">Modulo di contatto</p>
-        <h2 class="form-info-title rv">Raccontaci<br>la tua <em>situazione</em></h2>
-        <p class="form-info-body rv">
-          Più dettagli ci dai — zona preferita, budget, numero di persone, quando ti serve l'appartamento — più precisa sarà la risposta. Non un elenco generico: una proposta su misura.
-        </p>
-
+        <h2 class="form-info-title rv" id="form-heading">Raccontaci<br>la tua <em>situazione</em></h2>
+        <p class="form-info-body rv">Più dettagli ci dai — zona preferita, budget, numero di persone, tempistiche — più precisa sarà la risposta. Non un elenco generico: una proposta su misura.</p>
         <div class="direct-contacts rv d2">
-          <a href="tel:+39XXXXXXXXX" class="direct-item" aria-label="Chiama Teseo Renting">
-            <div class="direct-icon tel">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.04 1.17 2 2 0 012 .02h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-            </div>
-            <div>
-              <div class="direct-label">Telefono</div>
-              <div class="direct-value">+39 XXX XXX XXXX</div>
-            </div>
+          <a href="tel:+39XXXXXXXXX" class="direct-item">
+            <div class="direct-icon tel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.04 1.17 2 2 0 012 .02h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+            <div><div class="direct-label">Telefono</div><div class="direct-value">+39 XXX XXX XXXX</div></div>
           </a>
-          <a href="https://wa.me/39XXXXXXXXXX" target="_blank" rel="noopener noreferrer"
-             class="direct-item" aria-label="WhatsApp Teseo Renting">
-            <div class="direct-icon wa">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            </div>
-            <div>
-              <div class="direct-label">WhatsApp</div>
-              <div class="direct-value">Messaggio diretto</div>
-            </div>
+          <a href="https://wa.me/39XXXXXXXXXX" target="_blank" rel="noopener noreferrer" class="direct-item">
+            <div class="direct-icon wa"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+            <div><div class="direct-label">WhatsApp</div><div class="direct-value">Messaggio diretto</div></div>
           </a>
-          <a href="mailto:info@teseorenting.it" class="direct-item" aria-label="Email Teseo Renting">
-            <div class="direct-icon mail">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
-            <div>
-              <div class="direct-label">Email</div>
-              <div class="direct-value">info@teseorenting.it</div>
-            </div>
+          <a href="mailto:info@teseorenting.it" class="direct-item">
+            <div class="direct-icon mail"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><div class="direct-label">Email</div><div class="direct-value">info@teseorenting.it</div></div>
           </a>
         </div>
       </div>
@@ -686,19 +529,14 @@
       <!-- Colonna destra: form -->
       <div class="rv d2">
         <div class="form-card">
-
-          <!-- Form visibile -->
           <div id="form-wrap">
-            <h3 class="form-card-title" id="form-heading">Invia una richiesta</h3>
+            <h3 class="form-card-title">Invia una richiesta</h3>
             <p class="form-card-sub">Risposta garantita entro 24 ore · Nessun impegno</p>
-
             <!--
-              PLACEHOLDER FORM — action="#" non invia nulla.
-              Sostituire action="#" con l'endpoint Formfree quando disponibile.
-              Aggiungere anche method="POST" e gli attributi Formfree richiesti.
+              PLACEHOLDER — action="#" non invia nulla.
+              Sostituire action con endpoint Formfree + aggiungere method="POST"
             -->
-            <form id="contact-form" action="#" method="POST" novalidate aria-label="Modulo di contatto Teseo Renting">
-
+            <form id="contact-form" action="#" novalidate aria-label="Modulo di contatto">
               <div class="form-row">
                 <div class="field">
                   <label for="f-nome">Nome <span style="color:var(--gold)">*</span></label>
@@ -709,17 +547,14 @@
                   <input type="text" id="f-cognome" name="cognome" placeholder="Rossi" required autocomplete="family-name"/>
                 </div>
               </div>
-
               <div class="field">
                 <label for="f-email">Email <span style="color:var(--gold)">*</span></label>
                 <input type="email" id="f-email" name="email" placeholder="mario.rossi@email.com" required autocomplete="email"/>
               </div>
-
               <div class="field">
-                <label for="f-tel">Telefono <span class="field-optional">(opzionale)</span></label>
+                <label for="f-tel">Telefono <span class="field-opt">(opzionale)</span></label>
                 <input type="tel" id="f-tel" name="telefono" placeholder="+39 XXX XXX XXXX" autocomplete="tel"/>
               </div>
-
               <div class="field">
                 <label for="f-tipologia">Cosa stai cercando? <span style="color:var(--gold)">*</span></label>
                 <select id="f-tipologia" name="tipologia" required>
@@ -728,58 +563,43 @@
                   <option value="bilocale">Bilocale</option>
                   <option value="trilocale">Trilocale</option>
                   <option value="quadrilocale">Quadrilocale o più</option>
-                  <option value="non-so">Non so ancora — ho bisogno di consulenza</option>
+                  <option value="consulenza">Non so ancora — ho bisogno di consulenza</option>
                 </select>
               </div>
-
               <div class="field">
                 <label for="f-messaggio">Raccontaci la tua situazione <span style="color:var(--gold)">*</span></label>
                 <textarea id="f-messaggio" name="messaggio"
-                          placeholder="Es: sono uno studente che si iscrive all'Università di Rieti da settembre, cerco un bilocale in zona centrale, budget max 600€/mese. Siamo in due..."
-                          required></textarea>
+                          placeholder="Es: sono uno studente che si iscrive all'Università di Rieti da settembre, cerco un bilocale in zona centrale, budget max 600€/mese..." required></textarea>
               </div>
-
               <div class="privacy-row">
                 <input type="checkbox" id="f-privacy" name="privacy" required/>
                 <label for="f-privacy" class="privacy-text">
-                  Ho letto e accetto la <a href="privacy.html">Privacy Policy</a>.
-                  I dati forniti saranno utilizzati esclusivamente per rispondere alla presente richiesta.
+                  Ho letto e accetto la <a href="privacy.html">Privacy Policy</a>. I dati forniti saranno utilizzati esclusivamente per rispondere alla presente richiesta.
                 </label>
               </div>
-
               <button type="submit" class="btn-submit" id="submit-btn">
                 Invia la richiesta
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg>
               </button>
-
             </form>
-
-            <div class="form-placeholder-note">
-              <strong>Nota tecnica:</strong> Il form è attualmente in modalità di anteprima — l'invio è disattivato. Verrà attivato con l'integrazione Formfree.
-            </div>
+            <div class="form-note"><strong>Nota:</strong> Il form è in modalità anteprima — l'invio verrà attivato con l'integrazione Formfree.</div>
           </div>
-
-          <!-- Stato di successo (mostrato via JS dopo l'invio simulato) -->
           <div id="form-success" role="status" aria-live="polite">
             <div class="success-icon">✓</div>
             <h3 class="success-title">Richiesta inviata</h3>
-            <p class="success-body">
-              Grazie per averci scritto. Teseo ti risponderà direttamente entro 24 ore con una proposta personalizzata.
-            </p>
+            <p class="success-body">Grazie per averci scritto. Teseo ti risponderà direttamente entro 24 ore con una proposta personalizzata.</p>
           </div>
-
-        </div><!-- /form-card -->
+        </div>
       </div>
 
-    </div><!-- /form-section-in -->
+    </div>
   </section>
 
   <!-- FOOTER -->
   <footer id="footer">
     <div class="foot-in">
       <div>
-        <img src="assets/images/brand/teseo-passarani-renting-logo.webp"
-             alt="Teseo Renting" class="foot-logo" width="150" height="36" loading="lazy"/>
+        <img src="assets/images/brand/teseo-passarani-renting-logo.webp" alt="Teseo Renting" class="foot-logo" width="150" height="36" loading="lazy"/>
         <p class="foot-desc">Agente immobiliare freelance specializzato in affitti per studenti e intermediazione a Rieti e provincia.</p>
       </div>
       <div>
@@ -810,89 +630,107 @@
   <script>
   (function(){
 
-    /* ── Scroll reveal ── */
-    var obs = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if(en.isIntersecting){ en.target.classList.add("in"); obs.unobserve(en.target); }
+    /* ── Accordion — logica apertura/chiusura ── */
+    var panels = Array.from(document.querySelectorAll(".acc-panel"));
+
+    function openPanel(panel) {
+      panels.forEach(function(p) {
+        p.classList.remove("open");
+        p.setAttribute("aria-expanded", "false");
       });
-    }, {threshold:.08});
-    document.querySelectorAll(".rv").forEach(function(el){ obs.observe(el); });
+      panel.classList.add("open");
+      panel.setAttribute("aria-expanded", "true");
+    }
 
-    /* ── Form — validazione e stato successo simulato ── */
-    var form      = document.getElementById("contact-form");
-    var formWrap  = document.getElementById("form-wrap");
-    var formOK    = document.getElementById("form-success");
-    var submitBtn = document.getElementById("submit-btn");
+    panels.forEach(function(panel) {
+      /* Click */
+      panel.addEventListener("click", function() { openPanel(panel); });
+      /* Tastiera */
+      panel.addEventListener("keydown", function(e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openPanel(panel); }
+      });
+    });
 
-    form.addEventListener("submit", function(e){
-      e.preventDefault();
-
-      /* Validazione base */
-      var nome     = document.getElementById("f-nome").value.trim();
-      var cognome  = document.getElementById("f-cognome").value.trim();
-      var email    = document.getElementById("f-email").value.trim();
-      var msg      = document.getElementById("f-messaggio").value.trim();
-      var tipologia= document.getElementById("f-tipologia").value;
-      var privacy  = document.getElementById("f-privacy").checked;
-
-      if(!nome || !cognome || !email || !msg || !tipologia || !privacy){
-        /* Evidenzia i campi vuoti */
-        [
-          {el: document.getElementById("f-nome"),     val: nome},
-          {el: document.getElementById("f-cognome"),  val: cognome},
-          {el: document.getElementById("f-email"),    val: email},
-          {el: document.getElementById("f-messaggio"),val: msg},
-          {el: document.getElementById("f-tipologia"),val: tipologia},
-        ].forEach(function(item){
-          if(!item.val){
-            item.el.style.borderColor = "#c0392b";
-            item.el.addEventListener("input", function(){
-              item.el.style.borderColor = "";
-            }, {once: true});
-          }
-        });
-        if(!privacy){
-          document.getElementById("f-privacy").style.outline = "2px solid #c0392b";
-          document.getElementById("f-privacy").addEventListener("change", function(){
-            this.style.outline = "";
-          }, {once: true});
+    /* ── Auto-apre il primo pannello quando l'accordion entra nel viewport ── */
+    var accordion = document.getElementById("accordion");
+    var opened = false;
+    var accObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(en) {
+        if (en.isIntersecting && !opened) {
+          opened = true;
+          /* Piccolo delay per dare tempo al rv fade-in di completarsi */
+          setTimeout(function() { openPanel(panels[0]); }, 400);
+          accObs.unobserve(accordion);
         }
-        return;
-      }
+      });
+    }, { threshold: 0.3 });
+    if (accordion) accObs.observe(accordion);
 
-      /* Simulazione invio (rimuovere quando si integra Formfree) */
+    /* ── Scroll reveal ── */
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(en) {
+        if (en.isIntersecting) { en.target.classList.add("in"); obs.unobserve(en.target); }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll(".rv").forEach(function(el) { obs.observe(el); });
+
+    /* ── Form validazione + stato successo simulato ── */
+    var form     = document.getElementById("contact-form");
+    var formWrap = document.getElementById("form-wrap");
+    var formOK   = document.getElementById("form-success");
+    var submitBtn= document.getElementById("submit-btn");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      var fields = [
+        { el: document.getElementById("f-nome"),      val: document.getElementById("f-nome").value.trim() },
+        { el: document.getElementById("f-cognome"),   val: document.getElementById("f-cognome").value.trim() },
+        { el: document.getElementById("f-email"),     val: document.getElementById("f-email").value.trim() },
+        { el: document.getElementById("f-messaggio"), val: document.getElementById("f-messaggio").value.trim() },
+        { el: document.getElementById("f-tipologia"), val: document.getElementById("f-tipologia").value },
+      ];
+      var privacy = document.getElementById("f-privacy").checked;
+      var valid = true;
+      fields.forEach(function(f) {
+        if (!f.val) {
+          valid = false;
+          f.el.style.borderColor = "#c0392b";
+          f.el.addEventListener("input", function() { f.el.style.borderColor = ""; }, { once: true });
+        }
+      });
+      if (!privacy) {
+        valid = false;
+        var cb = document.getElementById("f-privacy");
+        cb.style.outline = "2px solid #c0392b";
+        cb.addEventListener("change", function() { cb.style.outline = ""; }, { once: true });
+      }
+      if (!valid) return;
+
       submitBtn.disabled = true;
       submitBtn.textContent = "Invio in corso…";
-
-      setTimeout(function(){
+      setTimeout(function() {
         formWrap.style.display = "none";
         formOK.style.display = "block";
       }, 900);
-
-      /*
-        INTEGRAZIONE FORMFREE:
-        Rimuovere il setTimeout sopra e lasciare che il form faccia
-        il submit normale con action="[URL_FORMFREE]" method="POST"
-      */
     });
 
-    /* ── Hamburger ── */
+    /* ── Hamburger menu ── */
     var ham      = document.getElementById("hamburger");
     var navLinks = document.querySelector(".nav-links");
-    if(ham){
-      ham.addEventListener("click", function(){
+    if (ham) {
+      ham.addEventListener("click", function() {
         var isOpen = ham.getAttribute("aria-expanded") === "true";
         ham.setAttribute("aria-expanded", !isOpen);
-        if(!isOpen){
+        if (!isOpen) {
           navLinks.style.cssText = "display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;background:rgba(249,247,244,.98);backdrop-filter:blur(14px);padding:16px 24px 24px;gap:4px;border-bottom:1px solid rgba(26,24,20,.10);box-shadow:0 8px 32px rgba(26,24,20,.12);z-index:999;";
         } else {
           navLinks.style.cssText = "";
         }
       });
-      document.addEventListener("click", function(e){
-        if(!ham.contains(e.target) && !navLinks.contains(e.target)){
+      document.addEventListener("click", function(e) {
+        if (!ham.contains(e.target) && !navLinks.contains(e.target)) {
           navLinks.style.cssText = "";
-          ham.setAttribute("aria-expanded","false");
+          ham.setAttribute("aria-expanded", "false");
         }
       });
     }
