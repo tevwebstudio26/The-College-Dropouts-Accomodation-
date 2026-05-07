@@ -4,568 +4,454 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The College Dropout — Appartamenti a Rieti</title>
-  <meta name="description" content="Appartamenti e sistemazioni per studenti e non solo a Rieti. Trova casa o pubblica il tuo annuncio con The College Dropout."/>
+  <meta name="description" content="Appartamenti e sistemazioni per studenti e non solo a Rieti."/>
   <link rel="canonical" href="https://thecollegedropout.it/"/>
   <meta property="og:title" content="The College Dropout — Appartamenti a Rieti"/>
-  <meta property="og:description" content="Appartamenti per studenti italiani, internazionali e non solo a Rieti."/>
   <meta property="og:type" content="website"/>
   <meta property="og:locale" content="it_IT"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-    :root {
-      --black:   #0a0a0a;
-      --magenta: #c8185c;
-      --white:   #f0ede8;
-      --off-white: #e8e4df;
-      --gray:    #888;
-      --border:  rgba(240,237,232,0.13);
-      --glow-mg: 0 0 10px rgba(200,24,92,.75), 0 0 30px rgba(200,24,92,.3);
+    :root{
+      --black:#0a0a0a;--magenta:#c8185c;--white:#f0ede8;
+      --off:#e8e4df;--gray:#888;
+      --border:rgba(240,237,232,.13);
+      --glow:0 0 12px rgba(200,24,92,.8),0 0 32px rgba(200,24,92,.3);
     }
 
-    html { scroll-behavior: smooth; }
+    html{scroll-behavior:smooth}
 
-    body {
-      font-family: 'Space Grotesk', sans-serif;
-      background: var(--black);
-      color: var(--white);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      cursor: none; /* hidden for custom cursor */
+    body{
+      font-family:'Space Grotesk',sans-serif;
+      background:var(--black);color:var(--white);
+      overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none;
     }
 
-    /* ─── CUSTOM CURSOR (desktop only) ─── */
-    #cur-dot, #cur-ring {
-      position: fixed;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 99999;
-      transform: translate(-50%, -50%);
-      transition: opacity .3s;
+    /* ── CURSOR ── */
+    #cur-dot,#cur-ring{position:fixed;border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%)}
+    #cur-dot{width:6px;height:6px;background:var(--magenta);box-shadow:0 0 8px var(--magenta)}
+    #cur-ring{width:30px;height:30px;border:1.5px solid rgba(200,24,92,.5);transition:width .18s,height .18s,border-color .18s}
+    body.ch #cur-ring{width:46px;height:46px;border-color:var(--magenta)}
+    @media(hover:none){#cur-dot,#cur-ring{display:none}body{cursor:auto}}
+
+    /* ── SCROLL PROGRESS ── */
+    #scroll-prog{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--magenta),#fff 80%);z-index:9998;transition:width .05s linear}
+
+    /* ══════════════════════════════════════════
+       PAGE TRANSITION OVERLAY
+       Starts FULLY COVERING on every page load (no flash).
+       JS adds .enter to retreat it after load.
+       On departure, .exit covers again then browser navigates.
+    ══════════════════════════════════════════ */
+    #page-transition{
+      position:fixed;inset:0;z-index:99000;
+      background:var(--black);
+      display:flex;align-items:center;justify-content:center;
+      pointer-events:all;
+      /* FULLY VISIBLE on load — prevents any content flash */
+      clip-path:inset(0% 0 0 0);
     }
-    #cur-dot {
-      width: 6px; height: 6px;
-      background: var(--magenta);
-      box-shadow: 0 0 8px var(--magenta);
+    /* EXIT: overlay rises from below, covers screen in 1000ms */
+    #page-transition.exit{
+      pointer-events:all;
+      animation:transExit 1s cubic-bezier(.77,0,.18,1) forwards;
     }
-    #cur-ring {
-      width: 30px; height: 30px;
-      border: 1.5px solid rgba(200,24,92,.55);
-      transition: width .18s ease, height .18s ease, border-color .18s ease;
+    /* ENTER: already covering → holds 400ms → retreats upward (total 1400ms) */
+    #page-transition.enter{
+      animation:transEnter 1.4s cubic-bezier(.77,0,.18,1) forwards;
     }
-    body.cursor-hover #cur-ring {
-      width: 46px; height: 46px;
-      border-color: var(--magenta);
+    @keyframes transExit{
+      0%  {clip-path:inset(100% 0 0 0)}
+      100%{clip-path:inset(0%   0 0 0)}
     }
-    @media (hover: none) {
-      #cur-dot, #cur-ring { display: none; }
-      body { cursor: auto; }
+    @keyframes transEnter{
+      /* hold fully covering for ~29% = ~400ms */
+      0%  {clip-path:inset(0% 0 0%   0)}
+      29% {clip-path:inset(0% 0 0%   0)}
+      /* then sweep upward */
+      100%{clip-path:inset(0% 0 100% 0)}
+    }
+    /* Logo: blooms in during exit/arrive, holds, fades as overlay retreats */
+    .trans-logo{
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(2.5rem,9vw,6rem);
+      letter-spacing:.1em;
+      color:var(--magenta);
+      text-shadow:0 0 24px rgba(200,24,92,.7),0 0 60px rgba(200,24,92,.25);
+      opacity:0;
+      animation:transLogoShow 1s ease forwards;
+    }
+    #page-transition.enter .trans-logo{
+      animation:transLogoEnter 1.4s ease forwards;
+    }
+    @keyframes transLogoShow{
+      0%  {opacity:0;transform:scale(.82);filter:blur(12px)}
+      35% {opacity:1;transform:scale(1);  filter:blur(0)}
+      100%{opacity:1;transform:scale(1);  filter:blur(0)}
+    }
+    @keyframes transLogoEnter{
+      0%  {opacity:1;transform:scale(1);  filter:blur(0)}
+      /* stays visible through hold */
+      55% {opacity:1;transform:scale(1);  filter:blur(0)}
+      /* fades as overlay retreats */
+      100%{opacity:0;transform:scale(.9); filter:blur(8px)}
     }
 
-    /* ─── SCROLL PROGRESS ─── */
-    #scroll-prog {
-      position: fixed;
-      top: 0; left: 0;
-      height: 2px;
-      width: 0%;
-      background: linear-gradient(90deg, var(--magenta), #fff 80%);
-      z-index: 9998;
-      transition: width .05s linear;
+    /* ── BG + NOISE ── */
+    .page-bg{position:fixed;inset:-60px;z-index:0;background:url('https://i.ibb.co/kV1YRjRf/background.webp') center/cover no-repeat;will-change:transform}
+    .page-bg::after{content:'';position:absolute;inset:0;background:rgba(10,10,10,.76)}
+    .noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.032;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size:180px}
+
+    /* ── GRAVITY DROP ENTRANCE ── */
+    .drop{opacity:0}
+    .drop.landed{animation:gravityDrop .72s cubic-bezier(.22,.68,0,1.4) forwards}
+    @keyframes gravityDrop{
+      0%  {opacity:0;transform:translateY(0) scale(1);filter:blur(2px)}
+      5%  {opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+      55% {transform:translateY(28px) scale(.995)}
+      72% {transform:translateY(6px) scale(1.008)}
+      85% {transform:translateY(-3px) scale(.998)}
+      100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
     }
 
-    /* ─── BACKGROUND ─── */
-    .page-bg {
-      position: fixed; inset: 0; z-index: 0;
-      background: url('https://i.ibb.co/kV1YRjRf/background.webp') center/cover no-repeat;
+    /* ── WORD REVEAL ON SCROLL ── */
+    .reveal-word{
+      display:inline-block;
+      clip-path:inset(0 100% 0 0);
+      transition:clip-path .65s cubic-bezier(.16,1,.3,1);
     }
-    .page-bg::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: rgba(10,10,10,.76);
+    .reveal-word.in{clip-path:inset(0 0% 0 0)}
+
+    /* ── PAGE WRAP ── */
+    .page-wrap{position:relative;z-index:2;min-height:100vh}
+
+    /* ══ NAV DRAWER ══ */
+    .lang-bar{position:fixed;top:0;right:0;z-index:900;display:flex;flex-direction:column;background:rgba(10,10,10,.92);border-left:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .lang-bar a{display:flex;align-items:center;gap:7px;padding:10px 14px;color:var(--white);text-decoration:none;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-family:'DM Mono',monospace;border-bottom:1px solid var(--border);transition:background .2s}
+    .lang-bar a:last-child{border-bottom:none}
+    .lang-bar a:hover{background:rgba(200,24,92,.22)}
+    .lang-bar a.active{color:var(--magenta)}
+    .lang-bar .flag{font-size:1.1rem}
+
+    .nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:1800;opacity:0;pointer-events:none;transition:opacity .35s}
+    .nav-overlay.open{opacity:1;pointer-events:all}
+    .nav-drawer{position:fixed;top:0;left:0;width:min(340px,90vw);height:100vh;background:var(--black);border-right:2px solid var(--magenta);z-index:1900;transform:translateX(-100%);transition:transform .4s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;overflow:hidden}
+    .nav-drawer.open{transform:translateX(0)}
+    .nav-drawer-header{padding:24px 28px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+    .nav-drawer-brand{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.06em;color:var(--magenta)}
+    .nav-close{background:none;border:none;color:var(--white);font-size:1.6rem;cursor:none;line-height:1;transition:color .2s}
+    .nav-close:hover{color:var(--magenta)}
+    .nav-links{display:flex;flex-direction:column;padding:24px 0;flex:1}
+    .nav-links a{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.04em;color:var(--white);text-decoration:none;padding:13px 28px;border-bottom:1px solid var(--border);transition:color .2s,padding-left .2s;position:relative}
+    .nav-links a:hover{color:var(--magenta);padding-left:40px}
+    .nav-links a.current{color:var(--magenta)}
+    .nav-links a.current::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--magenta)}
+    .nav-drawer-footer{padding:20px 28px;font-size:.68rem;color:var(--gray);letter-spacing:.08em;text-transform:uppercase;border-top:1px solid var(--border);font-family:'DM Mono',monospace;display:flex;justify-content:space-between;align-items:center}
+    .nav-footer-links{display:flex;gap:16px}
+    .nav-footer-links a{color:var(--gray);text-decoration:none;font-size:.65rem;transition:color .2s}
+    .nav-footer-links a:hover{color:var(--magenta)}
+
+    /* ── TOP BAR ── */
+    .top-bar{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border)}
+    .top-bar-left,.top-bar-right{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);font-family:'DM Mono',monospace}
+    .top-bar-right{padding-right:90px}
+    #live-counter{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--magenta)}
+
+    /* ── HERO GRID ── */
+    .hero-content{display:grid;grid-template-columns:1fr}
+    .hero-title-block{padding:36px 24px 24px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+    .hero-ellipse{position:absolute;top:16px;left:16px;width:clamp(200px,72vw,340px);height:clamp(80px,28vw,140px);border:2px solid var(--magenta);border-radius:50%;pointer-events:none;opacity:.6;animation:ellipseRotate 20s linear infinite;transform-origin:center center}
+    @keyframes ellipseRotate{from{transform:rotate(0deg) scaleX(1)}50%{transform:rotate(2deg) scaleX(1.02)}to{transform:rotate(0deg) scaleX(1)}}
+    .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.8rem,18vw,8rem);line-height:.92;letter-spacing:-.01em;color:var(--white);position:relative;z-index:1}
+    .hero-title.glitch-loop{animation:titleGlitch .65s ease-out forwards}
+    @keyframes titleGlitch{
+      0%  {text-shadow:none;transform:none;filter:none}
+      8%  {text-shadow:-5px 0 cyan,5px 0 magenta;transform:translateX(-3px);filter:brightness(1.6)}
+      16% {text-shadow:4px 0 magenta,-4px 0 cyan;transform:translateX(4px) skewX(-2deg);filter:brightness(1.4)}
+      24% {text-shadow:-3px 0 cyan,3px 0 magenta;transform:translateX(-2px);filter:brightness(1.2)}
+      52% {text-shadow:-6px 0 cyan,6px 0 magenta;transform:translateX(5px) scaleX(1.01);filter:brightness(1.7)}
+      60% {text-shadow:3px 0 magenta,-3px 0 cyan;transform:translateX(-3px);filter:brightness(1.3)}
+      68% {text-shadow:-2px 0 cyan,2px 0 magenta;transform:translateX(1px);filter:brightness(1.1)}
+      85% {text-shadow:-1px 0 rgba(0,255,255,.4),1px 0 rgba(200,24,92,.4);transform:none;filter:none}
+      100%{text-shadow:none;transform:none;filter:none}
+    }
+    .hero-subtitle{margin-top:12px;font-size:.85rem;letter-spacing:.07em;text-transform:uppercase;font-family:'DM Mono',monospace;position:relative;z-index:1;animation:subtitleGlow 3.6s ease-in-out infinite}
+    @keyframes subtitleGlow{0%,100%{color:rgba(240,237,232,.6);text-shadow:0 0 6px rgba(255,255,255,.25)}50%{color:#fff;text-shadow:0 0 14px rgba(255,255,255,.9),0 0 36px rgba(255,255,255,.25)}}
+
+    .hero-bear-block{padding:28px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-bottom:1px solid var(--border);gap:10px;position:relative;overflow:hidden}
+    .deco-circle{position:absolute;bottom:-30px;right:-20px;width:clamp(100px,40vw,200px);height:clamp(100px,40vw,200px);border:2px solid rgba(240,237,232,.09);border-radius:50%;pointer-events:none;animation:circleBreath 6s ease-in-out infinite}
+    @keyframes circleBreath{0%,100%{transform:scale(1);opacity:.4}50%{transform:scale(1.08);opacity:.7}}
+    .bear-container{position:relative;cursor:none;width:clamp(110px,36vw,180px)}
+    .bear-img{width:100%;height:auto;display:block;animation:bearGlow 3s ease-in-out infinite;transition:transform .3s ease}
+    .bear-container:hover .bear-img{transform:scale(1.06) rotate(-2deg)}
+    @keyframes bearGlow{0%,100%{filter:drop-shadow(0 0 4px var(--magenta)) drop-shadow(0 0 12px rgba(200,24,92,.3))}50%{filter:drop-shadow(0 0 16px var(--magenta)) drop-shadow(0 0 36px rgba(200,24,92,.55))}}
+    .bear-hint{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--magenta);font-family:'DM Mono',monospace;text-align:center;animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+    .hero-buttons-block{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)}
+    .hero-btn{padding:28px 20px;background:none;border:none;border-right:1px solid var(--border);color:var(--white);font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,6vw,2rem);letter-spacing:.04em;cursor:none;text-align:left;text-decoration:none;display:block;position:relative;overflow:hidden;animation:btnGlow 3.8s ease-in-out infinite;transition:background .25s,color .25s,text-shadow .25s,transform .25s cubic-bezier(.16,1,.3,1);will-change:transform}
+    .hero-btn:last-child{border-right:none}
+    .hero-btn:nth-child(2){animation-delay:-1.9s}
+    @keyframes btnGlow{0%,100%{text-shadow:0 0 5px rgba(255,255,255,.28),0 0 16px rgba(255,255,255,.07)}50%{text-shadow:0 0 16px rgba(255,255,255,.9),0 0 40px rgba(255,255,255,.2)}}
+    .hero-btn::before{content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;background:var(--magenta);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+    .hero-btn:hover::before{transform:scaleX(1)}
+    .hero-btn:hover{background:rgba(200,24,92,.07);color:var(--magenta);animation:none;text-shadow:var(--glow)}
+    .btn-label{display:block;font-size:.62rem;font-family:'DM Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:6px;transition:color .25s}
+    .hero-btn:hover .btn-label{color:rgba(200,24,92,.75)}
+
+    .hero-copy-block{padding:28px 24px;border-bottom:1px solid var(--border)}
+    .hero-copy{font-size:clamp(1rem,3.8vw,1.25rem);line-height:1.55;color:var(--off);max-width:520px}
+    .hero-copy strong{color:var(--magenta);font-weight:600}
+
+    /* ══════════════════════════════════════════
+       STACKED STICKY CARDS — "Come funziona"
+       Each card sticks, next one slides over it.
+    ══════════════════════════════════════════ */
+    .how-section{padding:72px 24px 0}
+    .how-label{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--magenta);margin-bottom:40px}
+
+    .stack-container{
+      /* height gives scroll room: 3 cards × 280px each */
+      height:840px;
+      position:relative;
+      margin-bottom:56px;
+    }
+    .stack-card{
+      position:sticky;
+      top:80px; /* where it sticks */
+      background:rgba(15,12,12,.92);
+      border:1px solid var(--border);
+      border-radius:4px;
+      padding:40px 32px;
+      margin-bottom:24px;
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      /* each card offset slightly — creates the "deck" illusion */
+      transform-origin:top center;
+      transition:box-shadow .3s;
+    }
+    .stack-card:hover{box-shadow:0 0 0 1px rgba(200,24,92,.3),var(--glow)}
+
+    /* Visual offset: card 2 appears slightly under card 1 etc */
+    .stack-card:nth-child(1){top:80px;z-index:3}
+    .stack-card:nth-child(2){top:108px;z-index:2}
+    .stack-card:nth-child(3){top:136px;z-index:1}
+
+    .stack-card-num{
+      font-family:'Bebas Neue',sans-serif;
+      font-size:4.5rem;line-height:1;
+      color:var(--magenta);opacity:.18;
+      margin-bottom:16px;display:block;
+    }
+    .stack-card-title{
+      font-family:'Bebas Neue',sans-serif;
+      font-size:2.2rem;letter-spacing:.03em;
+      color:var(--white);margin-bottom:12px;
+    }
+    .stack-card-desc{font-size:.95rem;line-height:1.7;color:var(--gray);max-width:480px}
+    .stack-card-tag{
+      display:inline-flex;align-items:center;gap:6px;
+      margin-top:20px;
+      font-family:'DM Mono',monospace;font-size:.62rem;
+      letter-spacing:.14em;text-transform:uppercase;
+      color:var(--magenta);
+      border:1px solid rgba(200,24,92,.3);
+      padding:5px 12px;border-radius:20px;
     }
 
-    /* ─── NOISE TEXTURE ─── */
-    .noise {
-      position: fixed; inset: 0; z-index: 1;
-      pointer-events: none;
-      opacity: .032;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size: 180px 180px;
+    .how-cta{margin:0 0 72px;display:inline-flex;align-items:center;gap:10px;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.06em;color:var(--black);background:var(--white);padding:14px 28px;border-radius:2px;text-decoration:none;transition:background .2s,box-shadow .2s,transform .2s;cursor:none}
+    .how-cta:hover{background:var(--magenta);color:var(--white);box-shadow:0 0 20px rgba(200,24,92,.45);transform:translateY(-2px)}
+    .how-cta-arrow{font-size:1.2rem;transition:transform .2s}
+    .how-cta:hover .how-cta-arrow{transform:translateX(4px)}
+
+    /* ══════════════════════════════════════════
+       PREMIUM FOOTER
+    ══════════════════════════════════════════ */
+    .site-footer{
+      border-top:1px solid var(--border);
+      padding:0;
+      position:relative;
+      overflow:hidden;
     }
 
-    /* ─── INK DROP REVEAL ─── */
-    .ink {
-      clip-path: inset(0 0 100% 0);
-      opacity: 0;
-      transition: clip-path .72s cubic-bezier(.16,1,.3,1), opacity .05s linear;
+    /* Giant title row */
+    .footer-title-row{
+      padding:48px 24px 32px;
+      border-bottom:1px solid var(--border);
+      position:relative;
     }
-    .ink.revealed { clip-path: inset(0 0 0% 0); opacity: 1; }
-
-    /* ─── CHROMATIC GLITCH ─── */
-    @keyframes glitch-in {
-      0%   { text-shadow: -4px 0 cyan, 4px 0 magenta; filter: brightness(1.7); }
-      25%  { text-shadow:  3px 0 magenta,-3px 0 cyan; filter: brightness(1.2); }
-      50%  { text-shadow: -2px 0 cyan,    2px 0 magenta; filter: brightness(1.3); }
-      75%  { text-shadow:  4px 0 magenta,-1px 0 cyan; filter: brightness(1.1); }
-      100% { text-shadow: none; filter: none; }
+    .footer-giant{
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(3rem,14vw,10rem);
+      line-height:.88;
+      letter-spacing:-.02em;
+      color:transparent;
+      -webkit-text-stroke:1px rgba(240,237,232,.18);
+      /* on hover fills in */
+      transition:color .4s ease, -webkit-text-stroke .4s ease;
+      display:block;
+      cursor:none;
     }
-    .glitch-once { animation: glitch-in .55s ease-out forwards; }
-
-    /* ─── LAYOUT ─── */
-    .page-wrap { position: relative; z-index: 2; min-height: 100vh; }
-
-    /* ─── LANG BAR ─── */
-    .lang-bar {
-      position: fixed; top: 0; right: 0; z-index: 900;
-      display: flex; flex-direction: column;
-      background: rgba(10,10,10,.92);
-      border-left: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+    .footer-giant:hover{
+      color:var(--white);
+      -webkit-text-stroke:1px transparent;
     }
-    .lang-bar a {
-      display: flex; align-items: center; gap: 7px;
-      padding: 10px 14px;
-      color: var(--white); text-decoration: none;
-      font-size: .72rem; font-weight: 600;
-      letter-spacing: .1em; text-transform: uppercase;
-      font-family: 'DM Mono', monospace;
-      border-bottom: 1px solid var(--border);
-      transition: background .2s;
+    .footer-giant .accent{
+      color:var(--magenta);
+      -webkit-text-stroke:0;
     }
-    .lang-bar a:last-child { border-bottom: none; }
-    .lang-bar a:hover { background: rgba(200,24,92,.22); }
-    .lang-bar a.active { color: var(--magenta); }
-    .lang-bar .flag { font-size: 1.1rem; }
-
-    /* ─── NAVBAR DRAWER ─── */
-    .nav-overlay {
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,.62);
-      z-index: 1800; opacity: 0; pointer-events: none;
-      transition: opacity .35s;
-    }
-    .nav-overlay.open { opacity: 1; pointer-events: all; }
-
-    .nav-drawer {
-      position: fixed; top: 0; left: 0;
-      width: min(320px, 88vw); height: 100vh;
-      background: var(--black);
-      border-right: 2px solid var(--magenta);
-      z-index: 1900;
-      transform: translateX(-100%);
-      transition: transform .4s cubic-bezier(.16,1,.3,1);
-      display: flex; flex-direction: column; overflow: hidden;
-    }
-    .nav-drawer.open { transform: translateX(0); }
-
-    .nav-drawer-header {
-      padding: 24px 28px 20px;
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .nav-drawer-brand {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.4rem; letter-spacing: .06em; color: var(--magenta);
-    }
-    .nav-close {
-      background: none; border: none;
-      color: var(--white); font-size: 1.6rem;
-      cursor: none; line-height: 1; transition: color .2s;
-    }
-    .nav-close:hover { color: var(--magenta); }
-
-    .nav-links { display: flex; flex-direction: column; padding: 32px 0; flex: 1; }
-    .nav-links a {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.4rem; letter-spacing: .04em;
-      color: var(--white); text-decoration: none;
-      padding: 14px 28px;
-      border-bottom: 1px solid var(--border);
-      transition: color .2s, padding-left .2s;
-    }
-    .nav-links a:hover { color: var(--magenta); padding-left: 40px; }
-
-    .nav-drawer-footer {
-      padding: 24px 28px;
-      font-size: .72rem; color: var(--gray);
-      letter-spacing: .08em; text-transform: uppercase;
-      border-top: 1px solid var(--border);
-      font-family: 'DM Mono', monospace;
+    .footer-tagline{
+      margin-top:16px;
+      font-family:'DM Mono',monospace;
+      font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+      color:var(--gray);
     }
 
-    /* ─── TOP BAR ─── */
-    .top-bar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 24px;
-      border-bottom: 1px solid var(--border);
+    /* Three-column links */
+    .footer-links-row{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:0;
+      border-bottom:1px solid var(--border);
     }
-    .top-bar-left, .top-bar-right {
-      font-size: .68rem; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--gray);
-      font-family: 'DM Mono', monospace;
+    .footer-col{
+      padding:32px 24px;
+      border-bottom:1px solid var(--border);
     }
-    .top-bar-right { padding-right: 90px; }
+    .footer-col:last-child{border-bottom:none}
+    .footer-col-label{
+      font-family:'DM Mono',monospace;
+      font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--magenta);margin-bottom:16px;
+    }
+    .footer-col a{
+      display:block;
+      font-family:'Space Grotesk',sans-serif;
+      font-size:.88rem;color:var(--gray);text-decoration:none;
+      padding:5px 0;
+      border-bottom:1px solid transparent;
+      transition:color .2s,border-color .2s;
+    }
+    .footer-col a:hover{color:var(--white);border-color:rgba(240,237,232,.1)}
 
-    /* ─── HERO GRID ─── */
-    .hero-content { display: grid; grid-template-columns: 1fr; }
+    /* Bottom strip */
+    .footer-bottom{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:20px 24px;
+      flex-wrap:wrap;gap:10px;
+    }
+    .footer-bottom-left{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gray)}
+    .footer-bottom-right{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gray)}
+    .footer-bottom-right a{color:var(--gray);text-decoration:none;transition:color .2s}
+    .footer-bottom-right a:hover{color:var(--magenta)}
+    .footer-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--magenta);margin:0 8px;vertical-align:middle;animation:blink 2s ease-in-out infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 
-    /* Title */
-    .hero-title-block {
-      padding: 36px 24px 24px;
-      border-bottom: 1px solid var(--border);
-      position: relative;
+    /* ── RESPONSIVE ── */
+    @media(min-width:768px){
+      .hero-content{grid-template-columns:1fr 1fr;grid-template-rows:auto auto;min-height:calc(100vh - 57px - 57px)}
+      .hero-title-block{grid-column:1;grid-row:1;border-right:1px solid var(--border);border-bottom:1px solid var(--border);padding:48px 40px 40px}
+      .hero-bear-block{grid-column:2;grid-row:1/3;border-bottom:none;border-left:1px solid var(--border);min-height:400px}
+      .hero-buttons-block{grid-column:1;grid-row:2;border-bottom:none;border-right:1px solid var(--border)}
+      .hero-copy-block{grid-column:1/3;grid-row:3;border-top:1px solid var(--border);border-bottom:none;padding:36px 40px}
+      .hero-copy{max-width:640px}
+      .how-section{padding:80px 40px 0}
+      .stack-container{height:760px}
+      .stack-card{padding:48px 40px}
+      .footer-links-row{grid-template-columns:repeat(3,1fr)}
+      .footer-col{border-bottom:none;border-right:1px solid var(--border)}
+      .footer-col:last-child{border-right:none}
+      .footer-title-row,.footer-bottom{padding-left:40px;padding-right:40px}
     }
-    .hero-ellipse {
-      position: absolute; top: 16px; left: 16px;
-      width: clamp(200px,72vw,340px); height: clamp(80px,28vw,140px);
-      border: 2px solid var(--magenta); border-radius: 50%;
-      pointer-events: none; opacity: .6;
-    }
-    .hero-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3.8rem,18vw,8rem);
-      line-height: .92; letter-spacing: -.01em;
-      color: var(--white); position: relative; z-index: 1;
-    }
-
-    /* Subtitle — cold glow pulse */
-    .hero-subtitle {
-      margin-top: 12px;
-      font-size: .85rem; letter-spacing: .07em;
-      text-transform: uppercase;
-      font-family: 'DM Mono', monospace;
-      position: relative; z-index: 1;
-      animation: subtitleGlow 3.6s ease-in-out infinite;
-    }
-    @keyframes subtitleGlow {
-      0%,100% { color: rgba(240,237,232,.6); text-shadow: 0 0 6px rgba(255,255,255,.25); }
-      50%      { color: #fff; text-shadow: 0 0 14px rgba(255,255,255,.9), 0 0 36px rgba(255,255,255,.25); }
-    }
-
-    /* Bear */
-    .hero-bear-block {
-      padding: 28px 24px;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      border-bottom: 1px solid var(--border);
-      gap: 10px; position: relative;
-    }
-    .deco-circle {
-      position: absolute; bottom: -30px; right: -20px;
-      width: clamp(100px,40vw,200px); height: clamp(100px,40vw,200px);
-      border: 2px solid rgba(240,237,232,.09); border-radius: 50%;
-      pointer-events: none;
-    }
-    .bear-container {
-      position: relative; cursor: none;
-      width: clamp(110px,36vw,180px);
-    }
-    .bear-img {
-      width: 100%; height: auto; display: block;
-      animation: bearGlow 3s ease-in-out infinite;
-      transition: transform .3s ease;
-    }
-    .bear-container:hover .bear-img { transform: scale(1.06) rotate(-2deg); }
-    @keyframes bearGlow {
-      0%,100% { filter: drop-shadow(0 0 4px var(--magenta)) drop-shadow(0 0 12px rgba(200,24,92,.3)); }
-      50%      { filter: drop-shadow(0 0 16px var(--magenta)) drop-shadow(0 0 36px rgba(200,24,92,.55)); }
-    }
-    .bear-hint {
-      font-size: .65rem; letter-spacing: .12em;
-      text-transform: uppercase; color: var(--magenta);
-      font-family: 'DM Mono', monospace; text-align: center;
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:1} }
-
-    /* Buttons — cold white glow → magenta hover */
-    .hero-buttons-block {
-      display: grid; grid-template-columns: 1fr 1fr;
-      border-bottom: 1px solid var(--border);
-    }
-    .hero-btn {
-      padding: 28px 20px;
-      background: none; border: none;
-      border-right: 1px solid var(--border);
-      color: var(--white);
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(1.4rem,6vw,2rem); letter-spacing: .04em;
-      cursor: none; text-align: left; text-decoration: none; display: block;
-      position: relative; overflow: hidden;
-      animation: btnGlow 3.8s ease-in-out infinite;
-      transition: background .25s, color .25s, text-shadow .25s;
-    }
-    .hero-btn:last-child { border-right: none; }
-    .hero-btn:nth-child(2) { animation-delay: -1.9s; }
-
-    @keyframes btnGlow {
-      0%,100% { text-shadow: 0 0 5px rgba(255,255,255,.28), 0 0 16px rgba(255,255,255,.07); }
-      50%      { text-shadow: 0 0 16px rgba(255,255,255,.9), 0 0 40px rgba(255,255,255,.2); }
-    }
-    .hero-btn::before {
-      content: ''; position: absolute;
-      bottom: 0; left: 0; width: 100%; height: 3px;
-      background: var(--magenta);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform .3s ease;
-    }
-    .hero-btn:hover::before { transform: scaleX(1); }
-    .hero-btn:hover {
-      background: rgba(200,24,92,.07); color: var(--magenta);
-      animation: none; text-shadow: var(--glow-mg);
-    }
-    .btn-label {
-      display: block; font-size: .62rem;
-      font-family: 'DM Mono', monospace;
-      letter-spacing: .14em; text-transform: uppercase;
-      color: var(--gray); margin-bottom: 6px; transition: color .25s;
-    }
-    .hero-btn:hover .btn-label { color: rgba(200,24,92,.75); }
-
-    /* Copy */
-    .hero-copy-block { padding: 28px 24px; border-bottom: 1px solid var(--border); }
-    .hero-copy {
-      font-size: clamp(1rem,3.8vw,1.25rem); line-height: 1.55;
-      color: var(--off-white); max-width: 520px;
-    }
-    .hero-copy strong { color: var(--magenta); font-weight: 600; }
-
-    /* ─────────────────────────────────────────
-       HOW IT WORKS SECTION
-    ───────────────────────────────────────── */
-    .how-section {
-      border-top: 1px solid var(--border);
-      padding: 56px 24px 48px;
-    }
-    .how-label {
-      font-family: 'DM Mono', monospace;
-      font-size: .65rem; letter-spacing: .18em;
-      text-transform: uppercase; color: var(--magenta);
-      margin-bottom: 28px;
-    }
-    .how-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0;
-    }
-    .how-step {
-      display: grid;
-      grid-template-columns: 56px 1fr;
-      gap: 20px;
-      padding: 28px 0;
-      border-bottom: 1px solid var(--border);
-      align-items: start;
-    }
-    .how-step:last-child { border-bottom: none; }
-
-    .how-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 3rem; line-height: 1;
-      color: var(--magenta); opacity: .45;
-      transition: opacity .3s;
-    }
-    .how-step:hover .how-num { opacity: 1; }
-
-    .how-body {}
-    .how-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem; letter-spacing: .03em;
-      color: var(--white); margin-bottom: 8px;
-      transition: color .2s;
-    }
-    .how-step:hover .how-title { color: var(--magenta); }
-    .how-desc {
-      font-size: .88rem; line-height: 1.65;
-      color: var(--gray); max-width: 400px;
-    }
-
-    /* CTA inside how section */
-    .how-cta {
-      margin-top: 44px;
-      display: inline-flex; align-items: center; gap: 10px;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.1rem; letter-spacing: .06em;
-      color: var(--black);
-      background: var(--white);
-      padding: 14px 28px; border-radius: 2px;
-      text-decoration: none;
-      transition: background .2s, box-shadow .2s, transform .2s;
-      cursor: none;
-    }
-    .how-cta:hover {
-      background: var(--magenta); color: var(--white);
-      box-shadow: 0 0 20px rgba(200,24,92,.45);
-      transform: translateY(-2px);
-    }
-    .how-cta-arrow { font-size: 1.2rem; transition: transform .2s; }
-    .how-cta:hover .how-cta-arrow { transform: translateX(4px); }
-
-    /* ─── BOTTOM BAR ─── */
-    .bottom-bar {
-      padding: 18px 24px;
-      display: flex; align-items: center; justify-content: space-between;
-      border-top: 1px solid var(--border);
-      flex-wrap: wrap; gap: 10px;
-    }
-    .bottom-bar-tag {
-      font-size: .65rem; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--gray);
-      font-family: 'DM Mono', monospace;
-    }
-    .bottom-bar-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--magenta);
-      animation: blink 2s ease-in-out infinite;
-    }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
-
-    /* ─── TICKER ─── */
-    .ticker-wrap {
-      overflow: hidden; border-top: 1px solid var(--border);
-      background: rgba(200,24,92,.04);
-    }
-    .ticker-inner {
-      display: flex; width: max-content;
-      animation: ticker 28s linear infinite;
-    }
-    .ticker-inner:hover { animation-play-state: paused; }
-    .ticker-item {
-      white-space: nowrap; padding: 14px 40px;
-      font-size: .72rem; letter-spacing: .18em;
-      text-transform: uppercase; color: var(--gray);
-      font-family: 'DM Mono', monospace;
-      border-right: 1px solid var(--border);
-    }
-    .ticker-item span { color: var(--magenta); margin-right: 12px; }
-    @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-    /* ─── RESPONSIVE ─── */
-    @media (min-width: 768px) {
-      .hero-content {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto;
-        min-height: calc(100vh - 57px - 57px);
-      }
-      .hero-title-block {
-        grid-column: 1; grid-row: 1;
-        border-right: 1px solid var(--border);
-        border-bottom: 1px solid var(--border);
-        padding: 48px 40px 40px;
-      }
-      .hero-bear-block {
-        grid-column: 2; grid-row: 1 / 3;
-        border-bottom: none; border-left: 1px solid var(--border);
-        min-height: 400px;
-      }
-      .hero-buttons-block {
-        grid-column: 1; grid-row: 2;
-        border-bottom: none; border-right: 1px solid var(--border);
-      }
-      .hero-copy-block {
-        grid-column: 1 / 3; grid-row: 3;
-        border-top: 1px solid var(--border);
-        border-bottom: none; padding: 36px 40px;
-      }
-      .hero-copy { max-width: 640px; }
-
-      .how-section { padding: 72px 40px 60px; }
-      .how-grid { grid-template-columns: repeat(3, 1fr); gap: 0; }
-      .how-step {
-        grid-template-columns: 1fr;
-        padding: 0 32px 0 0;
-        border-bottom: none;
-        border-right: 1px solid var(--border);
-      }
-      .how-step:last-child { border-right: none; padding-right: 0; }
-      .how-num { font-size: 3.5rem; margin-bottom: 16px; }
-    }
-
-    @media (min-width: 1024px) {
-      .hero-content { grid-template-columns: 1.2fr 0.8fr; }
-      .hero-title { font-size: clamp(5rem,10vw,9rem); }
+    @media(min-width:1024px){
+      .hero-content{grid-template-columns:1.2fr 0.8fr}
+      .hero-title{font-size:clamp(5rem,10vw,9rem)}
+      .stack-container{height:700px}
     }
   </style>
 </head>
 <body>
 
-<!-- Cursor -->
+<!-- PAGE TRANSITION OVERLAY -->
+<div id="page-transition"><span class="trans-logo">TCD.</span></div>
+
 <div id="cur-dot"></div>
 <div id="cur-ring"></div>
-
-<!-- Scroll progress -->
 <div id="scroll-prog"></div>
-
-<!-- Background + noise -->
-<div class="page-bg"></div>
+<div class="page-bg" id="pageBg"></div>
 <div class="noise"></div>
 
-<!-- Language bar -->
+<!-- LANG BAR -->
 <div class="lang-bar" role="navigation" aria-label="Selezione lingua">
-  <a href="#" class="active" aria-label="Italiano"><span class="flag">🇮🇹</span><span>IT</span></a>
+  <a href="index.html" class="active" aria-label="Italiano"><span class="flag">🇮🇹</span><span>IT</span></a>
   <a href="#" aria-label="English"><span class="flag">🇬🇧</span><span>EN</span></a>
 </div>
 
-<!-- Navbar drawer -->
+<!-- NAV DRAWER -->
 <div class="nav-overlay" id="navOverlay" onclick="closeNav()"></div>
 <nav class="nav-drawer" id="navDrawer" aria-label="Menu principale">
   <div class="nav-drawer-header">
-    <span class="nav-drawer-brand">TCD</span>
+    <span class="nav-drawer-brand">TCD.</span>
     <button class="nav-close" onclick="closeNav()" aria-label="Chiudi menu">✕</button>
   </div>
   <div class="nav-links">
-    <a href="#">Soluzioni</a>
-    <a href="#">I nostri servizi</a>
-    <a href="#">Contatti</a>
+    <a href="index.html" class="current">Homepage</a>
+    <a href="soluzioni.html">Soluzioni</a>
+    <a href="servizi.html">I Nostri Servizi</a>
+    <a href="appartamento.html">Hai un Appartamento?</a>
+    <a href="contatti.html">Contatti</a>
   </div>
-  <div class="nav-drawer-footer">The College Dropout © 2025</div>
+  <div class="nav-drawer-footer">
+    <span>The College Dropout © 2025</span>
+    <div class="nav-footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">GitHub</a>
+    </div>
+  </div>
 </nav>
 
-<!-- Page -->
+<!-- PAGE -->
 <div class="page-wrap">
 
-  <div class="top-bar ink" data-delay="0">
+  <div class="top-bar drop" data-delay="0">
     <span class="top-bar-left">Rieti, Italia — Studentlife</span>
-    <span class="top-bar-right">Affitti · Sistemazioni · Housing</span>
+    <span class="top-bar-right">
+      <span id="live-counter">0 studenti alloggiati</span>&nbsp;·&nbsp;Housing
+    </span>
   </div>
 
   <main class="hero-content">
-
-    <div class="hero-title-block ink" data-delay="100">
+    <div class="hero-title-block drop" data-delay="120">
       <div class="hero-ellipse" aria-hidden="true"></div>
-      <h1 class="hero-title">The College<br>Dropout</h1>
+      <h1 class="hero-title" id="heroTitle">The College<br>Dropout</h1>
       <p class="hero-subtitle">Accommodation for students and more</p>
     </div>
 
-    <div class="hero-bear-block ink" data-delay="260">
+    <div class="hero-bear-block drop" data-delay="280">
       <div class="deco-circle" aria-hidden="true"></div>
-      <div class="bear-container" onclick="openNav()" role="button"
-           aria-label="Apri menu di navigazione" tabindex="0">
-        <img
-          src="https://i.ibb.co/s9HLBc15/logo.webp"
-          alt="The College Dropout bear logo — clicca per aprire il menu"
-          class="bear-img"
-          width="180" height="200"
-        />
+      <div class="bear-container" onclick="openNav()" role="button" aria-label="Apri menu" tabindex="0">
+        <img src="https://i.ibb.co/s9HLBc15/logo.webp" alt="TCD logo — clicca per il menu" class="bear-img" width="180" height="200"/>
       </div>
       <p class="bear-hint">↑ Clicca l'orsetto per aprire la navbar</p>
     </div>
 
-    <div class="hero-buttons-block ink" data-delay="400">
-      <a href="#" class="hero-btn" aria-label="Sezione per chi cerca alloggio">
+    <div class="hero-buttons-block drop" data-delay="420">
+      <a href="soluzioni.html" class="hero-btn" id="btn1" aria-label="Chi cerca alloggio">
         <span class="btn-label">Sono uno studente</span>
         Per chi<br>cerca
       </a>
-      <a href="#" class="hero-btn" aria-label="Sezione per chi offre alloggio">
+      <a href="appartamento.html" class="hero-btn" id="btn2" aria-label="Chi offre alloggio">
         <span class="btn-label">Ho un immobile</span>
         Per chi<br>offre
       </a>
     </div>
 
-    <div class="hero-copy-block ink" data-delay="540">
+    <div class="hero-copy-block drop" data-delay="560">
       <p class="hero-copy">
         Appartamenti e sistemazioni per chi cerca
         <strong>casa a Rieti</strong>.
@@ -573,128 +459,215 @@
         Niente agenzie. Diretto.
       </p>
     </div>
-
   </main>
 
-  <!-- HOW IT WORKS -->
-  <section class="how-section ink" data-delay="680" aria-label="Come funziona">
-    <p class="how-label">— Come funziona</p>
-    <div class="how-grid">
-      <div class="how-step">
-        <div class="how-num">01</div>
-        <div class="how-body">
-          <h2 class="how-title">Cerca o pubblica</h2>
-          <p class="how-desc">Sfoglia gli annunci disponibili o carica il tuo spazio in pochi minuti. Nessuna commissione nascosta.</p>
-        </div>
+  <!-- STACKED STICKY CARDS -->
+  <section class="how-section" aria-label="Come funziona">
+    <p class="how-label reveal-line">— Come funziona</p>
+    <div class="stack-container">
+
+      <div class="stack-card">
+        <span class="stack-card-num">01</span>
+        <h2 class="stack-card-title">Cerca o pubblica</h2>
+        <p class="stack-card-desc">Sfoglia gli annunci disponibili o carica il tuo spazio in pochi minuti. Nessuna commissione nascosta, nessun form infinito.</p>
+        <span class="stack-card-tag">✦ Gratis per iniziare</span>
       </div>
-      <div class="how-step">
-        <div class="how-num">02</div>
-        <div class="how-body">
-          <h2 class="how-title">Contatto diretto</h2>
-          <p class="how-desc">Parli direttamente con chi cerca o con chi affitta. Zero intermediari, zero attese, risposta in giornata.</p>
-        </div>
+
+      <div class="stack-card">
+        <span class="stack-card-num">02</span>
+        <h2 class="stack-card-title">Contatto diretto</h2>
+        <p class="stack-card-desc">Parli direttamente con chi cerca o con chi affitta. Zero intermediari, zero attese. La risposta arriva in giornata.</p>
+        <span class="stack-card-tag">✦ Niente agenzie</span>
       </div>
-      <div class="how-step">
-        <div class="how-num">03</div>
-        <div class="how-body">
-          <h2 class="how-title">Casa trovata</h2>
-          <p class="how-desc">Accordo preso, chiavi in mano. Benvenuto a Rieti — ora puoi pensare solo a studiare (o quasi).</p>
-        </div>
+
+      <div class="stack-card">
+        <span class="stack-card-num">03</span>
+        <h2 class="stack-card-title">Casa trovata</h2>
+        <p class="stack-card-desc">Accordo preso, chiavi in mano. Benvenuto a Rieti — ora puoi pensare solo a studiare (o quasi).</p>
+        <span class="stack-card-tag">✦ 100% Locale</span>
       </div>
+
     </div>
-    <a href="#" class="how-cta">
-      Inizia ora <span class="how-cta-arrow">→</span>
+    <a href="soluzioni.html" class="how-cta">
+      Esplora gli appartamenti <span class="how-cta-arrow">→</span>
     </a>
   </section>
 
-  <div class="bottom-bar ink" data-delay="800">
-    <span class="bottom-bar-tag">Est. 2025 · Rieti</span>
-    <div class="bottom-bar-dot" aria-hidden="true"></div>
-    <span class="bottom-bar-tag">100% Locale</span>
-  </div>
-
-  <div class="ticker-wrap ink" data-delay="900">
-    <div class="ticker-inner">
-      <div class="ticker-item"><span>✦</span> Università degli Studi della Tuscia</div>
-      <div class="ticker-item"><span>✦</span> Comune di Rieti</div>
-      <div class="ticker-item"><span>✦</span> ESU Rieti</div>
-      <div class="ticker-item"><span>✦</span> Erasmus Student Network</div>
-      <div class="ticker-item"><span>✦</span> Camera di Commercio Rieti-Viterbo</div>
-      <div class="ticker-item"><span>✦</span> DSU Lazio</div>
-      <div class="ticker-item"><span>✦</span> Sponsor · Partner · Collaboratori</div>
-      <div class="ticker-item"><span>✦</span> Università degli Studi della Tuscia</div>
-      <div class="ticker-item"><span>✦</span> Comune di Rieti</div>
-      <div class="ticker-item"><span>✦</span> ESU Rieti</div>
-      <div class="ticker-item"><span>✦</span> Erasmus Student Network</div>
-      <div class="ticker-item"><span>✦</span> Camera di Commercio Rieti-Viterbo</div>
-      <div class="ticker-item"><span>✦</span> DSU Lazio</div>
-      <div class="ticker-item"><span>✦</span> Sponsor · Partner · Collaboratori</div>
+  <!-- PREMIUM FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-title-row">
+      <span class="footer-giant">THE COLLEGE<br><span class="accent">DROPOUT</span></span>
+      <p class="footer-tagline">Appartamenti a Rieti — per studenti e non solo · Est. 2025</p>
     </div>
-  </div>
+
+    <div class="footer-links-row">
+      <div class="footer-col">
+        <p class="footer-col-label">Navigazione</p>
+        <a href="index.html">Homepage</a>
+        <a href="soluzioni.html">Soluzioni</a>
+        <a href="servizi.html">I Nostri Servizi</a>
+        <a href="appartamento.html">Hai un Appartamento?</a>
+        <a href="contatti.html">Contatti</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-label">Per gli studenti</p>
+        <a href="soluzioni.html">Trova un appartamento</a>
+        <a href="soluzioni.html">Mappa degli alloggi</a>
+        <a href="#">Rieti — guida alla città</a>
+        <a href="#">Erasmus & internazionali</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-label">Per i proprietari</p>
+        <a href="appartamento.html">Pubblica il tuo spazio</a>
+        <a href="servizi.html">I nostri servizi</a>
+        <a href="contatti.html">Scrivici</a>
+        <a href="#">FAQ</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-bottom-left">
+        © 2025 The College Dropout
+        <span class="footer-dot"></span>
+        Rieti, Italia
+      </span>
+      <span class="footer-bottom-right">
+        Design & dev: <a href="https://tevwebstudio.it" target="_blank">T&V Web Studio</a>
+        &nbsp;·&nbsp;
+        <a href="#">Privacy</a>
+      </span>
+    </div>
+  </footer>
 
 </div><!-- end page-wrap -->
 
 <script>
-  /* ── CUSTOM CURSOR ── */
-  const dot  = document.getElementById('cur-dot');
-  const ring = document.getElementById('cur-ring');
-  let mx = -100, my = -100, rx = -100, ry = -100;
+/* ══ CURSOR ══ */
+const dot=document.getElementById('cur-dot'),ring=document.getElementById('cur-ring');
+let mx=-100,my=-100,rx=-100,ry=-100;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+(function animC(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animC)})();
+document.querySelectorAll('a,button,[role=button],.hero-btn,.stack-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
+});
 
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    dot.style.left = mx + 'px';
-    dot.style.top  = my + 'px';
+/* ══ SCROLL PROGRESS ══ */
+const prog=document.getElementById('scroll-prog');
+window.addEventListener('scroll',()=>{prog.style.width=Math.min(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100,100)+'%'},{passive:true});
+
+/* ══ PARALLAX BG ══ */
+const pageBg=document.getElementById('pageBg');
+window.addEventListener('scroll',()=>{pageBg.style.transform=`translateY(${window.scrollY*.3}px)`},{passive:true});
+
+/* ══ GRAVITY DROP ENTRANCE ══
+   Animations start paused. The page transition 'enter'
+   animationend event releases them (see transition block below).
+*/
+document.querySelectorAll('.drop').forEach(el=>{
+  el.style.animationDelay=parseInt(el.dataset.delay||0,10)+'ms';
+  el.style.animationPlayState='paused';
+  el.classList.add('landed'); // class added now, plays when unpaused
+});
+
+/* ══ PERIODIC GLITCH (definition only — fired by startPageAnimations) ══ */
+const heroTitle=document.getElementById('heroTitle');
+function fireGlitch(){
+  heroTitle.classList.remove('glitch-loop');void heroTitle.offsetWidth;
+  heroTitle.classList.add('glitch-loop');
+  heroTitle.addEventListener('animationend',()=>heroTitle.classList.remove('glitch-loop'),{once:true});
+}
+setInterval(fireGlitch,7000); // repeats every 7s regardless
+
+/* counter and glitch are now started by startPageAnimations() inside the transition block */
+
+/* ══ WORD REVEAL ON SCROLL ══
+   Wraps each word in .reveal-line elements in a span,
+   then reveals them via IntersectionObserver
+══ */
+document.querySelectorAll('.reveal-line').forEach(el=>{
+  const words=el.textContent.split(' ');
+  el.innerHTML=words.map(w=>`<span class="reveal-word">${w}</span>`).join(' ');
+});
+const revObs=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(!entry.isIntersecting)return;
+    entry.target.querySelectorAll('.reveal-word').forEach((w,i)=>{
+      setTimeout(()=>w.classList.add('in'),i*60);
+    });
+    revObs.unobserve(entry.target);
   });
+},{threshold:.3});
+document.querySelectorAll('.reveal-line').forEach(el=>revObs.observe(el));
 
-  /* Ring follows with lag */
-  (function animRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top  = ry + 'px';
-    requestAnimationFrame(animRing);
-  })();
-
-  /* Hover expand on interactive elements */
-  document.querySelectorAll('a, button, [role=button], .hero-btn').forEach(el => {
-    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+/* ══ MAGNETIC BUTTONS ══ */
+[document.getElementById('btn1'),document.getElementById('btn2')].forEach(btn=>{
+  if(!btn)return;
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    const x=e.clientX-(r.left+r.width/2),y=e.clientY-(r.top+r.height/2);
+    btn.style.transform=`translate(${x*.22}px,${y*.22}px)`;
   });
+  btn.addEventListener('mouseleave',()=>btn.style.transform='translate(0,0)');
+});
 
-  /* ── SCROLL PROGRESS ── */
-  const prog = document.getElementById('scroll-prog');
-  window.addEventListener('scroll', () => {
-    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-    prog.style.width = Math.min(pct, 100) + '%';
-  }, { passive: true });
+/* ══ NAVBAR ══ */
+function openNav(){document.getElementById('navDrawer').classList.add('open');document.getElementById('navOverlay').classList.add('open');document.body.style.overflow='hidden'}
+function closeNav(){document.getElementById('navDrawer').classList.remove('open');document.getElementById('navOverlay').classList.remove('open');document.body.style.overflow=''}
+document.querySelector('.bear-container').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openNav()}});
 
-  /* ── NAVBAR ── */
-  function openNav() {
-    document.getElementById('navDrawer').classList.add('open');
-    document.getElementById('navOverlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeNav() {
-    document.getElementById('navDrawer').classList.remove('open');
-    document.getElementById('navOverlay').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  document.querySelector('.bear-container').addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openNav(); }
+/* ══════════════════════════════════════════════════
+   PAGE TRANSITION SYSTEM
+   EXIT  : overlay rises, covers screen in 1000ms → navigate
+   ENTER : overlay arrives already covering, holds 400ms,
+           then retreats in 1000ms (total 1400ms)
+   ALL page animations (drop, counter, glitch) fire only
+   after the enter animationend — never before.
+══════════════════════════════════════════════════ */
+const overlay=document.getElementById('page-transition');
+
+function startPageAnimations(){
+  /* 1. Release gravity-drop elements */
+  document.querySelectorAll('.drop').forEach(el=>{
+    el.style.animationPlayState='running';
   });
+  /* 2. Counter */
+  const cEl=document.getElementById('live-counter');
+  const start=performance.now(),dur=1400,tgt=47;
+  (function t(now){
+    const p=Math.min((now-start)/dur,1),e=1-Math.pow(1-p,3);
+    cEl.textContent=Math.round(e*tgt)+' studenti alloggiati';
+    if(p<1)requestAnimationFrame(t);
+  })(start);
+  /* 3. First glitch fires after drop animations settle */
+  setTimeout(fireGlitch,900);
+}
 
-  /* ── INK DROP REVEAL + GLITCH ── */
-  document.querySelectorAll('.ink').forEach(el => {
-    const delay = parseInt(el.dataset.delay || 0, 10);
-    setTimeout(() => {
-      el.classList.add('revealed');
-      el.querySelectorAll('.hero-title, .hero-subtitle, .hero-btn').forEach(t => {
-        t.classList.add('glitch-once');
-        t.addEventListener('animationend', () => t.classList.remove('glitch-once'), { once: true });
-      });
-    }, delay);
-  });
+window.addEventListener('load',()=>{
+  overlay.classList.add('enter');
+  overlay.addEventListener('animationend',()=>{
+    overlay.classList.remove('enter');
+    overlay.style.clipPath='inset(0% 0 100% 0)';
+    startPageAnimations();
+  },{once:true});
+});
+
+/* On departure: reset to bottom, play exit → navigate */
+document.addEventListener('click',e=>{
+  const link=e.target.closest('a[href]');
+  if(!link)return;
+  const href=link.getAttribute('href');
+  if(!href||href.startsWith('#')||href.startsWith('http')||href.startsWith('mailto'))return;
+  e.preventDefault();
+  /* Force starting position below viewport, then animate up */
+  overlay.style.clipPath='inset(100% 0 0 0)';
+  overlay.classList.remove('enter');
+  void overlay.offsetWidth;
+  overlay.classList.add('exit');
+  overlay.addEventListener('animationend',()=>{
+    window.location.href=href;
+  },{once:true});
+});
 </script>
-
 </body>
 </html>
