@@ -403,14 +403,12 @@
     <a href="index.html" class="current">Homepage</a>
     <a href="soluzioni.html">Soluzioni</a>
     <a href="servizi.html">I Nostri Servizi</a>
-    <a href="appartamento.html">Hai un Appartamento?</a>
     <a href="contatti.html">Contatti</a>
   </div>
   <div class="nav-drawer-footer">
-    <span>The College Dropout © 2025</span>
+    <span>The College Dropout © 2026</span>
     <div class="nav-footer-links">
       <a href="#">Privacy</a>
-      <a href="#">GitHub</a>
     </div>
   </div>
 </nav>
@@ -437,7 +435,7 @@
       <div class="bear-container" onclick="openNav()" role="button" aria-label="Apri menu" tabindex="0">
         <img src="https://i.ibb.co/s9HLBc15/logo.webp" alt="TCD logo — clicca per il menu" class="bear-img" width="180" height="200"/>
       </div>
-      <p class="bear-hint">↑ Clicca l'orsetto per aprire la navbar</p>
+      <p class="bear-hint">↑ Clicca sul logo TCD per aprire la navbar</p>
     </div>
 
     <div class="hero-buttons-block drop" data-delay="420">
@@ -497,7 +495,7 @@
   <footer class="site-footer">
     <div class="footer-title-row">
       <span class="footer-giant">THE COLLEGE<br><span class="accent">DROPOUT</span></span>
-      <p class="footer-tagline">Appartamenti a Rieti — per studenti e non solo · Est. 2025</p>
+      <p class="footer-tagline">Appartamenti a Rieti — per studenti e non solo · Est. 2026</p>
     </div>
 
     <div class="footer-links-row">
@@ -506,7 +504,6 @@
         <a href="index.html">Homepage</a>
         <a href="soluzioni.html">Soluzioni</a>
         <a href="servizi.html">I Nostri Servizi</a>
-        <a href="appartamento.html">Hai un Appartamento?</a>
         <a href="contatti.html">Contatti</a>
       </div>
       <div class="footer-col">
@@ -518,7 +515,7 @@
       </div>
       <div class="footer-col">
         <p class="footer-col-label">Per i proprietari</p>
-        <a href="appartamento.html">Pubblica il tuo spazio</a>
+        <a href="#">Pubblica il tuo spazio</a>
         <a href="servizi.html">I nostri servizi</a>
         <a href="contatti.html">Scrivici</a>
         <a href="#">FAQ</a>
@@ -527,7 +524,7 @@
 
     <div class="footer-bottom">
       <span class="footer-bottom-left">
-        © 2025 The College Dropout
+        © 2026 The College Dropout
         <span class="footer-dot"></span>
         Rieti, Italia
       </span>
@@ -617,21 +614,18 @@ function closeNav(){document.getElementById('navDrawer').classList.remove('open'
 document.querySelector('.bear-container').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openNav()}});
 
 /* ══════════════════════════════════════════════════
-   PAGE TRANSITION SYSTEM
-   EXIT  : overlay rises, covers screen in 1000ms → navigate
-   ENTER : overlay arrives already covering, holds 400ms,
-           then retreats in 1000ms (total 1400ms)
-   ALL page animations (drop, counter, glitch) fire only
-   after the enter animationend — never before.
+   PAGE TRANSITION — HOMEPAGE ONLY
+   The TCD. overlay plays ONLY when arriving at the homepage.
+   When leaving, we navigate directly — destination pages
+   have their own entrance animation (e.g. glitch on Soluzioni).
+   No exit animation here: the destination page covers itself.
 ══════════════════════════════════════════════════ */
 const overlay=document.getElementById('page-transition');
 
 function startPageAnimations(){
-  /* 1. Release gravity-drop elements */
   document.querySelectorAll('.drop').forEach(el=>{
     el.style.animationPlayState='running';
   });
-  /* 2. Counter */
   const cEl=document.getElementById('live-counter');
   const start=performance.now(),dur=1400,tgt=47;
   (function t(now){
@@ -639,34 +633,29 @@ function startPageAnimations(){
     cEl.textContent=Math.round(e*tgt)+' studenti alloggiati';
     if(p<1)requestAnimationFrame(t);
   })(start);
-  /* 3. First glitch fires after drop animations settle */
   setTimeout(fireGlitch,900);
 }
 
+/* On arrival: TCD. overlay retreats, then page animations start */
 window.addEventListener('load',()=>{
   overlay.classList.add('enter');
   overlay.addEventListener('animationend',()=>{
     overlay.classList.remove('enter');
     overlay.style.clipPath='inset(0% 0 100% 0)';
+    overlay.style.pointerEvents='none';
     startPageAnimations();
   },{once:true});
 });
 
-/* On departure: reset to bottom, play exit → navigate */
+/* On departure: navigate immediately — no exit overlay.
+   The destination page handles its own entrance. */
 document.addEventListener('click',e=>{
   const link=e.target.closest('a[href]');
   if(!link)return;
   const href=link.getAttribute('href');
   if(!href||href.startsWith('#')||href.startsWith('http')||href.startsWith('mailto'))return;
   e.preventDefault();
-  /* Force starting position below viewport, then animate up */
-  overlay.style.clipPath='inset(100% 0 0 0)';
-  overlay.classList.remove('enter');
-  void overlay.offsetWidth;
-  overlay.classList.add('exit');
-  overlay.addEventListener('animationend',()=>{
-    window.location.href=href;
-  },{once:true});
+  window.location.href=href;
 });
 </script>
 </body>
