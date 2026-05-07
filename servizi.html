@@ -839,113 +839,126 @@ function startPhase3(){
   window._introFrameHandle=frameHandle;
 }
 
-/* ── PHASE 4: Chromatic glitch on canvas text + white flash + scatter ── */
+/* ── PHASE 4: SPATIAL NEBULA DISSOLVE ──
+   1. Sample pixel positions from the rendered text
+   2. Each pixel becomes a luminous particle
+   3. Particles drift slowly outward + fade
+      like gas dispersing in space
+   No deformation. No skew. Pure light dissolving.
+──────────────────────────────────────────────── */
 function startPhase4(){
   if(window._introFrameHandle)cancelAnimationFrame(window._introFrameHandle);
 
-  const cx=ICX(),cy=ICY();
-  const exitDur=800;
-  let exitT=null;
+  const W=introCanvas.width, H=introCanvas.height;
+  const cx=ICX(), cy=ICY();
 
-  // Glitch frames: RGB offsets and brightness applied to the canvas draws
-  const GLITCH_FRAMES=[
-    {offX:-6, offY:0,  alpha:1.0, bright:1.6, hue: 0},
-    {offX: 7, offY:0,  alpha:1.0, bright:1.8, hue:180},
-    {offX:-9, offY:2,  alpha:1.0, bright:2.2, hue: 0},
-    {offX: 5, offY:-2, alpha:1.0, bright:2.5, hue:180},
-    {offX:-4, offY:1,  alpha:0.8, bright:1.4, hue: 0},
-    {offX: 2, offY:0,  alpha:0.5, bright:1.2, hue:180},
-  ];
-  let gfI=0;
-  let glitchOffset={x:0,y:0,bright:1};
+  /* Step 1: Render title to an offscreen canvas to sample pixels */
+  const offscreen=document.createElement('canvas');
+  offscreen.width=W; offscreen.height=H;
+  const octx=offscreen.getContext('2d');
 
-  // Run glitch frames rapidly before exit animation starts
-  const gfIv=setInterval(()=>{
-    if(gfI>=GLITCH_FRAMES.length){clearInterval(gfIv);glitchOffset={x:0,y:0,bright:1};return}
-    const f=GLITCH_FRAMES[gfI++];
-    glitchOffset={x:f.offX,y:f.offY,bright:f.bright};
+  // Draw the complete title onto offscreen
+  let yOff=cy-60;
+  TITLE_LINES.forEach((ln,li)=>{
+    const fontSize=ln.sizeVal();
+    octx.font=`${fontSize} ${ln.family}`;
+    octx.fillStyle=ln.color;
+    octx.textAlign='center';
+    octx.fillText(ln.text, cx, yOff+parseFloat(fontSize)*0.9);
+    yOff+=parseFloat(fontSize)*1.1;
+  });
 
-    // Draw glitch frame on canvas: two offset copies (cyan + magenta) + main
-    introCtx.clearRect(0,0,introCanvas.width,introCanvas.height);
-    function drawLine(ln,li,ox,oy,color,ga){
-      const fontSize=ln.sizeVal();
-      const yBase=cy-60+li*parseFloat(fontSize)*1.1;
-      introCtx.font=`${fontSize} ${ln.family}`;
-      introCtx.textAlign='center';
-      introCtx.globalAlpha=ga;
-      introCtx.fillStyle=color;
-      introCtx.shadowBlur=0;
-      introCtx.fillText(ln.text,cx+ox,yBase+parseFloat(fontSize)*.9+oy);
-    }
-    TITLE_LINES.forEach((ln,li)=>{
-      // Cyan layer
-      drawLine(ln,li,-8,0,'rgba(0,255,255,0.7)',0.6);
-      // Magenta layer
-      drawLine(ln,li, 8,0,'rgba(255,0,200,0.7)',0.6);
-      // White main
-      drawLine(ln,li, 0,0,li===1?'#c8185c':'#f0ede8',glitchOffset.bright*.5);
-    });
-    introCtx.globalAlpha=1;
-  },70);
+  /* Step 2: Sample pixels — skip most, keep ~1 in 5 for performance */
+  const imgData=octx.getImageData(0,0,W,H);
+  const px=imgData.data;
+  const particles=[];
+  const SAMPLE=5; // sample every Nth pixel
 
-  // Start scatter+flash animation after glitch frames
-  setTimeout(()=>{
-    function drawExit(ts){
-      if(!exitT)exitT=ts;
-      const p=Math.min((ts-exitT)/exitDur,1);
-      introCtx.clearRect(0,0,introCanvas.width,introCanvas.height);
-
-      // White flash at peak
-      if(p>0.45&&p<0.72){
-        const fp=(p-.45)/.27;
-        const fA=fp<.5?fp*2:2-fp*2;
-        introCtx.fillStyle=`rgba(255,255,255,${fA*.88})`;
-        introCtx.fillRect(0,0,introCanvas.width,introCanvas.height);
-      }
-
-      // Scatter title with glitch chromatic effect
-      TITLE_LINES.forEach((ln,li)=>{
-        const fontSize=ln.sizeVal();
-        introCtx.textAlign='center';
-        const scatter=p*200*(li+1);
-        const skew=(li%2===0?-1:1)*p*35;
-        const a=Math.max(0,1-p*1.3);
-        // Draw cyan ghost
-        introCtx.globalAlpha=a*.5;
-        introCtx.font=`${fontSize} ${ln.family}`;
-        introCtx.fillStyle='rgba(0,255,255,0.7)';
-        introCtx.save();
-        introCtx.translate(cx-10,cy-60+li*parseFloat(fontSize)*1.1);
-        introCtx.transform(1,0,Math.tan(skew*Math.PI/180),1,0,0);
-        introCtx.fillText(ln.text,0,parseFloat(fontSize)*.9+(li===0?scatter/2:-scatter/2));
-        introCtx.restore();
-        // Draw magenta ghost
-        introCtx.globalAlpha=a*.5;
-        introCtx.fillStyle='rgba(255,0,200,0.7)';
-        introCtx.save();
-        introCtx.translate(cx+10,cy-60+li*parseFloat(fontSize)*1.1);
-        introCtx.transform(1,0,Math.tan(-skew*Math.PI/180),1,0,0);
-        introCtx.fillText(ln.text,0,parseFloat(fontSize)*.9+(li===0?scatter/2:-scatter/2));
-        introCtx.restore();
-        // Main text
-        introCtx.globalAlpha=a;
-        introCtx.fillStyle=li===1?'#c8185c':'#f0ede8';
-        introCtx.shadowColor=li===1?'rgba(200,24,92,0.8)':'rgba(240,237,232,0.3)';
-        introCtx.shadowBlur=li===1?20:8;
-        introCtx.save();
-        introCtx.translate(cx,cy-60+li*parseFloat(fontSize)*1.1);
-        introCtx.transform(1,0,Math.tan(skew*Math.PI/180),1,0,0);
-        introCtx.fillText(ln.text,0,parseFloat(fontSize)*.9+(li===0?scatter/2:-scatter/2));
-        introCtx.shadowBlur=0;
-        introCtx.restore();
+  for(let y=0;y<H;y+=SAMPLE){
+    for(let x=0;x<W;x+=SAMPLE){
+      const idx=(y*W+x)*4;
+      const a=px[idx+3];
+      if(a<30) continue; // skip transparent
+      const r=px[idx], g=px[idx+1], b=px[idx+2];
+      // Direction: drift slowly outward from text center
+      const dx=x-cx, dy=y-cy;
+      const dist=Math.sqrt(dx*dx+dy*dy)||1;
+      // Vary speed: inner particles slower, outer faster
+      const speed=(0.3+Math.random()*0.9)*(dist/Math.max(W,H)*4+0.6);
+      const angle=Math.atan2(dy,dx)+(Math.random()-.5)*0.6; // slight spread
+      particles.push({
+        x, y,
+        vx: Math.cos(angle)*speed,
+        vy: Math.sin(angle)*speed,
+        r: 0.8+Math.random()*1.6,
+        color: `rgba(${r},${g},${b},1)`,
+        // Bright particles get a glow
+        glow: (r+g+b)/3 > 180 || b<50, // white or magenta
+        alpha: 1
       });
-      introCtx.globalAlpha=1;
-
-      if(p<1)requestAnimationFrame(drawExit);
-      else startPhase5();
     }
-    requestAnimationFrame(drawExit);
-  },GLITCH_FRAMES.length*70+80);
+  }
+
+  /* Step 3: Animate — particles drift + fade over ~1400ms */
+  const DISSOLVE_DUR=1400;
+  let dissolveT=null;
+
+  function drawDissolve(ts){
+    if(!dissolveT)dissolveT=ts;
+    const p=Math.min((ts-dissolveT)/DISSOLVE_DUR, 1);
+
+    introCtx.clearRect(0,0,W,H);
+    // Keep background black (stars drawn below on starfield canvas)
+
+    particles.forEach(pt=>{
+      // Ease: slow drift that accelerates gently
+      const drift=p*(2-p); // ease-in-out (but starts slow)
+      const px2=pt.x+pt.vx*drift*120;
+      const py2=pt.y+pt.vy*drift*120;
+      // Fade out with a curve that holds visible longer then drops
+      const fade=Math.max(0, 1-Math.pow(p,1.6));
+      const alpha=fade;
+      if(alpha<0.01) return;
+
+      introCtx.globalAlpha=alpha;
+
+      if(pt.glow){
+        // Glowing particles: radial gradient halo
+        const gr=introCtx.createRadialGradient(px2,py2,0,px2,py2,pt.r*5);
+        gr.addColorStop(0,pt.color);
+        gr.addColorStop(0.3,pt.color.replace(',1)',',.25)'));
+        gr.addColorStop(1,'rgba(0,0,0,0)');
+        introCtx.fillStyle=gr;
+        introCtx.beginPath();
+        introCtx.arc(px2,py2,pt.r*5,0,Math.PI*2);
+        introCtx.fill();
+      }
+      // Core dot
+      introCtx.fillStyle=pt.color;
+      introCtx.beginPath();
+      introCtx.arc(px2,py2,pt.r,0,Math.PI*2);
+      introCtx.fill();
+    });
+
+    // Subtle magenta nebula at center that fades in then out
+    if(p<0.6){
+      const nebA=p<0.3?p/0.3*0.3:0.3*(1-(p-0.3)/0.3);
+      const nebG=introCtx.createRadialGradient(cx,cy,0,cx,cy,180);
+      nebG.addColorStop(0,`rgba(200,24,92,${nebA})`);
+      nebG.addColorStop(1,'rgba(200,24,92,0)');
+      introCtx.globalAlpha=1;
+      introCtx.fillStyle=nebG;
+      introCtx.beginPath();introCtx.arc(cx,cy,180,0,Math.PI*2);
+      introCtx.fill();
+    }
+
+    introCtx.globalAlpha=1;
+
+    if(p<1) requestAnimationFrame(drawDissolve);
+    else    startPhase5();
+  }
+
+  requestAnimationFrame(drawDissolve);
 }
 
 /* ── PHASE 5: Reveal solar system ── */
