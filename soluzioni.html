@@ -35,16 +35,7 @@
 
     #scroll-prog{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--magenta),#fff 80%);z-index:9998;transition:width .05s linear}
 
-    /* ══ PAGE TRANSITION — starts FULLY COVERING on load ══ */
-    #page-transition{position:fixed;inset:0;z-index:99000;background:var(--black);display:flex;align-items:center;justify-content:center;pointer-events:all;clip-path:inset(0% 0 0 0)}
-    #page-transition.exit{pointer-events:all;animation:transExit 1s cubic-bezier(.77,0,.18,1) forwards}
-    #page-transition.enter{animation:transEnter 1.4s cubic-bezier(.77,0,.18,1) forwards}
-    @keyframes transExit{0%{clip-path:inset(100% 0 0 0)}100%{clip-path:inset(0% 0 0 0)}}
-    @keyframes transEnter{0%{clip-path:inset(0% 0 0% 0)}29%{clip-path:inset(0% 0 0% 0)}100%{clip-path:inset(0% 0 100% 0)}}
-    .trans-logo{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,9vw,6rem);letter-spacing:.1em;color:var(--magenta);text-shadow:0 0 24px rgba(200,24,92,.7),0 0 60px rgba(200,24,92,.25);opacity:0;animation:transLogoShow 1s ease forwards}
-    #page-transition.enter .trans-logo{animation:transLogoEnter 1.4s ease forwards}
-    @keyframes transLogoShow{0%{opacity:0;transform:scale(.82);filter:blur(12px)}35%{opacity:1;transform:scale(1);filter:blur(0)}100%{opacity:1;transform:scale(1);filter:blur(0)}}
-    @keyframes transLogoEnter{0%{opacity:1;transform:scale(1);filter:blur(0)}55%{opacity:1;transform:scale(1);filter:blur(0)}100%{opacity:0;transform:scale(.9);filter:blur(8px)}}
+    /* ══ PAGE TRANSITION — solo homepage, non su questa pagina ══ */
 
     /* ══ GLITCH INTRO ══ */
     #glitch-overlay{position:fixed;inset:0;z-index:8000;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;overflow:hidden}
@@ -125,6 +116,24 @@
     .map-meta-top{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);line-height:1.5}
     .map-meta-hint{font-size:.63rem;letter-spacing:.06em;color:rgba(200,24,92,.85);line-height:1.4}
     .map-meta-count{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gray)}
+
+    /* ══ ZONE LABELS on map ══ */
+    .zone-label{
+      background:transparent !important;
+      border:none !important;
+      box-shadow:none !important;
+      color:rgba(240,237,232,.55) !important;
+      font-family:'DM Mono',monospace !important;
+      font-size:.52rem !important;
+      letter-spacing:.14em !important;
+      text-transform:uppercase !important;
+      white-space:nowrap !important;
+      pointer-events:none !important;
+      text-shadow:0 1px 3px rgba(0,0,0,.8) !important;
+      transition:opacity .4s ease !important;
+    }
+    .zone-label-hidden{opacity:0 !important}
+    .zone-label::before{display:none !important}
 
     /* ══ PIN ══ */
     .tcd-pin{position:relative;width:36px;height:36px;cursor:none}
@@ -258,7 +267,6 @@
 </head>
 <body>
 
-<div id="page-transition"><span class="trans-logo">TCD.</span></div>
 <div id="cur-dot"></div>
 <div id="cur-ring"></div>
 <div id="scroll-prog"></div>
@@ -281,12 +289,11 @@
     <a href="index.html">Homepage</a>
     <a href="soluzioni.html" class="current">Soluzioni</a>
     <a href="servizi.html">I Nostri Servizi</a>
-    <a href="appartamento.html">Hai un Appartamento?</a>
     <a href="contatti.html">Contatti</a>
   </div>
   <div class="nav-drawer-footer">
-    <span>The College Dropout © 2025</span>
-    <div class="nav-footer-links"><a href="#">Privacy</a><a href="#">GitHub</a></div>
+    <span>The College Dropout © 2026</span>
+    <div class="nav-footer-links"><a href="#">Privacy</a></div>
   </div>
 </nav>
 
@@ -340,7 +347,7 @@
   <footer class="site-footer">
     <div class="footer-title-row">
       <span class="footer-giant">THE COLLEGE<br><span class="accent">DROPOUT</span></span>
-      <p class="footer-tagline">Appartamenti a Rieti — per studenti e non solo · Est. 2025</p>
+      <p class="footer-tagline">Appartamenti a Rieti — per studenti e non solo · Est. 2026</p>
     </div>
     <div class="footer-links-row">
       <div class="footer-col">
@@ -348,7 +355,6 @@
         <a href="index.html">Homepage</a>
         <a href="soluzioni.html">Soluzioni</a>
         <a href="servizi.html">I Nostri Servizi</a>
-        <a href="appartamento.html">Hai un Appartamento?</a>
         <a href="contatti.html">Contatti</a>
       </div>
       <div class="footer-col">
@@ -360,14 +366,14 @@
       </div>
       <div class="footer-col">
         <p class="footer-col-label">Per i proprietari</p>
-        <a href="appartamento.html">Pubblica il tuo spazio</a>
+        <a href="#">Pubblica il tuo spazio</a>
         <a href="servizi.html">I nostri servizi</a>
         <a href="contatti.html">Scrivici</a>
         <a href="#">FAQ</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-bottom-left">© 2025 The College Dropout<span class="footer-dot"></span>Rieti, Italia</span>
+      <span class="footer-bottom-left">© 2026 The College Dropout<span class="footer-dot"></span>Rieti, Italia</span>
       <span class="footer-bottom-right">Design & dev: <a href="https://tevwebstudio.it" target="_blank">T&V Web Studio</a>&nbsp;·&nbsp;<a href="#">Privacy</a></span>
     </div>
   </footer>
@@ -403,7 +409,6 @@ function startScramble(){scrambleIv=setInterval(()=>{spans.forEach((s,i)=>{if(!l
 function lockLetters(cb){let i=0;const next=()=>{if(i>=WORD.length){if(cb)cb();return}lockedMask[i]=true;spans[i].textContent=WORD[i];spans[i].classList.add('locked');i++;setTimeout(next,i<WORD.length?80+Math.random()*60:120)};setTimeout(next,0)}
 function sweepScanlines(){scanWrap.querySelectorAll('.scan-h').forEach((sl,i)=>{setTimeout(()=>{sl.style.transition='opacity .06s';sl.style.opacity='1';setTimeout(()=>{sl.style.opacity='0'},100+i*18)},i*50)})}
 for(let i=0;i<10;i++){const sl=document.createElement('div');sl.className='scan-h';sl.style.top=(4+i*9.5)+'%';scanWrap.appendChild(sl)}
-// Glitch intro is now started by the page transition animationend (see bottom of script)
 function startExit(){
   lockedMask.fill(false);spans.forEach(s=>{s.classList.remove('locked');s.classList.add('corrupt')});
   let n=0;const iv=setInterval(()=>{spans.forEach(s=>{s.textContent=rndCh()});if(++n>14)clearInterval(iv)},40);
@@ -421,9 +426,142 @@ function startExit(){
 /* ══ LEAFLET ══ */
 const map=L.map('map',{center:LAZIO,zoom:8,zoomControl:true,scrollWheelZoom:false,dragging:true});
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:19}).addTo(map);
-L.imageOverlay('https://i.ibb.co/HpVzJ2Jz/mappa-rieti-appartamenti.webp',[[42.370,12.820],[42.440,12.930]],{opacity:0.58,interactive:false}).addTo(map);
+
+/* ══════════════════════════════════════════════════
+   ZONE POLYGONS — GeoJSON coordinates for Rieti
+   Each zone matches the neighborhoods where
+   apartments are located. Coordinates traced from
+   real Rieti geography.
+══════════════════════════════════════════════════ */
+const ZONES=[
+  {
+    name:'Centro Storico',
+    color:'#c8185c',
+    coords:[
+      [42.4065,12.8580],[42.4068,12.8610],[42.4060,12.8645],
+      [42.4048,12.8660],[42.4035,12.8655],[42.4025,12.8638],
+      [42.4022,12.8610],[42.4030,12.8580],[42.4045,12.8568],
+      [42.4060,12.8570]
+    ]
+  },
+  {
+    name:"Porta d'Arce",
+    color:'#e0186a',
+    coords:[
+      [42.4030,12.8560],[42.4032,12.8580],[42.4022,12.8610],
+      [42.4010,12.8605],[42.4004,12.8585],[42.4006,12.8558],
+      [42.4018,12.8548]
+    ]
+  },
+  {
+    name:'Villa Reatina',
+    color:'#a81048',
+    coords:[
+      [42.4010,12.8700],[42.4015,12.8740],[42.4005,12.8768],
+      [42.3988,12.8772],[42.3975,12.8750],[42.3978,12.8710],
+      [42.3990,12.8692],[42.4005,12.8690]
+    ]
+  },
+  {
+    name:'Madonna del Cuore',
+    color:'#d01455',
+    coords:[
+      [42.4072,12.8510],[42.4078,12.8548],[42.4065,12.8572],
+      [42.4050,12.8565],[42.4042,12.8542],[42.4048,12.8508],
+      [42.4062,12.8498]
+    ]
+  },
+  {
+    name:'Campoloniano',
+    color:'#b8145c',
+    coords:[
+      [42.4045,12.8750],[42.4048,12.8795],[42.4035,12.8820],
+      [42.4018,12.8812],[42.4010,12.8778],[42.4020,12.8748],
+      [42.4035,12.8738]
+    ]
+  },
+  {
+    name:'Quattrostrade',
+    color:'#c01858',
+    coords:[
+      [42.4105,12.8460],[42.4112,12.8498],[42.4098,12.8525],
+      [42.4080,12.8520],[42.4072,12.8492],[42.4080,12.8458],
+      [42.4095,12.8448]
+    ]
+  }
+];
+
+/* Add each zone as a styled GeoJSON polygon */
+const zoneLayers=[];
+
+ZONES.forEach(zone=>{
+  // Convert [lat,lng] array to GeoJSON [lng,lat] format
+  const geojson={
+    type:'Feature',
+    properties:{name:zone.name},
+    geometry:{
+      type:'Polygon',
+      coordinates:[zone.coords.map(([lat,lng])=>[lng,lat])]
+    }
+  };
+
+  const layer=L.geoJSON(geojson,{
+    style:{
+      color:zone.color,
+      weight:1.5,
+      opacity:0,        /* start hidden */
+      fillColor:zone.color,
+      fillOpacity:0,    /* start hidden */
+      dashArray:'5,4'
+    }
+  }).addTo(map);
+
+  zoneLayers.push({layer,zone});
+
+  /* Hover: fill becomes visible */
+  layer.on('mouseover',()=>{
+    layer.setStyle({fillOpacity:0.22,weight:2,opacity:1});
+    document.body.classList.add('ch');
+  });
+  layer.on('mouseout',()=>{
+    layer.setStyle({fillOpacity:0.04,weight:1.5,opacity:0.7});
+    document.body.classList.remove('ch');
+  });
+
+  /* Zone label — permanent tooltip at centroid, starts hidden */
+  const latlngs=zone.coords.map(([lat,lng])=>L.latLng(lat,lng));
+  const centroid=latlngs.reduce(
+    (acc,ll)=>({lat:acc.lat+ll.lat/latlngs.length,lng:acc.lng+ll.lng/latlngs.length}),
+    {lat:0,lng:0}
+  );
+  const tt=L.tooltip({permanent:true,direction:'center',className:'zone-label zone-label-hidden',interactive:false})
+    .setContent(zone.name)
+    .setLatLng(centroid)
+    .addTo(map);
+  zoneLayers[zoneLayers.length-1].tooltip=tt;
+});
 
 const mapBox=document.getElementById('map-container');
+
+/* ══ MAP LEGEND ══ */
+const legend=L.control({position:'bottomright'});
+legend.onAdd=function(){
+  const d=L.DomUtil.create('div');
+  d.style.cssText='background:rgba(10,10,10,.85);border:1px solid rgba(240,237,232,.13);padding:10px 14px;border-radius:2px;backdrop-filter:blur(8px)';
+  d.innerHTML=`
+    <div style="display:flex;flex-direction:column;gap:7px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="width:10px;height:10px;border-radius:50%;background:#c8185c;box-shadow:0 0 6px #c8185c;flex-shrink:0"></div>
+        <span style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:#f0ede8">Disponibile</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="width:10px;height:10px;border-radius:50%;background:#555;border:1px solid #888;flex-shrink:0"></div>
+        <span style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:#888">Occupato</span>
+      </div>
+    </div>`;
+  return d;
+};
+legend.addTo(map);
 mapBox.addEventListener('click',()=>{map.scrollWheelZoom.enable();mapBox.classList.add('focused');mapHint.classList.add('hidden')});
 mapBox.addEventListener('mouseleave',()=>{map.scrollWheelZoom.disable();mapBox.classList.remove('focused')});
 
@@ -431,8 +569,36 @@ setTimeout(()=>mapCont.classList.add('land'),2300);
 setTimeout(()=>map.flyTo(RIETI,14,{animate:true,duration:2.2,easeLinearity:0.35}),2500);
 setTimeout(()=>titleBar.classList.add('open'),3100);
 
-function createPinIcon(a){const c=a?'#c8185c':'#555';return L.divIcon({html:`<div class="tcd-pin"><div class="pin-ring" style="border-color:${c}55"></div><div class="pin-dot" style="background:${c};box-shadow:0 0 10px ${c},0 0 22px ${c}55"></div></div>`,className:'',iconSize:[36,36],iconAnchor:[18,18],popupAnchor:[0,-22]})}
-function buildPopup(apt){const badge=apt.available?`<span class="apt-badge free">Disponibile</span>`:`<span class="apt-badge taken">Occupato</span>`;return `<div class="apt-card"><img class="apt-card-img" src="${apt.img}" alt="${apt.name}" loading="lazy"/><div class="apt-card-body"><p class="apt-card-zone">${apt.zone}</p><h3 class="apt-card-name">${apt.name}</h3><div class="apt-card-row"><p class="apt-card-price">€${apt.price}<span>/mese</span></p>${badge}</div><div class="apt-card-details"><div class="apt-detail"><strong>${apt.rooms}</strong>locali</div><div class="apt-detail"><strong>${apt.sqm} m²</strong>superficie</div></div><a href="#" class="apt-card-cta">Scopri →</a></div></div>`}
+/* Reveal zones only after flyTo has fully settled at zoom 14 */
+setTimeout(()=>{
+  zoneLayers.forEach(({layer,tooltip},i)=>{
+    setTimeout(()=>{
+      layer.setStyle({opacity:0.7,fillOpacity:0.04});
+      if(tooltip){
+        const el=tooltip.getElement();
+        if(el)el.classList.remove('zone-label-hidden');
+      }
+    },i*120);
+  });
+},4800);
+
+function createPinIcon(available){
+  const c=available?'#c8185c':'#555555';
+  const glow=available
+    ?`box-shadow:0 0 10px ${c},0 0 22px rgba(200,24,92,.5)`
+    :`box-shadow:0 0 6px rgba(80,80,80,.6)`;
+  const ringColor=available?`${c}55`:`rgba(100,100,100,.35)`;
+  return L.divIcon({
+    html:`<div class="tcd-pin">
+      <div class="pin-ring" style="border-color:${ringColor}"></div>
+      <div class="pin-dot" style="background:${c};border:2px solid ${available?'#fff':'#aaa'};${glow}"></div>
+    </div>`,
+    className:'',iconSize:[36,36],iconAnchor:[18,18],popupAnchor:[0,-22]
+  });
+}
+
+/* Popup CTA links to appartamento.html?id=N — wormhole triggered via click handler below */
+function buildPopup(apt){const badge=apt.available?`<span class="apt-badge free">Disponibile</span>`:`<span class="apt-badge taken">Occupato</span>`;return `<div class="apt-card"><img class="apt-card-img" src="${apt.img}" alt="${apt.name}" loading="lazy"/><div class="apt-card-body"><p class="apt-card-zone">${apt.zone}</p><h3 class="apt-card-name">${apt.name}</h3><div class="apt-card-row"><p class="apt-card-price">€${apt.price}<span>/mese</span></p>${badge}</div><div class="apt-card-details"><div class="apt-detail"><strong>${apt.rooms}</strong>locali</div><div class="apt-detail"><strong>${apt.sqm} m²</strong>superficie</div></div><a href="appartamento.html?id=${apt.id}" class="apt-card-cta wormhole-link">Scopri →</a></div></div>`}
 function triggerPinFlash(){pinFlash.classList.remove('flash');void pinFlash.offsetWidth;pinFlash.classList.add('flash');pinFlash.addEventListener('animationend',()=>pinFlash.classList.remove('flash'),{once:true})}
 
 apartments.forEach((apt,i)=>{
@@ -468,7 +634,7 @@ apartments.forEach(apt=>{
         <div class="h-apt-meta-item"><strong>${apt.rooms}</strong>locali</div>
         <div class="h-apt-meta-item"><strong>${apt.sqm} m²</strong>superficie</div>
       </div>
-      <a href="#" class="h-apt-cta">Scopri l'appartamento →</a>
+      <a href="appartamento.html?id=${apt.id}" class="h-apt-cta wormhole-link">Scopri l'appartamento →</a>
     </div>`;
   track.appendChild(card);
 });
@@ -518,43 +684,58 @@ document.querySelectorAll('a,button,[role=button],.h-apt-card,.apt-list-item').f
 const prog=document.getElementById('scroll-prog');
 window.addEventListener('scroll',()=>{prog.style.width=Math.min(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100,100)+'%'},{passive:true});
 
-/* ══ PAGE TRANSITION ══
-   EXIT  : overlay covers screen in 1000ms → navigate
-   ENTER : overlay holds on TCD. logo for 400ms, retreats in 1000ms
-   Glitch intro starts ONLY after enter animationend
-══ */
-const ptOverlay=document.getElementById('page-transition');
+/* ══ WORMHOLE CANVAS for apartment navigation ══ */
+const wCanvas=document.createElement('canvas');
+wCanvas.style.cssText='position:fixed;inset:0;z-index:99000;pointer-events:none;opacity:0;';
+document.body.appendChild(wCanvas);
+const wCtx=wCanvas.getContext('2d');
+function resizeW(){wCanvas.width=window.innerWidth;wCanvas.height=window.innerHeight}
+resizeW();window.addEventListener('resize',resizeW);
 
+function drawWorm(p){
+  const W=wCanvas.width,H=wCanvas.height,cx=W/2,cy=H/2;
+  const maxR=Math.sqrt(cx*cx+cy*cy)*1.1;
+  wCtx.clearRect(0,0,W,H);
+  wCtx.fillStyle=`rgba(10,10,10,${p})`;wCtx.fillRect(0,0,W,H);
+  for(let i=0;i<18;i++){
+    const t=((1-p)+i/18)%1;
+    const r=t*maxR;
+    const a=(1-t)*0.85;
+    wCtx.strokeStyle=`hsla(${320-t*60},${90-t*30}%,${50+t*10}%,${a})`;
+    wCtx.lineWidth=Math.max(0.5,(1-t)*3.5);
+    wCtx.shadowColor=`rgba(200,24,92,${a*.5})`;wCtx.shadowBlur=t<0.3?10:0;
+    wCtx.beginPath();wCtx.ellipse(cx,cy,r,r*0.45,0,0,Math.PI*2);wCtx.stroke();
+  }
+  wCtx.shadowBlur=0;
+  const gr=30*p;if(gr>1){const g=wCtx.createRadialGradient(cx,cy,0,cx,cy,gr);g.addColorStop(0,'rgba(200,24,92,.9)');g.addColorStop(1,'rgba(200,24,92,0)');wCtx.fillStyle=g;wCtx.beginPath();wCtx.arc(cx,cy,gr,0,Math.PI*2);wCtx.fill();}
+}
+
+function wormholeTo(href){
+  wCanvas.style.pointerEvents='all';wCanvas.style.opacity='1';
+  let st=null;const dur=900;
+  (function f(ts){if(!st)st=ts;const p=Math.min((ts-st)/dur,1);drawWorm(p);if(p<1)requestAnimationFrame(f);else window.location.href=href;})( performance.now());
+}
+
+/* ══ GLITCH STARTS ON LOAD — no page transition overlay on this page ══ */
 window.addEventListener('load',()=>{
-  /* Glitch overlay is hidden until page transition clears */
-  glitchOverlay.style.opacity='0';
-  glitchOverlay.style.pointerEvents='none';
-  glitchOverlay.style.transition='none';
-
-  ptOverlay.classList.add('enter');
-  ptOverlay.addEventListener('animationend',()=>{
-    ptOverlay.classList.remove('enter');
-    ptOverlay.style.clipPath='inset(0% 0 100% 0)';
-    /* Now start the glitch intro */
-    glitchOverlay.style.opacity='1';
-    glitchOverlay.style.pointerEvents='all';
-    logoEl.classList.add('show');
-    startScramble();
-    sweepScanlines();
-    setTimeout(()=>lockLetters(()=>setTimeout(startExit,400)),200);
-  },{once:true});
+  logoEl.classList.add('show');
+  startScramble();
+  sweepScanlines();
+  setTimeout(()=>lockLetters(()=>setTimeout(startExit,400)),200);
 });
 
-/* On departure: exit animation → navigate */
+/* Links: wormhole for apartment pages, direct for everything else */
 document.addEventListener('click',e=>{
   const link=e.target.closest('a[href]');
   if(!link)return;
   const href=link.getAttribute('href');
   if(!href||href.startsWith('#')||href.startsWith('http')||href.startsWith('mailto'))return;
   e.preventDefault();
-  ptOverlay.style.clipPath='inset(100% 0 0 0)';ptOverlay.classList.remove('enter');void ptOverlay.offsetWidth;
-  ptOverlay.classList.add('exit');
-  ptOverlay.addEventListener('animationend',()=>{window.location.href=href},{once:true});
+  if(link.classList.contains('wormhole-link')||href.includes('appartamento.html')){
+    wormholeTo(href);
+  } else {
+    window.location.href=href;
+  }
 });
 </script>
 </body>
