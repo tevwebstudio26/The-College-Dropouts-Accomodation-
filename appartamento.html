@@ -40,11 +40,44 @@
     /* ── TRANSITION CANVAS (top z-index) ── */
     #trans-canvas{position:fixed;inset:0;z-index:99000;display:block;pointer-events:none}
 
-    /* ── BACK BUTTON ── */
-    .back-btn{position:fixed;top:0;left:0;z-index:600;height:56px;display:flex;align-items:center;gap:10px;padding:0 20px;background:rgba(10,10,10,.92);border-bottom:1px solid var(--border);border-right:1px solid var(--border);cursor:none;backdrop-filter:blur(8px);text-decoration:none;color:var(--gray);font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;transition:color .2s,background .2s}
-    .back-btn:hover{color:var(--magenta);background:rgba(200,24,92,.06)}
-    .back-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
-    @media(min-width:768px){.back-btn{height:64px}}
+    /* ── TOP BAR — fixed strip with TCD + back btn ── */
+    .top-bar-strip{
+      position:fixed;top:0;left:0;right:0;z-index:600;
+      height:56px;
+      display:flex;align-items:center;
+      background:rgba(10,10,10,.92);
+      border-bottom:1px solid var(--border);
+      backdrop-filter:blur(8px);
+      pointer-events:none; /* children handle their own events */
+    }
+    @media(min-width:768px){.top-bar-strip{height:64px}}
+
+    /* Back button — centered in the top bar */
+    .back-btn{
+      position:absolute;left:50%;transform:translateX(-50%);
+      display:flex;align-items:center;gap:10px;
+      color:var(--gray);text-decoration:none;
+      font-family:'DM Mono',monospace;font-size:.62rem;
+      letter-spacing:.14em;text-transform:uppercase;
+      cursor:none;pointer-events:all;
+      padding:8px 20px;
+      border:1px solid var(--border);
+      border-radius:2px;
+      transition:color .25s,border-color .25s,background .25s;
+      white-space:nowrap;
+    }
+    .back-btn:hover{
+      color:var(--white);
+      border-color:rgba(200,24,92,.5);
+      background:rgba(200,24,92,.07);
+    }
+    .back-btn:hover .back-arrow{color:var(--magenta)}
+    .back-arrow{
+      font-size:.9rem;line-height:1;
+      color:var(--magenta);
+      transition:transform .2s;
+    }
+    .back-btn:hover .back-arrow{transform:translateX(-3px)}
 
     /* ── LANG BAR ── */
     .lang-bar{position:fixed;top:0;right:0;z-index:900;display:flex;flex-direction:column;background:rgba(10,10,10,.92);border-left:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -83,7 +116,13 @@
     @media(min-width:768px){.container{padding:0 40px}}
 
     /* ── HEADER ── */
-    .apt-header{padding:32px 0 24px;border-bottom:1px solid var(--border)}
+    .apt-header{padding:20px 0 24px;border-bottom:1px solid var(--border)}
+    .apt-header-top{
+      display:flex;align-items:center;justify-content:space-between;
+      margin-bottom:16px;
+      padding-bottom:12px;
+      border-bottom:1px solid var(--border);
+    }
     .apt-breadcrumb{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);margin-bottom:12px;display:flex;align-items:center;gap:8px}
     .apt-breadcrumb a{color:var(--gray);text-decoration:none;transition:color .2s;cursor:none}
     .apt-breadcrumb a:hover{color:var(--magenta)}
@@ -246,11 +285,13 @@
 <div id="cur-ring"></div>
 <div id="scroll-prog"></div>
 
-<!-- BACK BUTTON -->
-<a href="soluzioni.html" class="back-btn">
-  <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-  Soluzioni
-</a>
+<!-- TOP BAR STRIP -->
+<div class="top-bar-strip">
+  <a href="soluzioni.html" class="back-btn">
+    <span class="back-arrow">←</span>
+    Torna a Soluzioni
+  </a>
+</div>
 
 <!-- LANG BAR -->
 <div class="lang-bar" role="navigation">
@@ -636,119 +677,84 @@ function lbNav(d){lbIdx=(lbIdx+d+APT.gallery.length)%APT.gallery.length;updateLb
 function updateLb(){document.getElementById('lb-img').src=APT.gallery[lbIdx];document.getElementById('lb-counter').textContent=`${lbIdx+1} / ${APT.gallery.length}`}
 
 /* ══════════════════════════════════════════════════
-   TRANSITION — LIQUID PORTAL (Blob morph)
+   TRANSITION — SCAN LINE REVEAL
    ─────────────────────────────────────────────────
-   A magenta liquid blob expands from center outward
-   covering the screen (EXIT), or contracts inward
-   revealing the page (ENTRY).
+   ENTRY: A magenta scan line sweeps top→bottom.
+   Above the line: page content visible.
+   Below the line: black cover retreats downward.
+   Effect: page "prints" itself into view line by line.
 
-   The blob is drawn with SVG-style bezier curves
-   on canvas — 6 control points that rotate and
-   oscillate to create an organic "lava" edge.
+   EXIT: Black cover sweeps top→bottom covering page.
+   A magenta line marks the advancing edge.
+
+   Duration: ~900ms. Minimal, sharp, on-brand.
 ══════════════════════════════════════════════════ */
 const tCanvas=document.getElementById('trans-canvas');
 const tCtx=tCanvas.getContext('2d');
 function resizeT(){tCanvas.width=innerWidth;tCanvas.height=innerHeight}
 resizeT();window.addEventListener('resize',resizeT);
 
-const BLOB_PTS=6; // control points around the blob
-
-/* Get blob radius at each control point.
-   Base radius grows with progress.
-   Each point oscillates ±perturbation.
-   At full size the blob covers the entire viewport. */
-function getBlobPath(progress,phase){
-  const W=tCanvas.width,H=tCanvas.height;
-  const cx=W/2,cy=H/2;
-  const maxR=Math.sqrt(cx*cx+cy*cy)*1.15;
-  const baseR=maxR*progress;
-  const perturb=baseR*0.18; // organic edge wobble
-
-  const pts=[];
-  for(let i=0;i<BLOB_PTS;i++){
-    const angle=(i/BLOB_PTS)*Math.PI*2;
-    const wobble=Math.sin(phase*2.1+i*1.4)*perturb;
-    const r=Math.max(0,baseR+wobble);
-    pts.push({
-      x:cx+Math.cos(angle)*r,
-      y:cy+Math.sin(angle)*r
-    });
-  }
-
-  /* Draw smooth closed bezier through all points */
-  tCtx.beginPath();
-  for(let i=0;i<pts.length;i++){
-    const curr=pts[i];
-    const next=pts[(i+1)%pts.length];
-    const prev=pts[(i-1+pts.length)%pts.length];
-    const cpx1=curr.x+(next.x-prev.x)*0.16;
-    const cpy1=curr.y+(next.y-prev.y)*0.16;
-    const cpx2=next.x-(pts[(i+2)%pts.length].x-curr.x)*0.16;
-    const cpy2=next.y-(pts[(i+2)%pts.length].y-curr.y)*0.16;
-    if(i===0)tCtx.moveTo(curr.x,curr.y);
-    tCtx.bezierCurveTo(cpx1,cpy1,cpx2,cpy2,next.x,next.y);
-  }
-  tCtx.closePath();
-}
-
-let blobPhase=0;
-
-function drawBlob(progress){
+function drawScan(progress,mode){
   const W=tCanvas.width,H=tCanvas.height;
   tCtx.clearRect(0,0,W,H);
-  blobPhase+=0.06;
 
-  if(progress<=0.01) return;
-
-  /* Outer glow ring — slightly larger blob */
-  tCtx.save();
-  getBlobPath(Math.min(progress+0.04,1),blobPhase-0.2);
-  const glowGrad=tCtx.createRadialGradient(W/2,H/2,0,W/2,H/2,W*.6);
-  glowGrad.addColorStop(0,`rgba(200,24,92,0)`);
-  glowGrad.addColorStop(0.75,`rgba(200,24,92,${progress*.15})`);
-  glowGrad.addColorStop(1,`rgba(200,24,92,0)`);
-  tCtx.fillStyle=glowGrad;tCtx.fill();
-  tCtx.restore();
-
-  /* Main blob fill */
-  tCtx.save();
-  getBlobPath(progress,blobPhase);
-  const grad=tCtx.createRadialGradient(W/2-W*.08,H/2-H*.06,0,W/2,H/2,W*.7);
-  grad.addColorStop(0,`rgba(160,14,50,${Math.min(progress*1.2,1)})`);
-  grad.addColorStop(0.5,`rgba(200,24,92,${Math.min(progress*1.1,1)})`);
-  grad.addColorStop(1,`rgba(10,10,10,${Math.min(progress*1.1,1)})`);
-  tCtx.fillStyle=grad;tCtx.fill();
-  tCtx.restore();
-
-  /* Magenta edge highlight */
-  tCtx.save();
-  getBlobPath(progress,blobPhase);
-  tCtx.strokeStyle=`rgba(220,60,110,${Math.min(progress*0.9,0.6)})`;
-  tCtx.lineWidth=3;tCtx.stroke();
-  tCtx.restore();
-
-  /* TCD. label at center when fully covered */
-  if(progress>0.85){
-    const a=(progress-.85)/.15;
-    tCtx.globalAlpha=a;
-    tCtx.font=`${Math.round(W*.06)}px 'Bebas Neue',sans-serif`;
-    tCtx.fillStyle='rgba(240,237,232,.9)';
-    tCtx.textAlign='center';tCtx.textBaseline='middle';
-    tCtx.fillText('TCD.',W/2,H/2);
-    tCtx.globalAlpha=1;
+  if(mode==='entry'){
+    /* Black block retreating downward — covers bottom portion */
+    const revealedY=progress*H;
+    /* Black cover below the scan line */
+    tCtx.fillStyle='#0a0a0a';
+    tCtx.fillRect(0,revealedY,W,H-revealedY);
+    /* Scan line at the leading edge */
+    if(progress<0.99){
+      /* Thick glow band */
+      const bandH=3+progress*2;
+      const grad=tCtx.createLinearGradient(0,revealedY-12,0,revealedY+bandH+6);
+      grad.addColorStop(0,'rgba(200,24,92,0)');
+      grad.addColorStop(0.4,`rgba(200,24,92,${0.6+progress*0.3})`);
+      grad.addColorStop(0.7,`rgba(255,255,255,${0.4+progress*0.4})`);
+      grad.addColorStop(1,'rgba(200,24,92,0)');
+      tCtx.fillStyle=grad;
+      tCtx.fillRect(0,revealedY-12,W,bandH+18);
+      /* Sharp 1px white line */
+      tCtx.fillStyle=`rgba(255,255,255,${0.7+progress*0.3})`;
+      tCtx.fillRect(0,revealedY,W,1.5);
+    }
+  } else {
+    /* EXIT: black cover sweeps downward, scan line at front */
+    const coveredY=progress*H;
+    /* Black cover growing from top */
+    tCtx.fillStyle='#0a0a0a';
+    tCtx.fillRect(0,0,W,coveredY);
+    /* Scan line at leading edge */
+    if(progress<0.99){
+      const grad=tCtx.createLinearGradient(0,coveredY-6,0,coveredY+16);
+      grad.addColorStop(0,'rgba(200,24,92,0)');
+      grad.addColorStop(0.3,`rgba(200,24,92,${0.7})`);
+      grad.addColorStop(0.6,`rgba(255,255,255,0.8)`);
+      grad.addColorStop(1,'rgba(200,24,92,0)');
+      tCtx.fillStyle=grad;
+      tCtx.fillRect(0,coveredY-6,W,22);
+      tCtx.fillStyle='rgba(255,255,255,0.9)';
+      tCtx.fillRect(0,coveredY,W,1.5);
+    }
+    /* Progress indicator — small label trailing the line */
+    const pct=Math.round(progress*100);
+    tCtx.font=`500 11px 'DM Mono',monospace`;
+    tCtx.fillStyle=`rgba(200,24,92,${Math.min(progress*3,0.7)})`;
+    tCtx.textAlign='right';
+    tCtx.fillText(`${pct}%`,W-24,Math.max(coveredY-8,16));
   }
 }
 
-function runBlob(mode,duration,onComplete){
+function runScan(mode,duration,onComplete){
   tCanvas.style.pointerEvents='all';
   let startT=null;
   function frame(ts){
     if(!startT)startT=ts;
     let p=Math.min((ts-startT)/duration,1);
-    // Strong ease-in-out: slow start, fast middle, slow end
-    p=p<0.5?4*p*p*p:(1-Math.pow(-2*p+2,3)/2);
-    const progress=mode==='exit'?p:(1-p);
-    drawBlob(progress);
+    /* Ease: fast start (like dropping), slight decel at end */
+    const eased=1-Math.pow(1-p,1.8);
+    drawScan(eased,mode);
     if(p<1){requestAnimationFrame(frame)}
     else{
       tCtx.clearRect(0,0,tCanvas.width,tCanvas.height);
@@ -761,7 +767,7 @@ function runBlob(mode,duration,onComplete){
 
 /* ENTRY on load */
 window.addEventListener('load',()=>{
-  runBlob('entry',1100,()=>{
+  runScan('entry',900,()=>{
     document.getElementById('pageWrap').classList.add('visible');
   });
 });
@@ -775,7 +781,7 @@ document.addEventListener('click',e=>{
   e.preventDefault();
   document.getElementById('pageWrap').style.transition='none';
   document.getElementById('pageWrap').style.opacity='0';
-  runBlob('exit',950,()=>{window.location.href=href});
+  runScan('exit',800,()=>{window.location.href=href});
 });
 </script>
 </body>
