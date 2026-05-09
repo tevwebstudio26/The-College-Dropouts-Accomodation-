@@ -684,58 +684,36 @@ document.querySelectorAll('a,button,[role=button],.h-apt-card,.apt-list-item').f
 const prog=document.getElementById('scroll-prog');
 window.addEventListener('scroll',()=>{prog.style.width=Math.min(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100,100)+'%'},{passive:true});
 
-/* ══ WORMHOLE CANVAS for apartment navigation ══ */
-const wCanvas=document.createElement('canvas');
-wCanvas.style.cssText='position:fixed;inset:0;z-index:99000;pointer-events:none;opacity:0;';
-document.body.appendChild(wCanvas);
-const wCtx=wCanvas.getContext('2d');
-function resizeW(){wCanvas.width=window.innerWidth;wCanvas.height=window.innerHeight}
-resizeW();window.addEventListener('resize',resizeW);
+/* ══ GLITCH STARTS ON LOAD ══
+   Skip if coming from appartamento page (no double animation)
+══ */
+const skipGlitch=new URLSearchParams(location.search).get('from')==='appartamento';
 
-function drawWorm(p){
-  const W=wCanvas.width,H=wCanvas.height,cx=W/2,cy=H/2;
-  const maxR=Math.sqrt(cx*cx+cy*cy)*1.1;
-  wCtx.clearRect(0,0,W,H);
-  wCtx.fillStyle=`rgba(10,10,10,${p})`;wCtx.fillRect(0,0,W,H);
-  for(let i=0;i<18;i++){
-    const t=((1-p)+i/18)%1;
-    const r=t*maxR;
-    const a=(1-t)*0.85;
-    wCtx.strokeStyle=`hsla(${320-t*60},${90-t*30}%,${50+t*10}%,${a})`;
-    wCtx.lineWidth=Math.max(0.5,(1-t)*3.5);
-    wCtx.shadowColor=`rgba(200,24,92,${a*.5})`;wCtx.shadowBlur=t<0.3?10:0;
-    wCtx.beginPath();wCtx.ellipse(cx,cy,r,r*0.45,0,0,Math.PI*2);wCtx.stroke();
-  }
-  wCtx.shadowBlur=0;
-  const gr=30*p;if(gr>1){const g=wCtx.createRadialGradient(cx,cy,0,cx,cy,gr);g.addColorStop(0,'rgba(200,24,92,.9)');g.addColorStop(1,'rgba(200,24,92,0)');wCtx.fillStyle=g;wCtx.beginPath();wCtx.arc(cx,cy,gr,0,Math.PI*2);wCtx.fill();}
-}
-
-function wormholeTo(href){
-  wCanvas.style.pointerEvents='all';wCanvas.style.opacity='1';
-  let st=null;const dur=900;
-  (function f(ts){if(!st)st=ts;const p=Math.min((ts-st)/dur,1);drawWorm(p);if(p<1)requestAnimationFrame(f);else window.location.href=href;})( performance.now());
-}
-
-/* ══ GLITCH STARTS ON LOAD — no page transition overlay on this page ══ */
 window.addEventListener('load',()=>{
-  logoEl.classList.add('show');
-  startScramble();
-  sweepScanlines();
-  setTimeout(()=>lockLetters(()=>setTimeout(startExit,400)),200);
+  if(skipGlitch){
+    /* Skip glitch intro — arrive directly, page already visible */
+    glitchOverlay.style.display='none';
+    pageWrap.classList.add('visible');
+    navTrigger.classList.add('visible');
+    setTimeout(()=>mapCont.classList.add('land'),300);
+    setTimeout(()=>map.flyTo(RIETI,14,{animate:true,duration:2.2,easeLinearity:0.35}),500);
+    setTimeout(()=>titleBar.classList.add('open'),1300);
+  } else {
+    logoEl.classList.add('show');
+    startScramble();
+    sweepScanlines();
+    setTimeout(()=>lockLetters(()=>setTimeout(startExit,400)),200);
+  }
 });
 
-/* Links: wormhole for apartment pages, direct for everything else */
+/* All links navigate directly — no wormhole overlay */
 document.addEventListener('click',e=>{
   const link=e.target.closest('a[href]');
   if(!link)return;
   const href=link.getAttribute('href');
   if(!href||href.startsWith('#')||href.startsWith('http')||href.startsWith('mailto'))return;
   e.preventDefault();
-  if(link.classList.contains('wormhole-link')||href.includes('appartamento.html')){
-    wormholeTo(href);
-  } else {
-    window.location.href=href;
-  }
+  window.location.href=href;
 });
 </script>
 </body>
