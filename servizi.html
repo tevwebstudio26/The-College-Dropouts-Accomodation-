@@ -285,6 +285,7 @@
     <a href="index.html">Homepage</a>
     <a href="soluzioni.html">Soluzioni</a>
     <a href="servizi.html" class="current">I Nostri Servizi</a>
+    <a href="chi-siamo.html">Chi Siamo</a>
     <a href="contatti.html">Contatti</a>
   </div>
   <div class="nav-drawer-footer">
@@ -543,9 +544,21 @@ document.addEventListener('click',e=>{
 
 /* ══ SERVICE DATA ══ */
 const services=[
-  {tag:'01 — Per chi cerca',title:'Soluzioni Abitative',href:'soluzioni.html',cta:'Esplora gli appartamenti',body:`<p><strong>Trovare casa a Rieti non deve essere complicato.</strong> Con TCD hai accesso a una rete di appartamenti reali, verificati e disponibili per studenti italiani, internazionali e non solo.</p><p>Nessuna agenzia, nessuna commissione nascosta. Sfoglia la mappa interattiva, clicca sull'appartamento e contatta direttamente il proprietario.</p><p>Gli alloggi vanno da monolocali in centro storico a bilocali nelle zone universitarie, con prezzi a partire da €290/mese.</p>`},
-  {tag:'02 — Per chi affitta',title:'Affitta il tuo Immobile',href:'#',cta:'Pubblica il tuo spazio',body:`<p><strong>Hai un appartamento a Rieti e vuoi affittarlo?</strong> TCD è il canale più diretto per raggiungere studenti e giovani lavoratori in cerca di casa.</p><p>Pubblicazione in 48 ore. Nessuna commissione sull'affitto mensile. Il tuo spazio raggiunge studenti dell'Università della Tuscia, Erasmus e professionisti.</p><p>Tu gestisci la relazione con l'inquilino. Noi gestiamo la visibilità.</p>`},
-  {tag:'03 — Supporto personalizzato',title:'Consulenze & Mediazioni',href:'contatti.html',cta:'Scrivici',body:`<p><strong>Non sai da dove iniziare? Hai bisogno di un mediatore?</strong> Siamo qui.</p><p>Consulenze per proprietari e inquilini: stima del valore di affitto, supporto contrattuale, mediazione e orientamento per studenti internazionali.</p><p>Il primo incontro è gratuito e senza impegno.</p>`}
+  {tag:'01 — Per chi cerca',title:'Soluzioni Abitative',href:'soluzioni.html',cta:'Guarda le soluzioni disponibili',body:`<p>Hai bisogno di una stanza o di un appartamento a Rieti? Ti mettiamo in
+    contatto con la soluzione giusta per te — senza agenzie, senza commissioni,
+    senza burocrazia inutile.</p><p>Lavoriamo con studenti italiani, internazionali
+    e Erasmus. Se hai un budget, un quartiere preferito o una data di arrivo,
+    scrivici: ci pensiamo noi.</p>`},
+  {tag:'02 — Per chi affitta',title:'Affitta il tuo Immobile',href:'contatti.html',cta:'Parliamone',body:`<p>Hai un immobile a Rieti e vuoi affittarlo a studenti? Gestiamo tutto noi
+    — dalla valutazione iniziale alla firma del contratto, dalla ricerca
+    dell'inquilino giusto alla gestione quotidiana.</p><p>Nessun contratto
+    vincolante. Nessuna esclusiva. Il nostro compenso dipende esclusivamente
+    dall'affitto che incassi tu.</p>`},
+  {tag:'03 — Supporto personalizzato',title:'Consulenze & Mediazioni',href:'contatti.html',cta:'Scrivici',body:`<p>Non sai da dove iniziare? Ti aiutiamo a capire se il tuo immobile è
+    adatto all'affitto studentesco, a quanto puoi affittarlo e come farlo
+    nel rispetto delle normative fiscali vigenti.</p><p>Offriamo anche supporto
+    per pratiche catastali, urbanistiche, energetiche e design d'interni.
+    Il primo incontro è gratuito.</p>`}
 ];
 
 function openTooltip(idx){
