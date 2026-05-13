@@ -251,6 +251,7 @@
     <a href="index.html">Homepage</a>
     <a href="soluzioni.html">Soluzioni</a>
     <a href="servizi.html">I Nostri Servizi</a>
+    <a href="chi-siamo.html">Chi Siamo</a>
     <a href="contatti.html" class="current">Contatti</a>
   </div>
   <div class="nav-drawer-footer">
@@ -504,10 +505,10 @@ function scrollTerm(){
 }
 
 async function runTerminal(){
-  await typeLine('TCD Contact System v1.0','dim',16,0);
+  await typeLine('TCD Contact System · Rieti','dim',16,0);
   await typeLine('Connected · Rieti, Italia · 2026','dim',13,100);
   addBlank();
-  await typeLine('> Contattaci','prompt',30,180);
+  await typeLine('> Come possiamo aiutarti?','prompt',30,180);
   addBlank();
   await typeLine('Scegli il metodo di contatto:','white',20,260);
   addBlank();
@@ -571,7 +572,7 @@ async function handleWhatsApp(){
   await typeLine('→ Reindirizzamento...','system',14,540);
   await new Promise(r=>setTimeout(r,800));
   /* Replace XXXXXXXXXXX with real number */
-  window.open('https://wa.me/39XXXXXXXXXXX?text=Ciao%2C%20vi%20contatto%20tramite%20The%20College%20Dropout.','_blank');
+  window.open('https://wa.me/39XXXXXXXXXXX?text=Ciao%2C%20vi%20contatto%20tramite%20il%20sito%20The%20College%20Dropout.%20Vorrei%20informazioni%20su%3A%20','_blank');
   addBlank();
   await typeLine('✓ WhatsApp aperto in nuova tab','success',16);
   addBlank();
@@ -612,7 +613,7 @@ function showEmailForm(){
     </div>
     <div class="form-field">
       <label class="form-label">Oggetto</label>
-      <input class="form-input" id="f-oggetto" type="text" placeholder="Informazioni appartamento Centro Storico"/>
+      <input class="form-input" id="f-oggetto" type="text" placeholder="Informazioni soluzione Centro Storico"/>
     </div>
     <div class="form-field">
       <label class="form-label">Messaggio *</label>
@@ -665,7 +666,7 @@ async function submitForm(){
   await typeLine('Messaggio inviato ✓','success',16,600);
   await typeLine(`Da: ${email}  ·  Oggetto: ${oggetto||'(nessun oggetto)'}  ·  Consegnato.`,'dim',12,900);
   addBlank();
-  await typeLine('Ti risponderemo entro 24 ore.','white',18,300);
+  await typeLine('✓ Messaggio ricevuto. Ti risponderemo entro 24 ore.','white',18,300);
   addBlank();
   termState='options';
   showOptions();
