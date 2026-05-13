@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Soluzioni — The College Dropout | Appartamenti a Rieti</title>
-  <meta name="description" content="Esplora gli appartamenti disponibili a Rieti con The College Dropout."/>
+  <meta name="description" content="Esplora le soluzioni disponibili a Rieti con The College Dropout."/>
   <link rel="canonical" href="https://thecollegedropout.it/soluzioni"/>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -289,6 +289,7 @@
     <a href="index.html">Homepage</a>
     <a href="soluzioni.html" class="current">Soluzioni</a>
     <a href="servizi.html">I Nostri Servizi</a>
+    <a href="chi-siamo.html">Chi Siamo</a>
     <a href="contatti.html">Contatti</a>
   </div>
   <div class="nav-drawer-footer">
@@ -315,25 +316,25 @@
   <section class="hero-map">
     <div id="map-container">
       <div id="map"></div>
-      <div id="map-hint">Clicca sulla mappa per attivarla · Scroll per zoomare</div>
+      <div id="map-hint">Clicca su una soluzione per scoprire di più · Scroll per zoomare</div>
     </div>
     <div class="map-title-bar" id="mapTitleBar">
       <div class="map-title-inner">
         <h1 class="map-title">Solu<span>zioni</span></h1>
         <div class="map-meta">
-          <div class="map-meta-hint">↙ Clicca su un appartamento per scoprire di più</div>
+          <div class="map-meta-hint">↙ Clicca su una soluzione per scoprire di più</div>
           <div class="map-meta-top">Rieti, Italia</div>
-          <div class="map-meta-count"><span id="apt-count">6</span> appartamenti disponibili</div>
+          <div class="map-meta-count"><span id="apt-count">6</span> soluzioni disponibili</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- HORIZONTAL SCROLL SECTION -->
-  <section class="h-scroll-section" id="hScrollSection" aria-label="Appartamenti disponibili">
+  <section class="h-scroll-section" id="hScrollSection" aria-label="Soluzioni disponibili">
     <div class="h-scroll-sticky" id="hScrollSticky">
       <div class="h-scroll-header">
-        <span class="h-scroll-label">— Tutti gli appartamenti</span>
+        <span class="h-scroll-label">— Tutte le soluzioni</span>
         <span class="h-scroll-count" id="hScrollCount">0 / 6</span>
       </div>
       <div class="h-scroll-track" id="hScrollTrack"></div>
@@ -347,7 +348,7 @@
   <footer class="site-footer">
     <div class="footer-title-row">
       <span class="footer-giant">THE COLLEGE<br><span class="accent">DROPOUT</span></span>
-      <p class="footer-tagline">Appartamenti a Rieti — per studenti e non solo · Est. 2026</p>
+      <p class="footer-tagline">Soluzioni a Rieti — per studenti e non solo · Est. 2026</p>
     </div>
     <div class="footer-links-row">
       <div class="footer-col">
@@ -359,7 +360,7 @@
       </div>
       <div class="footer-col">
         <p class="footer-col-label">Per gli studenti</p>
-        <a href="soluzioni.html">Trova un appartamento</a>
+        <a href="soluzioni.html">Trova una soluzione</a>
         <a href="soluzioni.html">Mappa degli alloggi</a>
         <a href="#">Rieti — guida alla città</a>
         <a href="#">Erasmus & internazionali</a>
@@ -385,7 +386,7 @@
 /* ══ DATA ══ */
 const RIETI=[42.4043,12.8630],LAZIO=[41.9,12.7];
 const apartments=[
-  {id:1,name:"Appartamento Centro Storico",zone:"Centro Storico",   price:420,rooms:2,sqm:55, available:true, lat:42.4043,lng:12.8630,img:"https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=560&q=80"},
+  {id:1,name:"Soluzione Centro Storico",zone:"Centro Storico",   price:420,rooms:2,sqm:55, available:true, lat:42.4043,lng:12.8630,img:"https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=560&q=80"},
   {id:2,name:"Monolocale Porta d'Arce",    zone:"Porta d'Arce",    price:310,rooms:1,sqm:32, available:true, lat:42.4018,lng:12.8598,img:"https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=560&q=80"},
   {id:3,name:"Bilocale Villa Reatina",     zone:"Villa Reatina",   price:480,rooms:2,sqm:62, available:false,lat:42.3995,lng:12.8720,img:"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=560&q=80"},
   {id:4,name:"Trilocale Madonna del Cuore",zone:"Madonna del Cuore",price:580,rooms:3,sqm:80, available:true, lat:42.4060,lng:12.8540,img:"https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=560&q=80"},
@@ -558,6 +559,18 @@ legend.onAdd=function(){
         <div style="width:10px;height:10px;border-radius:50%;background:#555;border:1px solid #888;flex-shrink:0"></div>
         <span style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:#888">Occupato</span>
       </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="width:10px;height:10px;border-radius:50%;background:#6366f1;box-shadow:0 0 6px #6366f155;flex-shrink:0"></div>
+        <span style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:#f0ede8">Università</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="width:10px;height:10px;border-radius:50%;background:#f59e0b;box-shadow:0 0 6px #f59e0b55;flex-shrink:0"></div>
+        <span style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:#f0ede8">Supermercato</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="width:10px;height:10px;border-radius:50%;background:#22c55e;box-shadow:0 0 6px #22c55e55;flex-shrink:0"></div>
+        <span style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:#f0ede8">Stazione</span>
+      </div>
     </div>`;
   return d;
 };
@@ -608,6 +621,39 @@ apartments.forEach((apt,i)=>{
   setTimeout(()=>{const el=marker.getElement();if(!el)return;el.style.opacity='0';el.style.transform=(el.style.transform||'')+' scale(0)';el.style.transition='opacity .4s ease,transform .45s cubic-bezier(.16,1,.3,1)';requestAnimationFrame(()=>{el.style.opacity='1';el.style.transform=el.style.transform.replace('scale(0)','scale(1)')})},4700+i*140);
 });
 
+/* ══ POI — Punti di interesse ══ */
+const POI=[
+  /* Università */
+  {cat:'uni',name:'Unitus — Via Cintia',lat:42.4055,lng:12.8558},
+  {cat:'uni',name:'Unitus — Largo San Giorgio',lat:42.4050,lng:12.8635},
+  {cat:'uni',name:'Unitus — Ospedale Vecchio',lat:42.4038,lng:12.8628},
+  {cat:'uni',name:'Unitus — Istituto Geometri',lat:42.4072,lng:12.8502},
+  {cat:'uni',name:'Unitus — Complesso Santa Lucia',lat:42.4045,lng:12.8648},
+  /* Supermercati */
+  {cat:'super',name:'Conad Via Salaria',lat:42.4008,lng:12.8720},
+  {cat:'super',name:'Conad Via E. Greco',lat:42.3998,lng:12.8698},
+  {cat:'super',name:'Carrefour Market',lat:42.4062,lng:12.8545},
+  {cat:'super',name:'Eurospin Via Greco',lat:42.3995,lng:12.8702},
+  /* Stazione */
+  {cat:'station',name:'Stazione FS Rieti',lat:42.4020,lng:12.8538},
+];
+
+const POI_STYLES={
+  uni:{color:'#6366f1',svg:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 1.5 9 1.5 12 0v-5"/></svg>'},
+  super:{color:'#f59e0b',svg:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>'},
+  station:{color:'#22c55e',svg:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><path d="M8 19l-2 2"/><path d="M16 19l2 2"/></svg>'},
+};
+
+POI.forEach(poi=>{
+  const s=POI_STYLES[poi.cat];
+  const icon=L.divIcon({
+    html:`<div style="width:32px;height:32px;background:rgba(10,10,10,.9);border:1.5px solid ${s.color};border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 8px ${s.color}55">${s.svg}</div>`,
+    className:'',iconSize:[32,32],iconAnchor:[16,16],popupAnchor:[0,-20]
+  });
+  L.marker([poi.lat,poi.lng],{icon}).addTo(map)
+    .bindPopup(`<div style="font-family:'DM Mono',monospace;font-size:.62rem;color:#f0ede8;background:#0a0a0a;padding:8px 10px;border:1px solid ${s.color};border-radius:2px;white-space:nowrap">${poi.name}</div>`);
+});
+
 /* ══ HORIZONTAL SCROLL ══
    Sticky section: vertical scroll → horizontal card movement
    Uses scroll position relative to section top
@@ -634,7 +680,7 @@ apartments.forEach(apt=>{
         <div class="h-apt-meta-item"><strong>${apt.rooms}</strong>locali</div>
         <div class="h-apt-meta-item"><strong>${apt.sqm} m²</strong>superficie</div>
       </div>
-      <a href="appartamento.html?id=${apt.id}" class="h-apt-cta wormhole-link">Scopri l'appartamento →</a>
+      <a href="appartamento.html?id=${apt.id}" class="h-apt-cta wormhole-link">Scopri la soluzione →</a>
     </div>`;
   track.appendChild(card);
 });
